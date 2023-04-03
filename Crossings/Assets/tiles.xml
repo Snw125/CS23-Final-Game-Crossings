@@ -1,0 +1,100 @@
+<set>
+  <tiles>
+<tile name="Tiles/Grass_1" symmetry="X" weight="1.0"/>
+<tile name="Tiles/Grass_2" symmetry="X" weight="1.0"/>
+<tile name="Tiles/Grass_3" symmetry="X" weight="1.0"/>
+<tile name="Tiles/Grass_4" symmetry="X" weight="1.0"/>
+<tile name="Tiles/Grass_5" symmetry="X" weight="1.0"/>
+<tile name="Tiles/Grass_X" symmetry="X" weight="1.0"/>
+<tile name="Tiles/Path_End_T" symmetry="T" weight="1.0"/>
+<tile name="Tiles/Path_I" symmetry="I" weight="1.0"/>
+<tile name="Tiles/Path_L" symmetry="L" weight="1.0"/>
+<tile name="Tiles/Path_T" symmetry="T" weight="1.0"/>
+<tile name="Tiles/Path_X" symmetry="X" weight="1.0"/>
+<tile name="Tiles/Pavement_X" symmetry="X" weight="1.0"/>
+<tile name="Tiles/Road_End_T" symmetry="T" weight="1.0"/>
+<tile name="Tiles/Road_I" symmetry="I" weight="1.0"/>
+<tile name="Tiles/Road_L" symmetry="L" weight="1.0"/>
+<tile name="Tiles/Road_T" symmetry="T" weight="1.0"/>
+<tile name="Tiles/Road_X" symmetry="X" weight="1.0"/>
+<tile name="Tiles/Shore_Straight_T" symmetry="T" weight="1.0"/>
+<tile name="Tiles/Water_X" symmetry="X" weight="1.0"/>
+	</tiles>
+<neighbors>  <neighbor left="Tiles/Grass_1 0" right="Tiles/Grass_4 0"/>
+  <neighbor left="Tiles/Grass_1 1" right="Tiles/Grass_2 1"/>
+  <neighbor left="Tiles/Grass_4 0" right="Tiles/Grass_5 0"/>
+  <neighbor left="Tiles/Grass_4 1" right="Tiles/Grass_3 1"/>
+  <neighbor left="Tiles/Grass_5 0" right="Tiles/Grass_X 0"/>
+  <neighbor left="Tiles/Grass_5 1" right="Tiles/Grass_X 1"/>
+  <neighbor left="Tiles/Grass_X 0" right="Tiles/Shore_Straight_T 1"/>
+  <neighbor left="Tiles/Grass_X 1" right="Tiles/Grass_X 1"/>
+  <neighbor left="Tiles/Shore_Straight_T 1" right="Tiles/Water_X 0"/>
+  <neighbor left="Tiles/Shore_Straight_T 2" right="Tiles/Shore_Straight_T 2"/>
+  <neighbor left="Tiles/Water_X 0" right="Tiles/Shore_Straight_T 3"/>
+  <neighbor left="Tiles/Water_X 1" right="Tiles/Water_X 1"/>
+  <neighbor left="Tiles/Shore_Straight_T 0" right="Tiles/Shore_Straight_T 0"/>
+  <neighbor left="Tiles/Grass_2 0" right="Tiles/Grass_3 0"/>
+  <neighbor left="Tiles/Grass_2 1" right="Tiles/Grass_X 1"/>
+  <neighbor left="Tiles/Grass_3 0" right="Tiles/Grass_X 0"/>
+  <neighbor left="Tiles/Grass_3 1" right="Tiles/Path_End_T 2"/>
+  <neighbor left="Tiles/Grass_X 0" right="Tiles/Grass_X 0"/>
+  <neighbor left="Tiles/Grass_X 1" right="Tiles/Path_I 0"/>
+  <neighbor left="Tiles/Grass_X 1" right="Tiles/Path_End_T 0"/>
+  <neighbor left="Tiles/Grass_X 0" right="Tiles/Path_End_T 1"/>
+  <neighbor left="Tiles/Grass_X 1" right="Tiles/Path_End_T 1"/>
+  <neighbor left="Tiles/Path_End_T 1" right="Tiles/Path_I 3"/>
+  <neighbor left="Tiles/Path_End_T 2" right="Tiles/Path_L 0"/>
+  <neighbor left="Tiles/Path_I 3" right="Tiles/Path_End_T 3"/>
+  <neighbor left="Tiles/Path_I 0" right="Tiles/Path_T 3"/>
+  <neighbor left="Tiles/Path_End_T 3" right="Tiles/Shore_Straight_T 1"/>
+  <neighbor left="Tiles/Path_End_T 0" right="Tiles/Path_L 3"/>
+  <neighbor left="Tiles/Path_End_T 0" right="Tiles/Path_L 3"/>
+  <neighbor left="Tiles/Path_End_T 1" right="Tiles/Path_I 1"/>
+  <neighbor left="Tiles/Path_L 3" right="Tiles/Path_T 2"/>
+  <neighbor left="Tiles/Path_L 0" right="Tiles/Path_T 0"/>
+  <neighbor left="Tiles/Path_T 2" right="Tiles/Path_L 2"/>
+  <neighbor left="Tiles/Path_T 3" right="Tiles/Path_X 1"/>
+  <neighbor left="Tiles/Path_L 2" right="Tiles/Shore_Straight_T 1"/>
+  <neighbor left="Tiles/Path_L 3" right="Tiles/Path_T 2"/>
+  <neighbor left="Tiles/Path_I 0" right="Tiles/Path_T 3"/>
+  <neighbor left="Tiles/Path_I 1" right="Tiles/Path_End_T 3"/>
+  <neighbor left="Tiles/Path_T 3" right="Tiles/Path_X 0"/>
+  <neighbor left="Tiles/Path_T 0" right="Tiles/Path_L 1"/>
+  <neighbor left="Tiles/Path_X 0" right="Tiles/Path_T 1"/>
+  <neighbor left="Tiles/Path_X 1" right="Tiles/Path_T 1"/>
+  <neighbor left="Tiles/Path_T 1" right="Tiles/Shore_Straight_T 1"/>
+  <neighbor left="Tiles/Path_T 2" right="Tiles/Path_L 2"/>
+  <neighbor left="Tiles/Path_End_T 2" right="Tiles/Path_L 0"/>
+  <neighbor left="Tiles/Path_End_T 3" right="Tiles/Pavement_X 1"/>
+  <neighbor left="Tiles/Path_L 0" right="Tiles/Path_T 0"/>
+  <neighbor left="Tiles/Path_L 1" right="Tiles/Road_End_T 3"/>
+  <neighbor left="Tiles/Path_T 0" right="Tiles/Path_L 1"/>
+  <neighbor left="Tiles/Path_T 1" right="Tiles/Road_I 0"/>
+  <neighbor left="Tiles/Path_L 1" right="Tiles/Shore_Straight_T 1"/>
+  <neighbor left="Tiles/Path_L 2" right="Tiles/Road_End_T 1"/>
+  <neighbor left="Tiles/Pavement_X 0" right="Tiles/Road_End_T 2"/>
+  <neighbor left="Tiles/Pavement_X 1" right="Tiles/Road_End_T 2"/>
+  <neighbor left="Tiles/Road_End_T 2" right="Tiles/Road_I 3"/>
+  <neighbor left="Tiles/Road_End_T 3" right="Tiles/Road_L 3"/>
+  <neighbor left="Tiles/Road_I 3" right="Tiles/Road_End_T 0"/>
+  <neighbor left="Tiles/Road_I 0" right="Tiles/Road_T 0"/>
+  <neighbor left="Tiles/Road_End_T 1" right="Tiles/Road_L 2"/>
+  <neighbor left="Tiles/Road_End_T 1" right="Tiles/Road_L 2"/>
+  <neighbor left="Tiles/Road_End_T 2" right="Tiles/Road_I 1"/>
+  <neighbor left="Tiles/Road_L 2" right="Tiles/Road_T 3"/>
+  <neighbor left="Tiles/Road_L 3" right="Tiles/Road_T 1"/>
+  <neighbor left="Tiles/Road_T 3" right="Tiles/Road_L 1"/>
+  <neighbor left="Tiles/Road_T 0" right="Tiles/Road_X 1"/>
+  <neighbor left="Tiles/Road_L 2" right="Tiles/Road_T 3"/>
+  <neighbor left="Tiles/Road_I 0" right="Tiles/Road_T 0"/>
+  <neighbor left="Tiles/Road_I 1" right="Tiles/Road_End_T 0"/>
+  <neighbor left="Tiles/Road_T 0" right="Tiles/Road_X 0"/>
+  <neighbor left="Tiles/Road_T 1" right="Tiles/Road_L 0"/>
+  <neighbor left="Tiles/Road_X 0" right="Tiles/Road_T 2"/>
+  <neighbor left="Tiles/Road_X 1" right="Tiles/Road_T 2"/>
+  <neighbor left="Tiles/Road_T 3" right="Tiles/Road_L 1"/>
+  <neighbor left="Tiles/Road_End_T 3" right="Tiles/Road_L 3"/>
+  <neighbor left="Tiles/Road_L 3" right="Tiles/Road_T 1"/>
+  <neighbor left="Tiles/Road_T 1" right="Tiles/Road_L 0"/>
+	</neighbors>
+</set>
