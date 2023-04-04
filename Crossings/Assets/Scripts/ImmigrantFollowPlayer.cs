@@ -5,7 +5,13 @@ using UnityEngine;
 public class ImmigrantFollowPlayer : MonoBehaviour
 {
     public Transform player;
-    public float speed = 5f;
+    public float speed = 2f;
+
+    void Start () {
+        if (GameObject.FindGameObjectWithTag ("Player") != null) {
+                player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform> ();
+        }
+    }
 
     void Update()
     {

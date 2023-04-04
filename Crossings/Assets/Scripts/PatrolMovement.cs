@@ -13,7 +13,7 @@ public class PatrolMovement : MonoBehaviour {
     //    public int EnemyLives = 3;
     //    private GameHandler gameHandler;
 
-       public float attackRange = 10;
+       public float attackRange = 2;
        public bool isAttacking = false;
        private float scaleX;
 
