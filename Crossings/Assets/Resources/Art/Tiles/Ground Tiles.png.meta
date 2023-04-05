@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1458,7 +1458,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ground Tiles_51: -641723208
+      Ground Tiles_37: -1270934833
       Ground Tiles_40: 1737826937
       Ground Tiles_2: 1641003947
       Ground Tiles_43: -1607057872
@@ -1493,10 +1493,10 @@ TextureImporter:
       Ground Tiles_41: -1933983480
       Ground Tiles_16: 304462787
       Ground Tiles_34: 1972144543
-      Ground Tiles_50: 224164654
       Ground Tiles_62: -1473239551
       Ground Tiles_45: 1130545413
       Ground Tiles_22: 773632686
+      Ground Tiles_50: 224164654
       Ground Tiles_42: 344958032
       Ground Tiles_36: 223749050
       Ground Tiles_7: -731390004
@@ -1519,8 +1519,8 @@ TextureImporter:
       Ground Tiles_52: 618710939
       Ground Tiles_61: -1698163082
       Ground Tiles_18: 798041491
-      Ground Tiles_37: -1270934833
       Ground Tiles_32: 963259676
+      Ground Tiles_51: -641723208
       Ground Tiles_49: 533586955
   spritePackingTag: 
   pSDRemoveMatte: 0
