@@ -222,7 +222,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 521e5737beab1574e83d2bd93e0bf2bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49687ce127ffe604da778b785f4581d5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 521e5737beab1574e83d2bd93e0bf2bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 506203a46ce5cc544b0e250d6b232db6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1507,7 +1507,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 100
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1518,7 +1518,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Item 1
+  m_Text: Ladder
 --- !u!1 &1423006700452648328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,7 +1702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 521e5737beab1574e83d2bd93e0bf2bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c47a34011811f794791bf054f6d9f870, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1970,7 +1970,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 100
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1978,10 +1978,10 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Item 2
+  m_Text: Climbing Tool
 --- !u!1 &2486658402556934206
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,7 +2050,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 100
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -2061,7 +2061,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Item 4
+  m_Text: Decoy Art
 --- !u!1 &2733127470648340461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2549,7 +2549,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 100
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -2560,7 +2560,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Item 5
+  m_Text: Wireclipper
 --- !u!1 &3716924184322993009
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,7 +2640,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Climb over objects
+  m_Text: Trick guards
 --- !u!1 &3886337216275513896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,7 +2707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 521e5737beab1574e83d2bd93e0bf2bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6604f1c7772b8a4e836fc187d68ca28, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2796,7 +2796,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Climb over objects
+  m_Text: Spawn a hiding spot
 --- !u!1 &3970111121890210818
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,7 +3025,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 75
@@ -3341,7 +3341,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Climb over objects
+  m_Text: Cut through fences
 --- !u!1 &4790670651192038109
 GameObject:
   m_ObjectHideFlags: 0
@@ -3570,10 +3570,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 100
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 1
+    m_MinSize: 0
     m_MaxSize: 150
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -3581,7 +3581,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Item 6
+  m_Text: Bush
 --- !u!1 &5393880591738377943
 GameObject:
   m_ObjectHideFlags: 0
@@ -3687,7 +3687,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 100
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -3698,7 +3698,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Item 3
+  m_Text: Boat
 --- !u!1 &5712300379268348237
 GameObject:
   m_ObjectHideFlags: 0
@@ -3815,7 +3815,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Climb over objects
+  m_Text: 'Move over water
+
+'
 --- !u!1 &7026002917396071682
 GameObject:
   m_ObjectHideFlags: 0
@@ -4191,7 +4193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 521e5737beab1574e83d2bd93e0bf2bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 47b9539367a14084a974b5518a1f55cf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

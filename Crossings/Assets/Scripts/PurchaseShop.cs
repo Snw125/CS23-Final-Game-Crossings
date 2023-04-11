@@ -40,13 +40,13 @@ public class PurchaseShop : MonoBehaviour
 
     public void purchaseOne(){
       if (!itemOnePurchased){
-        Debug.Log("Buying Item 1, balance: " + balance);
+        Debug.Log("Buying Ladder, balance: " + balance);
         if (balance >= 75){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
           itemOnePurchased = true;
-          Debug.Log("Bought item 1 successfully");
+          Debug.Log("Bought ladder successfully");
           balance-= 75;
           balanceText.text = balance.ToString();
 
@@ -59,7 +59,7 @@ public class PurchaseShop : MonoBehaviour
 
       }
       else{
-        Debug.Log("Already purchases Item 1");
+        Debug.Log("Already purchases Ladder");
         feedbackText.color = Color.blue;
         feedbackText.text = "Already in Inventory";
       }
@@ -67,12 +67,12 @@ public class PurchaseShop : MonoBehaviour
 
     public void purchaseTwo(){
       if (!itemTwoPurchased){
-        Debug.Log("Buying Item 2, balance: " + balance);
+        Debug.Log("Buying Climbing Tool, balance: " + balance);
         if (balance >= 75){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
           itemTwoPurchased = true;
-          Debug.Log("Bought item 2 successfully");
+          Debug.Log("Bought Climbing tool successfully");
           balance -= 75;
           balanceText.text = balance.ToString();
 
@@ -85,7 +85,7 @@ public class PurchaseShop : MonoBehaviour
 
       }
       else{
-        Debug.Log("Already purchased Item 2");
+        Debug.Log("Already purchased Climbing tool");
         feedbackText.color = Color.blue;
         feedbackText.text = "Already in Inventory";
       }
@@ -99,7 +99,7 @@ public class PurchaseShop : MonoBehaviour
           feedbackText.text = "Successful Purchase!";
 
           itemThreePurchased = true;
-          Debug.Log("Bought item 3 successfully");
+          Debug.Log("Bought boat successfully");
           balance-= 75;
           balanceText.text = balance.ToString();
 
@@ -112,7 +112,7 @@ public class PurchaseShop : MonoBehaviour
 
       }
       else{
-        Debug.Log("Already purchased Item 3");
+        Debug.Log("Already purchased Boat");
         feedbackText.color = Color.blue;
         feedbackText.text = "Already in Inventory";
       }
@@ -120,13 +120,13 @@ public class PurchaseShop : MonoBehaviour
 
     public void purchaseFour(){
       if (!itemFourPurchased){
-        Debug.Log("Buying Item 4, balance: " + balance);
+        Debug.Log("Buying Decoy Art, balance: " + balance);
         if (balance >= 75){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
           itemFourPurchased = true;
-          Debug.Log("Bought item 4 successfully");
+          Debug.Log("Bought Decoy Art successfully");
           balance-= 75;
           balanceText.text = balance.ToString();
 
@@ -139,7 +139,7 @@ public class PurchaseShop : MonoBehaviour
 
       }
       else{
-        Debug.Log("Already purchases Item 4");
+        Debug.Log("Already purchased Decoy Art");
         feedbackText.color = Color.blue;
         feedbackText.text = "Already in Inventory";
       }
@@ -147,13 +147,13 @@ public class PurchaseShop : MonoBehaviour
 
     public void purchaseFive(){
       if (!itemFivePurchased){
-        Debug.Log("Buying Item 5, balance: " + balance);
+        Debug.Log("Buying Wireclipper, balance: " + balance);
         if (balance >= 75){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
           itemFivePurchased = true;
-          Debug.Log("Bought item 5 successfully");
+          Debug.Log("Bought Wireclipper successfully");
           balance-= 75;
           balanceText.text = balance.ToString();
 
@@ -166,7 +166,7 @@ public class PurchaseShop : MonoBehaviour
 
       }
       else{
-        Debug.Log("Already purchased Item 5");
+        Debug.Log("Already purchased Wireclipper");
         feedbackText.color = Color.blue;
         feedbackText.text = "Already in Inventory";
       }
@@ -174,13 +174,13 @@ public class PurchaseShop : MonoBehaviour
 
     public void purchaseSix(){
       if (!itemSixPurchased){
-        Debug.Log("Buying Item 6, balance: " + balance);
+        Debug.Log("Buying Bush, balance: " + balance);
         if (balance >= 75){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
           itemSixPurchased = true;
-          Debug.Log("Bought item 1 successfully");
+          Debug.Log("Bought bush successfully");
           balance-= 75;
           balanceText.text = balance.ToString();
 
@@ -193,7 +193,7 @@ public class PurchaseShop : MonoBehaviour
 
       }
       else{
-        Debug.Log("Already purchases Item 6");
+        Debug.Log("Already purchased Bush");
         feedbackText.color = Color.blue;
         feedbackText.text = "Already in Inventory";
       }
