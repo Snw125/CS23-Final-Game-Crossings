@@ -16,6 +16,8 @@ public class ImmigrantFollowSpots : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
+
         // Set the current spot index to the oldest spot
         currentSpotIndex = 0;
 

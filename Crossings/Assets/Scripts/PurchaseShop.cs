@@ -17,6 +17,9 @@ public class PurchaseShop : MonoBehaviour
     public Text feedbackText;
     public Text balanceText;
 
+
+    public GameObject ShopUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,7 @@ public class PurchaseShop : MonoBehaviour
       balance = 300;
       balanceText.text = balance.ToString();
 
+      ShopUI = transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -201,7 +205,10 @@ public class PurchaseShop : MonoBehaviour
 
     public void ExitButton(){
       Debug.Log("Exit Button Clicked");
-      feedbackText.color = Color.red;
-      feedbackText.text = "Exiting, BYE!";
+    //   feedbackText.color = Color.red;
+    //   feedbackText.text = "Exiting, BYE!";
+      Time.timeScale = 1f;
+      ShopUI.SetActive(false);
+      
     }
 }

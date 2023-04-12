@@ -654,6 +654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
   balanceText: {fileID: 5523189667092424145}
+  ShopUI: {fileID: 0}
 --- !u!1 &1423006698786142666
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +682,7 @@ RectTransform:
   m_GameObject: {fileID: 1423006698786142666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.68182, y: 0.68182, z: 0.68182}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1423006700261699935}
@@ -1287,6 +1288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
   balanceText: {fileID: 5523189667092424145}
+  ShopUI: {fileID: 0}
 --- !u!1 &1423006700261699934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,7 +1348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8705883, g: 0.7843138, b: 0.48627454, a: 1}
+  m_Color: {r: 1, g: 0.99634457, b: 0.759434, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1507,7 +1509,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 75
+    m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1624,7 +1626,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 300
+    m_FontSize: 250
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -1865,6 +1867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
   balanceText: {fileID: 5523189667092424145}
+  ShopUI: {fileID: 0}
 --- !u!1 &2140717242269376939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2328,6 +2331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
   balanceText: {fileID: 5523189667092424145}
+  ShopUI: {fileID: 0}
 --- !u!1 &2952098495792714044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,6 +2485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
   balanceText: {fileID: 5523189667092424145}
+  ShopUI: {fileID: 0}
 --- !u!1 &3254347085120172856
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,6 +3187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
   balanceText: {fileID: 5523189667092424145}
+  ShopUI: {fileID: 0}
 --- !u!1 &4690768074399165733
 GameObject:
   m_ObjectHideFlags: 0
@@ -3971,6 +3977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
   balanceText: {fileID: 5523189667092424145}
+  ShopUI: {fileID: 0}
 --- !u!1 &7358278056538984411
 GameObject:
   m_ObjectHideFlags: 0

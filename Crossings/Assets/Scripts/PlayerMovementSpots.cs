@@ -10,11 +10,13 @@ public class PlayerMovementSpots : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isMoving = false; // Flag indicating if the player is currently moving
+    public Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spots.Add(transform.position);
+        anim = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -42,6 +44,10 @@ public class PlayerMovementSpots : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        anim.SetFloat("Horizontal", movement.x);
+        anim.SetFloat("Vertical", movement.y);
+        anim.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     public bool IsMoving()
