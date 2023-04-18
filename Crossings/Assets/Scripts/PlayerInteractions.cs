@@ -22,8 +22,12 @@ public class PlayerInteractions : MonoBehaviour
 
     public bool nearShop;
     public bool nearBush;
+    public bool nearImm;
+
     public GameObject thingNear;
     public Collider2D thingCol;
+
+    public ImmigrantFollowSpots currImm;
 
     public bool hidden;
     
@@ -49,6 +53,7 @@ public class PlayerInteractions : MonoBehaviour
 
         nearShop = false;
         nearBush = false;
+        nearImm = false;
 
         hidden = false;
     }
@@ -120,6 +125,18 @@ public class PlayerInteractions : MonoBehaviour
                 TimeBar.fillAmount = 1 - (Time.time - timer)/holdDur;
             }
 
+            if (nearImm) {
+                if (Input.GetKeyDown(KeyCode.Z)) {
+                    if (currImm.getIsFollow())
+                    {
+                        currImm.StopFollow();
+                    }
+                    else {
+                        currImm.FollowPlayer();
+                    }
+                }
+            }
+
             if (hidden) {
                     // signify you can leave bush with Z (another button signifier?)
                     // check if they move if they do get them out of bush
@@ -132,6 +149,7 @@ public class PlayerInteractions : MonoBehaviour
                     }
                     // transform.position = bush position
             }
+
     }
 
     public void OnTriggerExit2D(Collider2D other){

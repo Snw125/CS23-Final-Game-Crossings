@@ -10,6 +10,7 @@ public class FieldOfView : MonoBehaviour
     public LayerMask obstructionLayer;
 
     public GameObject playerRef;
+    public PlayerInteractions playerStates;
     public PatrolCircle pathver1;
     public NPC_PatrolSequencePoints pathver2;
 
@@ -33,6 +34,8 @@ public class FieldOfView : MonoBehaviour
     void Start()
     {
         playerRef = GameObject.FindGameObjectWithTag("Player");
+        playerStates = playerRef.GetComponent<PlayerInteractions>();
+
         if (gameObject.GetComponent<PatrolCircle>() != null) 
         {
             pathver1 = gameObject.GetComponent<PatrolCircle>();
@@ -42,7 +45,7 @@ public class FieldOfView : MonoBehaviour
             pathver2 = gameObject.GetComponent<NPC_PatrolSequencePoints>();
         }
 
-        Timer = transform.GetChild(3).transform.GetChild(0).gameObject;
+        Timer = transform.GetChild(2).transform.GetChild(0).gameObject;
 
         StartCoroutine(FOVCheck());
     }
@@ -51,40 +54,33 @@ public class FieldOfView : MonoBehaviour
     void Update()
     {
         // if player is hidden SKIP THESE STEPS 
-        if (CanSeePlayer) {
-            if (savedTime + currtime < endNoticeTime) {
-                currtime = Time.time - noticeTime;
-            }
-            if (savedTime + currtime >= endNoticeTime) {
-                //currtime = 0;
+        if (!playerStates.hidden) {
+            if (CanSeePlayer) {
+                if (savedTime + currtime < endNoticeTime) {
+                    currtime = Time.time - noticeTime;
+                }
+                if (savedTime + currtime >= endNoticeTime) {
 
-                // chase!
-                Debug.Log("Chase!");
-                PlayerChase = true;
-            }
+                    // chase!
+                    Debug.Log("Chase!");
+                    PlayerChase = true;
+                }
 
-            // adjust sprite y scale 
-            Timer.transform.localScale = new Vector3(1, (savedTime + currtime)/endNoticeTime, 1);
-        }
-        else {
-            // TODO
-            //Debug.Log("before:" + currtime);
-            
-            if ((savedTime - currtime)/endNoticeTime > 0) {
-                currtime = Time.time - loseNoticeTime;
-                //Debug.Log(currtime);
+                Timer.transform.localScale = new Vector3(1, (savedTime + currtime)/endNoticeTime, 1);
             }
             else {
-                PlayerChase = false;
-                // chase player bool to false 
+                if ((savedTime - currtime)/endNoticeTime > 0) {
+                    currtime = Time.time - loseNoticeTime;
+                }
+                else {
+                    PlayerChase = false;
+                }
+                
+                Timer.transform.localScale = new Vector3(1, (savedTime - currtime)/endNoticeTime, 1);
+                
             }
-            // if can see player even becomes false, 
-            // make chase player false after a small delay period
-            // and reset the timer
-            
-            Timer.transform.localScale = new Vector3(1, (savedTime - currtime)/endNoticeTime, 1);
-            
         }
+        
 
         if (PlayerChase) 
         {
@@ -170,31 +166,31 @@ public class FieldOfView : MonoBehaviour
 
 
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.white;
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.white;
+    //     UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
 
-        // !!! 
-        Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, (-angle + turnadj) / 2);
-        Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, (angle + turnadj) / 2);
+    //     // !!! 
+    //     Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, (-angle + turnadj) / 2);
+    //     Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, (angle + turnadj) / 2);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
-        Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
+    //     Gizmos.color = Color.yellow;
+    //     Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
+    //     Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
 
-        if (CanSeePlayer)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, playerRef.transform.position);
-        }
-    }
+    //     if (CanSeePlayer)
+    //     {
+    //         Gizmos.color = Color.green;
+    //         Gizmos.DrawLine(transform.position, playerRef.transform.position);
+    //     }
+    // }
 
-    private Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)
-    {
-        angleInDegrees += eulerY;
+    // private Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)
+    // {
+    //     angleInDegrees += eulerY;
 
-        return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
-    }
+    //     return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    // }
 
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class ImmigrantFollowSpots : MonoBehaviour
 {
     public GameObject player;
+    public PlayerInteractions playerStates;
+
     public float moveSpeed = 5.0f;
     public float followDistance = 1.0f;
     public float stopDistance = 0.5f;
@@ -21,6 +23,8 @@ public class ImmigrantFollowSpots : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        playerStates = player.GetComponent<PlayerInteractions>();
+
         currentSpotIndex = 0;
 
         PlayerMovementSpots playerController = player.GetComponent<PlayerMovementSpots>();
@@ -34,16 +38,6 @@ public class ImmigrantFollowSpots : MonoBehaviour
 
 void Update()
 {
-    if (Input.GetKeyDown(KeyCode.P))
-    {
-        isFollowing = false;
-        Idle();
-    }
-    else if (Input.GetKeyDown(KeyCode.F))
-    {
-        isFollowing = true;
-    }
-
     if (!isFollowing) return;
 
     if (Vector3.Distance(transform.position, player.transform.position) < stopDistance)
@@ -74,6 +68,44 @@ void Update()
 
     Vector3 direction = (targetPosition - transform.position).normalized;
     transform.position += direction * interpolationSpeed * Time.deltaTime;
+}
+
+public void OnTriggerEnter2D(Collider2D other) 
+{
+    if (other.gameObject.tag == "Player") 
+    {
+        playerStates.ZButtonSig.SetActive(true);
+        playerStates.thingNear = this.gameObject;
+        playerStates.currImm = this;
+        playerStates.nearImm = true;
+    }
+}
+
+public void OnTriggerExit2D(Collider2D other) 
+{
+    if (other.gameObject.tag == "Player") 
+    {
+        playerStates.ZButtonSig.SetActive(false);
+        playerStates.thingNear = this.gameObject;
+        playerStates.currImm = this;
+        playerStates.nearImm = false;
+    }
+}
+
+public bool getIsFollow() 
+{
+    return isFollowing;
+}
+
+public void FollowPlayer() 
+{
+    isFollowing = true;
+}
+
+public void StopFollow() 
+{
+    isFollowing = false;
+    Idle();
 }
 
 
