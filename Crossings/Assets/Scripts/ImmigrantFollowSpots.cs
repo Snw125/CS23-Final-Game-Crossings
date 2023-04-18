@@ -14,6 +14,8 @@ public class ImmigrantFollowSpots : MonoBehaviour
     private int currentSpotIndex; // The index of the current spot being followed
     private Vector3 targetPosition; // The position the object is moving towards
 
+    public Animator anim;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -30,6 +32,8 @@ public class ImmigrantFollowSpots : MonoBehaviour
 
         // Set the initial target position to the current spot
         targetPosition = spots[currentSpotIndex];
+
+        anim = gameObject.GetComponentInChildren<Animator>();
     }
 
 
@@ -39,6 +43,7 @@ public class ImmigrantFollowSpots : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position) < stopDistance)
         {
             // Stop following the player
+            Idle();
             return;
         }
 
@@ -53,10 +58,67 @@ public class ImmigrantFollowSpots : MonoBehaviour
 
             // Set the new target position to the next spot in the list
             targetPosition = spots[currentSpotIndex];
+
+            // check if up 
+            if (spots[currentSpotIndex - 1].y < targetPosition.y) { TurnUp(); }
+            // check if down 
+            else if (spots[currentSpotIndex - 1].y > targetPosition.y) { TurnDown(); }
+            // check if turn right 
+            else if (spots[currentSpotIndex - 1].x < targetPosition.x) { TurnRight(); }
+            // check if left 
+            else if (spots[currentSpotIndex - 1].x > targetPosition.x) { TurnLeft(); }
         }
 
         // Interpolate towards the target position
         Vector3 direction = (targetPosition - transform.position).normalized;
         transform.position += direction * interpolationSpeed * Time.deltaTime;
+
+    }
+
+
+
+    private void TurnUp(){
+            Debug.Log("UP!");
+            
+            anim.SetBool("Up", true);
+            anim.SetBool("Down", false);
+            anim.SetBool("Right", false);
+            anim.SetBool("Left", false);
+    }
+
+    private void TurnDown(){
+            Debug.Log("DOWN!");
+
+            anim.SetBool("Up", false);
+            anim.SetBool("Down", true);
+            anim.SetBool("Right", false);
+            anim.SetBool("Left", false);
+    }
+
+    private void TurnRight(){
+            Debug.Log("RIGHT!");
+
+            anim.SetBool("Up", false);
+            anim.SetBool("Down", false);
+            anim.SetBool("Right", true);
+            anim.SetBool("Left", false);
+    }
+
+    private void TurnLeft(){
+            Debug.Log("LEFT!");
+
+            anim.SetBool("Up", false);
+            anim.SetBool("Down", false);
+            anim.SetBool("Right", false);
+            anim.SetBool("Left", true);
+    }
+
+    private void Idle(){
+            Debug.Log("STOP!");
+
+            anim.SetBool("Up", false);
+            anim.SetBool("Down", false);
+            anim.SetBool("Right", false);
+            anim.SetBool("Left", false);
     }
 }

@@ -7,16 +7,13 @@ public class PlayerInteractions : MonoBehaviour
 {
     //gameHandler = GameObject.FindWithTag("GameHandler").GetComponent<GameHandler>();
     
-    // TimeBar = Timer.transform.GetChild(0).GetComponent<Image>();
-    // Timer.SetActive(true);
-    // currtime = time;
     float timer;
     float holdDur;
-
 
     //private GameHandler gameHandler;
     public GameObject XButtonSig;
     public GameObject ZButtonSig;
+    public GameObject hideArt;
     
     public GameObject Timer;
     public Image TimeBar;
@@ -25,6 +22,8 @@ public class PlayerInteractions : MonoBehaviour
 
     public bool nearShop;
     public bool nearBush;
+    public GameObject thingNear;
+    public Collider2D thingCol;
 
     public bool hidden;
     
@@ -34,17 +33,19 @@ public class PlayerInteractions : MonoBehaviour
 
         Timer = transform.GetChild(4).transform.GetChild(0).gameObject;
         TimeBar = Timer.transform.GetChild(0).GetComponent<Image>();
-        // Timer.SetActive(true);
 
         holdDur = 2f;
 
         XButtonSig = transform.GetChild(2).gameObject;
         ZButtonSig = transform.GetChild(3).gameObject;
         ShopUI = GameObject.FindWithTag("shop");
+        hideArt = transform.GetChild(5).gameObject;
         
         XButtonSig.SetActive(false);
         ZButtonSig.SetActive(false);
         ShopUI.SetActive(false);
+        Timer.SetActive(false);
+        hideArt.SetActive(false);
 
         nearShop = false;
         nearBush = false;
@@ -57,12 +58,15 @@ public class PlayerInteractions : MonoBehaviour
             if (other.gameObject.tag == "Bush") {
                     // display button signifier
                     ZButtonSig.SetActive(true);
+                    Timer.SetActive(true);
                     nearBush = true;
+                    thingNear = other.gameObject;
             }
             if (other.gameObject.tag == "Fence") {
                     // display button signifier
                     XButtonSig.SetActive(true);
-                    // look for player input in trigger stay 
+                    Timer.SetActive(true);
+                    thingNear = other.gameObject;
             }
             if (other.gameObject.tag == "ShopOverworld") {
                     ZButtonSig.SetActive(true);
@@ -86,9 +90,7 @@ public class PlayerInteractions : MonoBehaviour
                 else if(Input.GetKey(KeyCode.Z))
                 {
                     if(Time.time - timer > holdDur)
-                    {
-                        // update timer visually 
-                        //TimeBar.fillAmount = time/holdDur;
+                    {   
 
                         //by making it positive inf, we won't subsequently run this code by accident,
                         //since X - +inf = -inf, which is always less than holdDur
@@ -96,21 +98,46 @@ public class PlayerInteractions : MonoBehaviour
                     
                         //perform your action
                         hidden = true;
-                        Debug.Log("nice!");
+                        Debug.Log("hidden!");
+                        Timer.SetActive(false);
+
+                        // make player darker 
+                        hideArt.SetActive(true);
+
                         // lock player to bush
+                        thingCol = thingNear.GetComponents<Collider2D>()[1];
+                        thingCol.enabled = !thingCol.enabled;
+                        Vector2 newpos = new Vector2 (thingNear.transform.position.x, thingNear.transform.position.y + .2f); 
+                        transform.position = newpos;
+                        // go to hidden code
                     }
                 }
                 else
                 {
                     timer = float.PositiveInfinity;
                 }
-                            
+                // update timer visually 
+                TimeBar.fillAmount = 1 - (Time.time - timer)/holdDur;
+            }
+
+            if (hidden) {
+                    // signify you can leave bush with Z (another button signifier?)
+                    // check if they move if they do get them out of bush
+                    if (Input.GetKeyDown(KeyCode.Z)) {
+                            // get em out
+                            hidden = false;
+                            hideArt.SetActive(false);
+                            // after timer to make more seemless??
+                            // thingCol.enabled = !thingCol.enabled;
+                    }
+                    // transform.position = bush position
             }
     }
 
     public void OnTriggerExit2D(Collider2D other){
             XButtonSig.SetActive(false);
             ZButtonSig.SetActive(false);
+            Timer.SetActive(false);
             
             nearShop = false;
             nearBush = false;
