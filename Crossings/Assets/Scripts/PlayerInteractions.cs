@@ -25,6 +25,7 @@ public class PlayerInteractions : MonoBehaviour
     public bool nearImm;
 
     public GameObject thingNear;
+    public SpriteRenderer thingNearArt;
     public Collider2D thingCol;
 
     public ImmigrantFollowSpots currImm;
@@ -96,7 +97,6 @@ public class PlayerInteractions : MonoBehaviour
                 {
                     if(Time.time - timer > holdDur)
                     {   
-
                         //by making it positive inf, we won't subsequently run this code by accident,
                         //since X - +inf = -inf, which is always less than holdDur
                         timer = float.PositiveInfinity;
@@ -126,7 +126,7 @@ public class PlayerInteractions : MonoBehaviour
             }
 
             if (nearImm) {
-                if (Input.GetKeyDown(KeyCode.Z)) {
+                if (Input.GetKeyDown(KeyCode.X)) {
                     if (currImm.getIsFollow())
                     {
                         currImm.StopFollow();
@@ -149,7 +149,6 @@ public class PlayerInteractions : MonoBehaviour
                     }
                     // transform.position = bush position
             }
-
     }
 
     public void OnTriggerExit2D(Collider2D other){
@@ -159,6 +158,7 @@ public class PlayerInteractions : MonoBehaviour
             
             nearShop = false;
             nearBush = false;
+            nearImm = false;
     }
 
 }

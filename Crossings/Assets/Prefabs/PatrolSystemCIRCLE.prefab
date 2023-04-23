@@ -123,7 +123,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731178318280804010}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6597ff60190a6345b71872cff3eea95, type: 3}
   m_Name: 
@@ -138,14 +138,18 @@ MonoBehaviour:
     m_Bits: 0
   playerRef: {fileID: 0}
   playerStates: {fileID: 0}
-  pathver1: {fileID: 0}
-  pathver2: {fileID: 0}
+  pathvercircle: {fileID: 0}
+  pathverswitch: {fileID: 0}
   CanSeePlayer: 0
   turnadj: 360
   Timer: {fileID: 0}
   endNoticeTime: 2
   PlayerChase: 0
   chaseSpeed: 2
+  facingUp: 0
+  facingDown: 0
+  facingRight: 0
+  facingLeft: 0
 --- !u!114 &478854922033517050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +176,7 @@ MonoBehaviour:
   faceDown: 0
   faceRight: 0
   faceLeft: 0
+  moving: 0
 --- !u!1 &1731178318726598370
 GameObject:
   m_ObjectHideFlags: 0

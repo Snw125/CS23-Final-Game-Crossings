@@ -106,14 +106,18 @@ MonoBehaviour:
     m_Bits: 0
   playerRef: {fileID: 0}
   playerStates: {fileID: 0}
-  pathver1: {fileID: 0}
-  pathver2: {fileID: 0}
+  pathvercircle: {fileID: 0}
+  pathverswitch: {fileID: 0}
   CanSeePlayer: 0
   turnadj: 360
   Timer: {fileID: 0}
   endNoticeTime: 2
   PlayerChase: 0
   chaseSpeed: 2
+  facingUp: 0
+  facingDown: 1
+  facingRight: 0
+  facingLeft: 0
 --- !u!1 &102587429454321220
 GameObject:
   m_ObjectHideFlags: 0

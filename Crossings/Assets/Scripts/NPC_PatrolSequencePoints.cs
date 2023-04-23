@@ -21,6 +21,8 @@ public class NPC_PatrolSequencePoints : MonoBehaviour {
        public bool faceRight = false;
        public bool faceLeft = false;
 
+       public bool moving = false;
+
        void Start(){
               waitTime = startWaitTime;
               nextSpot = startSpot;
@@ -66,22 +68,28 @@ public class NPC_PatrolSequencePoints : MonoBehaviour {
             faceRight = false;
             faceLeft = false;
 
+            moving = true;
+
             anim.SetBool("Up", true);
             anim.SetBool("Down", false);
             anim.SetBool("Right", false);
             anim.SetBool("Left", false);
-       }
+            anim.SetBool("Moving", true);
+    }
 
-       private void TurnDown(){
+    private void TurnDown(){
             faceUp = false;
             faceDown = true;
             faceRight = false;
             faceLeft = false;
 
+            moving = true;
+
             anim.SetBool("Up", false);
             anim.SetBool("Down", true);
             anim.SetBool("Right", false);
             anim.SetBool("Left", false);
+            anim.SetBool("Moving", true);
     }
 
     private void TurnRight(){
@@ -90,10 +98,13 @@ public class NPC_PatrolSequencePoints : MonoBehaviour {
             faceRight = true;
             faceLeft = false;
 
+            moving = true;
+
             anim.SetBool("Up", false);
             anim.SetBool("Down", false);
             anim.SetBool("Right", true);
             anim.SetBool("Left", false);
+            anim.SetBool("Moving", true);
     }
 
     private void TurnLeft(){
@@ -102,22 +113,20 @@ public class NPC_PatrolSequencePoints : MonoBehaviour {
             faceRight = false;
             faceLeft = true;
 
+            moving = true;
+
             anim.SetBool("Up", false);
             anim.SetBool("Down", false);
             anim.SetBool("Right", false);
             anim.SetBool("Left", true);
+            anim.SetBool("Moving", true);
     }
 
-    private void Idle(){
-            faceUp = false;
-            faceDown = false;
-            faceRight = false;
-            faceLeft = false;
 
-            anim.SetBool("Up", false);
-            anim.SetBool("Down", false);
-            anim.SetBool("Right", false);
-            anim.SetBool("Left", false);
+
+    private void Idle(){
+            moving = false;
+            anim.SetBool("Moving", false);
     }
 
 }

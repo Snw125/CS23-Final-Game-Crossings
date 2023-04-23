@@ -6,13 +6,15 @@ public class FieldOfView : MonoBehaviour
 {
     public float radius = 5f; 
     [Range(1, 360)] public float angle = 45f;
+    private float findAngle;
+
     public LayerMask targetLayer;
     public LayerMask obstructionLayer;
 
     public GameObject playerRef;
     public PlayerInteractions playerStates;
-    public PatrolCircle pathver1;
-    public NPC_PatrolSequencePoints pathver2;
+    public PatrolCircle pathvercircle;
+    public NPC_PatrolSequencePoints pathverswitch;
 
     public bool CanSeePlayer;
 
@@ -30,6 +32,11 @@ public class FieldOfView : MonoBehaviour
     public bool PlayerChase = false;
     public float chaseSpeed = 2f;
 
+    public bool facingUp;
+    public bool facingDown;
+    public bool facingRight;
+    public bool facingLeft;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,11 +45,11 @@ public class FieldOfView : MonoBehaviour
 
         if (gameObject.GetComponent<PatrolCircle>() != null) 
         {
-            pathver1 = gameObject.GetComponent<PatrolCircle>();
+            pathvercircle = gameObject.GetComponent<PatrolCircle>();
         }
         if (gameObject.GetComponent<NPC_PatrolSequencePoints>() != null) 
         {
-            pathver2 = gameObject.GetComponent<NPC_PatrolSequencePoints>();
+            pathverswitch = gameObject.GetComponent<NPC_PatrolSequencePoints>();
         }
 
         Timer = transform.GetChild(2).transform.GetChild(0).gameObject;
@@ -80,10 +87,24 @@ public class FieldOfView : MonoBehaviour
                 
             }
         }
+
+        if (pathvercircle != null) {
+            facingUp = pathvercircle.faceUp;
+            facingDown = pathvercircle.faceDown;
+            facingLeft = pathvercircle.faceLeft;
+            facingRight = pathvercircle.faceRight;
+        }
+        else if (pathverswitch != null) {
+            facingUp = pathverswitch.faceUp;
+            facingDown = pathverswitch.faceDown;
+            facingLeft = pathverswitch.faceLeft;
+            facingRight = pathverswitch.faceRight;
+        }
         
 
         if (PlayerChase) 
         {
+            // TO DO: make this more complicated
             transform.position = Vector2.MoveTowards(transform.position, playerRef.transform.position, chaseSpeed * Time.deltaTime);
         }
         
@@ -107,10 +128,24 @@ public class FieldOfView : MonoBehaviour
         if (rangeCheck.Length > 0) 
         {
             Transform target = rangeCheck[0].transform;
+            Debug.Log(target);
             Vector2 directionToTarget = (target.position - transform.position).normalized;
+            
+            if (facingUp) {
+                findAngle = Vector2.Angle(transform.up, directionToTarget);
+            }
+            if (facingDown) {
+                findAngle = Vector2.Angle(-transform.up, directionToTarget);
+            }
+            if (facingRight) {
+                findAngle = Vector2.Angle(transform.right, directionToTarget);
+            }
+            if (facingLeft) {
+                findAngle = Vector2.Angle(-transform.right, directionToTarget);
+            }
 
-            // !!! change for direction as well (transform.up)
-            if (Vector2.Angle(-transform.up, directionToTarget) < angle / 2)
+
+            if (findAngle < angle / 2)
             {
                 float distanceToTarget = Vector2.Distance(transform.position, target.position);
 
@@ -166,31 +201,44 @@ public class FieldOfView : MonoBehaviour
 
 
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.white;
-    //     UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
 
-    //     // !!! 
-    //     Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, (-angle + turnadj) / 2);
-    //     Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, (angle + turnadj) / 2);
+        // !!!
+        if (facingUp) {
+            turnadj = 0;
+        }
+        if (facingDown) {
+            turnadj = 360;
+        }
+        if (facingLeft) {
+            turnadj = 540;
+        }
+        if (facingRight) {
+            turnadj = 180;
+        }
 
-    //     Gizmos.color = Color.yellow;
-    //     Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
-    //     Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
+        Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, (-angle + turnadj) / 2);
+        Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, (angle + turnadj) / 2);
 
-    //     if (CanSeePlayer)
-    //     {
-    //         Gizmos.color = Color.green;
-    //         Gizmos.DrawLine(transform.position, playerRef.transform.position);
-    //     }
-    // }
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
+        Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
 
-    // private Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)
-    // {
-    //     angleInDegrees += eulerY;
+        if (CanSeePlayer)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, playerRef.transform.position);
+        }
+    }
 
-    //     return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
-    // }
+    private Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)
+    {
+        angleInDegrees += eulerY;
+
+        return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    }
 
 }

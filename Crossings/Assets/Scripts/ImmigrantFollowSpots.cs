@@ -18,7 +18,7 @@ public class ImmigrantFollowSpots : MonoBehaviour
 
     public Animator anim;
 
-    private bool isFollowing = true;
+    private bool isFollowing = false;
 
     void Start()
     {
@@ -70,14 +70,18 @@ void Update()
     transform.position += direction * interpolationSpeed * Time.deltaTime;
 }
 
+
 public void OnTriggerEnter2D(Collider2D other) 
 {
     if (other.gameObject.tag == "Player") 
     {
-        playerStates.ZButtonSig.SetActive(true);
+        playerStates.XButtonSig.SetActive(true);
         playerStates.thingNear = this.gameObject;
         playerStates.currImm = this;
         playerStates.nearImm = true;
+
+        playerStates.thingNearArt = playerStates.thingNear.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        playerStates.thingNearArt.color = Color.yellow;
     }
 }
 
@@ -85,12 +89,16 @@ public void OnTriggerExit2D(Collider2D other)
 {
     if (other.gameObject.tag == "Player") 
     {
-        playerStates.ZButtonSig.SetActive(false);
-        playerStates.thingNear = this.gameObject;
-        playerStates.currImm = this;
+        playerStates.thingNearArt = playerStates.thingNear.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        playerStates.thingNearArt.color = Color.white;
+
+        playerStates.XButtonSig.SetActive(false);
+        playerStates.thingNear = null;
+        playerStates.currImm = null;
         playerStates.nearImm = false;
     }
 }
+
 
 public bool getIsFollow() 
 {
@@ -110,47 +118,47 @@ public void StopFollow()
 
 
     private void TurnUp(){
-        Debug.Log("UP!");
+        //Debug.Log("UP!");
 
         anim.SetBool("Up", true);
         anim.SetBool("Down", false);
         anim.SetBool("Right", false);
         anim.SetBool("Left", false);
+        anim.SetBool("Moving", true);
     }
 
     private void TurnDown(){
-        Debug.Log("DOWN!");
+        //Debug.Log("DOWN!");
 
         anim.SetBool("Up", false);
         anim.SetBool("Down", true);
         anim.SetBool("Right", false);
         anim.SetBool("Left", false);
+        anim.SetBool("Moving", true);
     }
 
     private void TurnRight(){
-        Debug.Log("RIGHT!");
+        //Debug.Log("RIGHT!");
 
         anim.SetBool("Up", false);
         anim.SetBool("Down", false);
         anim.SetBool("Right", true);
         anim.SetBool("Left", false);
+        anim.SetBool("Moving", true);
     }
 
     private void TurnLeft(){
-        Debug.Log("LEFT!");
+        //Debug.Log("LEFT!");
 
         anim.SetBool("Up", false);
         anim.SetBool("Down", false);
         anim.SetBool("Right", false);
         anim.SetBool("Left", true);
+        anim.SetBool("Moving", true);
     }
 
     private void Idle(){
-        Debug.Log("STOP!");
-
-        anim.SetBool("Up", false);
-        anim.SetBool("Down", false);
-        anim.SetBool("Right", false);
-        anim.SetBool("Left", false);
+        //Debug.Log("STOP!");
+        anim.SetBool("Moving", false);
     }
 }
