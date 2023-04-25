@@ -62,11 +62,7 @@ public class PlayerInteractions : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other){
             if (other.gameObject.tag == "Bush") {
-                    // display button signifier
-                    ZButtonSig.SetActive(true);
-                    Timer.SetActive(true);
-                    nearBush = true;
-                    thingNear = other.gameObject;
+                Debug.Log("Whoa that works ??");
             }
             if (other.gameObject.tag == "Fence") {
                     // display button signifier
@@ -110,7 +106,7 @@ public class PlayerInteractions : MonoBehaviour
                         hideArt.SetActive(true);
 
                         // lock player to bush
-                        thingCol = thingNear.GetComponents<Collider2D>()[1];
+                        thingCol = thingNear.GetComponent<Collider2D>();
                         thingCol.enabled = !thingCol.enabled;
                         Vector2 newpos = new Vector2 (thingNear.transform.position.x, thingNear.transform.position.y + .2f); 
                         transform.position = newpos;
@@ -144,21 +140,21 @@ public class PlayerInteractions : MonoBehaviour
                             // get em out
                             hidden = false;
                             hideArt.SetActive(false);
-                            // after timer to make more seemless??
-                            // thingCol.enabled = !thingCol.enabled;
+                            Vector2 newpos = new Vector2 (transform.position.x, transform.position.y + .5f); 
+                            transform.position = newpos;
+                            thingCol.enabled = !thingCol.enabled;
                     }
-                    // transform.position = bush position
             }
     }
 
     public void OnTriggerExit2D(Collider2D other){
-            XButtonSig.SetActive(false);
-            ZButtonSig.SetActive(false);
-            Timer.SetActive(false);
+            // XButtonSig.SetActive(false);
+            // ZButtonSig.SetActive(false);
+            // Timer.SetActive(false);
             
             nearShop = false;
-            nearBush = false;
-            nearImm = false;
+            // nearBush = false;
+            // nearImm = false;
     }
 
 }
