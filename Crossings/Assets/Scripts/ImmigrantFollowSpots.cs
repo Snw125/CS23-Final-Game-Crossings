@@ -8,7 +8,7 @@ public class ImmigrantFollowSpots : MonoBehaviour
     public PlayerInteractions playerStates;
 
     public float moveSpeed = 5.0f;
-    public float followDistance = 1.0f;
+    public float followDistance = 3f;
     public float stopDistance = 0.5f;
     public float interpolationSpeed = 5.0f;
 
@@ -36,90 +36,75 @@ public class ImmigrantFollowSpots : MonoBehaviour
         anim = gameObject.GetComponentInChildren<Animator>();
     }
 
-void Update()
-{
-    if (!isFollowing) return;
-
-    if (Vector3.Distance(transform.position, player.transform.position) < stopDistance)
+    void Update()
     {
-        Idle();
-        return;
-    }
+        if (!isFollowing) return;
 
-    if (Vector3.Distance(transform.position, player.transform.position) < followDistance)
-    {
         targetPosition = player.transform.position;
-    }
-    else if (Vector3.Distance(transform.position, targetPosition) < followDistance)
-    {
-        currentSpotIndex++;
-        if (currentSpotIndex >= spots.Count)
+
+        if (Vector3.Distance(transform.position, player.transform.position) < stopDistance)
         {
-            currentSpotIndex = 0;
+            Idle();
+            return;
         }
 
-        targetPosition = spots[currentSpotIndex];
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        transform.position += direction * moveSpeed * Time.deltaTime;
 
-        if (spots[currentSpotIndex - 1].y < targetPosition.y) { TurnUp(); }
-        else if (spots[currentSpotIndex - 1].y > targetPosition.y) { TurnDown(); }
-        else if (spots[currentSpotIndex - 1].x < targetPosition.x) { TurnRight(); }
-        else if (spots[currentSpotIndex - 1].x > targetPosition.x) { TurnLeft(); }
+        if (direction.y > 0) { TurnUp(); }
+        else if (direction.y < 0) { TurnDown(); }
+        else if (direction.x > 0) { TurnRight(); }
+        else if (direction.x < 0) { TurnLeft(); }
     }
 
-    Vector3 direction = (targetPosition - transform.position).normalized;
-    transform.position += direction * interpolationSpeed * Time.deltaTime;
-}
 
-
-public void OnTriggerEnter2D(Collider2D other) 
-{
-    if (other.gameObject.tag == "Player") 
+    public void OnTriggerEnter2D(Collider2D other) 
     {
-        playerStates.XButtonSig.SetActive(true);
-        playerStates.thingNear = this.gameObject;
-        playerStates.currImm = this;
-        playerStates.nearImm = true;
+        if (other.gameObject.tag == "Player") 
+        {
+            playerStates.XButtonSig.SetActive(true);
+            playerStates.thingNear = this.gameObject;
+            playerStates.currImm = this;
+            playerStates.nearImm = true;
 
-        playerStates.thingNearArt = playerStates.thingNear.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        playerStates.thingNearArt.color = Color.yellow;
+            playerStates.thingNearArt = playerStates.thingNear.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            playerStates.thingNearArt.color = Color.yellow;
+        }
     }
-}
 
-public void OnTriggerExit2D(Collider2D other) 
-{
-    if (other.gameObject.tag == "Player") 
+    public void OnTriggerExit2D(Collider2D other) 
     {
-        playerStates.thingNearArt = playerStates.thingNear.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        playerStates.thingNearArt.color = Color.white;
+        if (other.gameObject.tag == "Player") 
+        {
+            playerStates.thingNearArt = playerStates.thingNear.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            playerStates.thingNearArt.color = Color.white;
 
-        playerStates.XButtonSig.SetActive(false);
-        playerStates.thingNear = null;
-        playerStates.currImm = null;
-        playerStates.nearImm = false;
+            playerStates.XButtonSig.SetActive(false);
+            playerStates.thingNear = null;
+            playerStates.currImm = null;
+            playerStates.nearImm = false;
+        }
     }
-}
 
 
-public bool getIsFollow() 
-{
-    return isFollowing;
-}
+    public bool getIsFollow() 
+    {
+        return isFollowing;
+    }
 
-public void FollowPlayer() 
-{
-    isFollowing = true;
-}
+    public void FollowPlayer() 
+    {
+        isFollowing = true;
+    }
 
-public void StopFollow() 
-{
-    isFollowing = false;
-    Idle();
-}
+    public void StopFollow() 
+    {
+        isFollowing = false;
+        Idle();
+    }
 
 
     private void TurnUp(){
-        //Debug.Log("UP!");
-
         anim.SetBool("Up", true);
         anim.SetBool("Down", false);
         anim.SetBool("Right", false);
@@ -128,8 +113,6 @@ public void StopFollow()
     }
 
     private void TurnDown(){
-        //Debug.Log("DOWN!");
-
         anim.SetBool("Up", false);
         anim.SetBool("Down", true);
         anim.SetBool("Right", false);
@@ -138,8 +121,6 @@ public void StopFollow()
     }
 
     private void TurnRight(){
-        //Debug.Log("RIGHT!");
-
         anim.SetBool("Up", false);
         anim.SetBool("Down", false);
         anim.SetBool("Right", true);
