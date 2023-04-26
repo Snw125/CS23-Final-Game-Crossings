@@ -181,7 +181,7 @@ public class GameHandler : MonoBehaviour
       }
     }
 
-    public void purchaseDecoyArt(){
+    public void purchaseDecoy(){
       if(!decoyArtPurchased){
         // Get Image and Text of the Inventory Spot to Use
         GameObject currText = inventorySpots[inventoryIndex].transform.GetChild(0).gameObject;

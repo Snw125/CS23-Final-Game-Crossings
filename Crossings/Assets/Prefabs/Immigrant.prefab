@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8592953472575949213}
   - component: {fileID: 1788179472535911978}
   - component: {fileID: 1864692352}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ImmigrantArt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751063087131530381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0101844715}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8377544048681856733}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5464953823166975702}
   - component: {fileID: 4434171444756248543}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8114439799372912239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: -0.0101844715}
+  m_LocalPosition: {x: 0, y: -0.4, z: -0.0101844715}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,9 +201,9 @@ GameObject:
   - component: {fileID: 2531571566330957930}
   - component: {fileID: 2428411717827689204}
   - component: {fileID: 1524518709}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Immigrant
-  m_TagString: Untagged
+  m_TagString: Immigrant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +238,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0016536713, y: -0.3750143}
+  m_Offset: {x: -0.0016536713, y: -0.047092438}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -249,7 +249,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.33134842, y: 0.2767086}
+  m_Size: {x: 0.61465836, y: 0.90974045}
   m_EdgeRadius: 0
 --- !u!50 &2428411717827689204
 Rigidbody2D:
@@ -285,8 +285,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  moveSpeed: 15
-  followDistance: 0.1
-  stopDistance: 0.5
+  playerStates: {fileID: 0}
+  moveSpeed: 5
+  followDistance: 1
+  stopDistance: 1
   interpolationSpeed: 2.5
   anim: {fileID: 0}

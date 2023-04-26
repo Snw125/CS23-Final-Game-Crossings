@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1977686276038894767}
   - component: {fileID: 1977686276038894765}
   - component: {fileID: 1977686276038894737}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Patrol MOVE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0011367798, y: -0.37147903}
+  m_Offset: {x: 0.0042533875, y: -0.03993225}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -93,7 +93,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.30057526, y: 0.29293823}
+  m_Size: {x: 0.47309113, y: 0.923687}
   m_EdgeRadius: 0
 --- !u!50 &1977686276038894767
 Rigidbody2D:
@@ -130,12 +130,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   angle: 90
+  decoyLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   obstructionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1536
   playerRef: {fileID: 0}
   playerStates: {fileID: 0}
   pathvercircle: {fileID: 0}
@@ -185,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1977686276652166389}
   - component: {fileID: 1977686276652166388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977686276652166378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: -0.037524838}
+  m_LocalPosition: {x: 0, y: -0.4, z: -0.037524838}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -270,7 +273,7 @@ GameObject:
   - component: {fileID: 1977686277488169021}
   - component: {fileID: 1977686277488169023}
   - component: {fileID: 1977686277488169020}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PatrolArt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 1977686277488169010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1977686276038894761}
@@ -374,7 +377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 909433629562965100}
   - component: {fileID: 7291743871549747342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 816944651122994107}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8147693905472024807}
   - component: {fileID: 3572253487933559022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

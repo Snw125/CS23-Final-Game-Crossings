@@ -11262,7 +11262,7 @@ GameObject:
   - component: {fileID: 563711162}
   m_Layer: 9
   m_Name: TM_Fences
-  m_TagString: Untagged
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11932,65 +11932,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 423803090, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1192465876, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 897182766476893404, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1214344048204829573, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1318501663182273877, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1639557709590669550, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073373574093557805, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6456242212252469433, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6456242212252469433, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 2113671601
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270787645476382927, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7691260111864888649, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8809245968477185920, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8809245968477185920, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 2113671601
-      objectReference: {fileID: 0}
     - target: {fileID: 8854552327388198840, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8854552327388198840, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8854552327388198844, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
       propertyPath: m_RootOrder
@@ -12036,22 +11980,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8854552327388198845, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8854552327388198846, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8854552328026672687, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8854552328450867920, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
 --- !u!1 &1446415775
@@ -12068,7 +11996,7 @@ GameObject:
   - component: {fileID: 1446415779}
   m_Layer: 10
   m_Name: TM_Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
