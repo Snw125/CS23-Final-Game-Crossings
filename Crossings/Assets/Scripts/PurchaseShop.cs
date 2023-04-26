@@ -58,9 +58,9 @@ public class PurchaseShop : MonoBehaviour
         }
       }
       else{
-        //Debug.Log("Already purchased Wire Clippers");
-        feedbackText.color = Color.blue;
-        feedbackText.text = "Already in Inventory";
+            //Debug.Log("Already purchased Wire Clippers");
+            feedbackText.color = Color.blue;
+            feedbackText.text = "Already in Inventory";
       }
     }
 
@@ -89,28 +89,28 @@ public class PurchaseShop : MonoBehaviour
 
     public void purchaseThree(){
       if (!ClimbToolPurchased){
-        Debug.Log("Buying Item 3, balance: " + balance);
+        //Debug.Log("Buying Climbing Tools, balance: " + balance);
         if (balance >= 75){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
           ClimbToolPurchased = true;
-          Debug.Log("Bought boat successfully");
+          //Debug.Log("Bought boat successfully");
+          
           balance-= 75;
           balanceText.text = balance.ToString();
           GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-          GameHandler.GetComponent<GameHandler>().purchaseBoat();
-
+          GameHandler.GetComponent<GameHandler>().purchaseClimbingTool();
         }
         else{
-          Debug.Log("Cannot buy, need more money");
+          //Debug.Log("Cannot buy, need more money");
           feedbackText.color = Color.red;
           feedbackText.text = "Error, Insufficient funds";
         }
 
       }
       else{
-        Debug.Log("Already purchased Boat");
+        //Debug.Log("Already purchased Boat");
         feedbackText.color = Color.blue;
         feedbackText.text = "Already in Inventory";
       }
@@ -118,90 +118,32 @@ public class PurchaseShop : MonoBehaviour
 
     public void purchaseFour(){
       if (!LadderPurchased){
-        Debug.Log("Buying Decoy Art, balance: " + balance);
+        //Debug.Log("Buying Ladder, balance: " + balance);
         if (balance >= 75){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
           LadderPurchased = true;
-          Debug.Log("Bought Decoy Art successfully");
+          //Debug.Log("Bought Decoy Art successfully");
+          
           balance-= 75;
           balanceText.text = balance.ToString();
           GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-          GameHandler.GetComponent<GameHandler>().purchaseDecoyArt();
-
+          GameHandler.GetComponent<GameHandler>().purchaseLadder();
         }
         else{
-          Debug.Log("Cannot buy, need more money");
+          //Debug.Log("Cannot buy, need more money");
           feedbackText.color = Color.red;
           feedbackText.text = "Error, Insufficient funds";
         }
 
       }
       else{
-        Debug.Log("Already purchased Decoy Art");
+        //Debug.Log("Already purchased Decoy Art");
         feedbackText.color = Color.blue;
         feedbackText.text = "Already in Inventory";
       }
     }
-
-    // public void purchaseFive(){
-    //   if (!itemFivePurchased){
-    //     Debug.Log("Buying Wireclipper, balance: " + balance);
-    //     if (balance >= 75){
-    //       feedbackText.color = Color.green;
-    //       feedbackText.text = "Successful Purchase!";
-
-    //       itemFivePurchased = true;
-    //       Debug.Log("Bought Wireclipper successfully");
-    //       balance-= 75;
-    //       balanceText.text = balance.ToString();
-    //       GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-    //       GameHandler.GetComponent<GameHandler>().purchaseWireClipper();
-
-    //     }
-    //     else{
-    //       Debug.Log("Cannot buy, need more money");
-    //       feedbackText.color = Color.red;
-    //       feedbackText.text = "Error, Insufficient funds";
-    //     }
-
-    //   }
-    //   else{
-    //     Debug.Log("Already purchased Wireclipper");
-    //     feedbackText.color = Color.blue;
-    //     feedbackText.text = "Already in Inventory";
-    //   }
-    // }
-
-    // public void purchaseSix(){
-    //   if (!itemSixPurchased){
-    //     Debug.Log("Buying Bush, balance: " + balance);
-    //     if (balance >= 75){
-    //       feedbackText.color = Color.green;
-    //       feedbackText.text = "Successful Purchase!";
-
-    //       itemSixPurchased = true;
-    //       Debug.Log("Bought bush successfully");
-    //       balance-= 75;
-    //       balanceText.text = balance.ToString();
-    //       GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-    //       GameHandler.GetComponent<GameHandler>().purchaseBush();
-
-    //     }
-    //     else{
-    //       Debug.Log("Cannot buy, need more money");
-    //       feedbackText.color = Color.red;
-    //       feedbackText.text = "Error, Insufficient funds";
-    //     }
-
-    //   }
-    //   else{
-    //     Debug.Log("Already purchased Bush");
-    //     feedbackText.color = Color.blue;
-    //     feedbackText.text = "Already in Inventory";
-    //   }
-    // }
 
     public void ExitButton(){
       Debug.Log("Exit Button Clicked");

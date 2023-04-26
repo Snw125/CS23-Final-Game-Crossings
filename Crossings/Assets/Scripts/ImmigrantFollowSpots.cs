@@ -12,7 +12,9 @@ public class ImmigrantFollowSpots : MonoBehaviour
     public float stopDistance = 0.5f;
     public float interpolationSpeed = 5.0f;
 
-    private List<Vector3> spots;
+    //private bool moving;
+
+    private Queue<Vector3> spots;
     private int currentSpotIndex;
     private Vector3 targetPosition;
 
@@ -25,13 +27,13 @@ public class ImmigrantFollowSpots : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerStates = player.GetComponent<PlayerInteractions>();
 
-        currentSpotIndex = 0;
-
-        PlayerMovementSpots playerController = player.GetComponent<PlayerMovementSpots>();
+        PlayerGridMove playerController = player.GetComponent<PlayerGridMove>();
         spots = playerController.spots;
 
-        spots.Insert(0, player.transform.position);
-        targetPosition = spots[currentSpotIndex];
+        //moving = false;
+
+        spots.Enqueue(player.transform.position);
+        targetPosition = transform.position;
 
         anim = gameObject.GetComponentInChildren<Animator>();
     }
@@ -39,22 +41,69 @@ public class ImmigrantFollowSpots : MonoBehaviour
     void Update()
     {
         if (!isFollowing) return;
-
-        targetPosition = player.transform.position;
-
-        if (Vector3.Distance(transform.position, player.transform.position) < stopDistance)
+        
+        transform.position = Vector3.MoveTowards(transform.position, 
+                            targetPosition, moveSpeed * Time.deltaTime);
+        // Vector3.Distance(transform.position, player.transform.position) < stopDistance
+        if (spots.Count == 1)
         {
             Idle();
             return;
         }
+        
+        if (spots.Count > 0) 
+        {
+            targetPosition = spots.Dequeue();
+            //Debug.Log(targetPosition);
 
-        Vector3 direction = (targetPosition - transform.position).normalized;
-        transform.position += direction * moveSpeed * Time.deltaTime;
+            if (transform.position.y < targetPosition.y) { TurnUp(); }
+            else if (transform.position.y > targetPosition.y) { TurnDown(); }
+            else if (transform.position.x < targetPosition.x) { TurnRight(); }
+            else if (transform.position.x > targetPosition.x) { TurnLeft(); }
+        }
 
-        if (direction.y > 0) { TurnUp(); }
-        else if (direction.y < 0) { TurnDown(); }
-        else if (direction.x > 0) { TurnRight(); }
-        else if (direction.x < 0) { TurnLeft(); }
+        
+
+        // else if (Vector3.Distance(transform.position, targetPosition) <= .05f) 
+        // {
+        //     if (moving) {
+        //         moving = false;
+        //     }
+        // }
+
+        // else {
+        //     moving = true;
+        // }
+
+        // if (Vector3.Distance(transform.position, player.transform.position) < followDistance)
+        // {
+        //     targetPosition = player.transform.position;
+        // }
+        // else if (Vector3.Distance(transform.position, targetPosition) < followDistance)
+        // {
+            
+        //     // if (currentSpotIndex >= spots.Count)
+        //     // {
+        //     //     currentSpotIndex = 0;
+        //     // }
+
+        //     targetPosition = spots[currentSpotIndex];
+        //     currentSpotIndex++;
+
+        //     
+        // }
+
+        // Vector3 direction = (targetPosition - transform.position).normalized;
+        // transform.position += direction * moveSpeed * Time.deltaTime;
+
+        //transform.position = targetPosition;
+
+        
+
+        // if (direction.y > 0) { TurnUp(); }
+        // else if (direction.y < 0) { TurnDown(); }
+        // else if (direction.x > 0) { TurnRight(); }
+        // else if (direction.x < 0) { TurnLeft(); }
     }
 
 
