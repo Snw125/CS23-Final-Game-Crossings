@@ -12,6 +12,9 @@ public class PlayerGridMove : MonoBehaviour
     private bool moving;
     public bool canMove;
 
+    public List<Vector3> spots = new List<Vector3>(); // list of positions to follow
+    public List<Transform> immigrants = new List<Transform>(); // list of immigrant objects to follow
+
     public PlayerInteractions interact;
     
     // Start is called before the first frame update
@@ -36,7 +39,15 @@ public class PlayerGridMove : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, 
                              movePoint.position, moveSpeed * Time.deltaTime);
-                             
+
+        if (interact.hidden) 
+        {
+            canMove = false;
+        }
+        else {
+            canMove = true;
+        }
+
         if (canMove && Vector3.Distance(transform.position, movePoint.position) <= .05f) {
 
             if (moving) {
@@ -49,6 +60,7 @@ public class PlayerGridMove : MonoBehaviour
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f) {
                 if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), 0f, whatStopsMovement)) {
                     movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                    //spots.Add(transform.position);
                 }
             }
             else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f) {
@@ -85,6 +97,11 @@ public class PlayerGridMove : MonoBehaviour
                 anim.SetBool("Right", false);
                 anim.SetBool("Left", false);
             }
+        } else {
+            anim.SetBool("Up", false);
+            anim.SetBool("Down", true);
+            anim.SetBool("Right", false);
+            anim.SetBool("Left", false);
         }
     }
 }

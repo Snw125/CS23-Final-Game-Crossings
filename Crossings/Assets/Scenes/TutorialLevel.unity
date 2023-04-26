@@ -11262,7 +11262,7 @@ GameObject:
   - component: {fileID: 563711162}
   m_Layer: 2
   m_Name: TM_Fences
-  m_TagString: Untagged
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11993,7 +11993,7 @@ GameObject:
   - component: {fileID: 1446415780}
   m_Layer: 2
   m_Name: TM_Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

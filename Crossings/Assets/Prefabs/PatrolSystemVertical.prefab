@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2447971370948445881}
   - component: {fileID: 5212775308776372827}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2751799669842977134}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3896777906278639136}
   - component: {fileID: 3896777906278639137}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3896777906278639167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: -0.037524838}
+  m_LocalPosition: {x: 0, y: -0.4, z: -0.037524838}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 3896777906896432762}
   - component: {fileID: 3896777906896432760}
   - component: {fileID: 3896777906896432708}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Patrol MOVE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0011367798, y: -0.37147903}
+  m_Offset: {x: -0.0011386871, y: -0.044326782}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -324,7 +324,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.30057526, y: 0.29293823}
+  m_Size: {x: 0.46562576, y: 0.9236641}
   m_EdgeRadius: 0
 --- !u!50 &3896777906896432762
 Rigidbody2D:
@@ -361,12 +361,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   angle: 90
+  decoyLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   obstructionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1536
   playerRef: {fileID: 0}
   playerStates: {fileID: 0}
   pathvercircle: {fileID: 0}
@@ -417,7 +420,7 @@ GameObject:
   - component: {fileID: 3896777907137714920}
   - component: {fileID: 3896777907137714922}
   - component: {fileID: 3896777907137714921}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PatrolArt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +436,7 @@ Transform:
   m_GameObject: {fileID: 3896777907137714919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3896777906896432764}
@@ -521,7 +524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6662065871467723314}
   - component: {fileID: 2086631667773889083}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

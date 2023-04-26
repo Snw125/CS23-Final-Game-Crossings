@@ -8,6 +8,7 @@ public class FieldOfView : MonoBehaviour
     [Range(1, 360)] public float angle = 45f;
     private float findAngle;
 
+    public LayerMask decoyLayer;
     public LayerMask targetLayer;
     public LayerMask obstructionLayer;
 
@@ -123,6 +124,7 @@ public class FieldOfView : MonoBehaviour
 
     private void FOV()
     {
+        //Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, radius, decoyLayer);
         Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
 
         if (rangeCheck.Length > 0) 
@@ -201,44 +203,44 @@ public class FieldOfView : MonoBehaviour
 
 
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.white;
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.white;
+    //     UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
 
-        // !!!
-        if (facingUp) {
-            turnadj = 0;
-        }
-        if (facingDown) {
-            turnadj = 360;
-        }
-        if (facingLeft) {
-            turnadj = 540;
-        }
-        if (facingRight) {
-            turnadj = 180;
-        }
+    //     // !!!
+    //     if (facingUp) {
+    //         turnadj = 0;
+    //     }
+    //     if (facingDown) {
+    //         turnadj = 360;
+    //     }
+    //     if (facingLeft) {
+    //         turnadj = 540;
+    //     }
+    //     if (facingRight) {
+    //         turnadj = 180;
+    //     }
 
-        Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, (-angle + turnadj) / 2);
-        Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, (angle + turnadj) / 2);
+    //     Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, (-angle + turnadj) / 2);
+    //     Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, (angle + turnadj) / 2);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
-        Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
+    //     Gizmos.color = Color.yellow;
+    //     Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
+    //     Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
 
-        if (CanSeePlayer)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, playerRef.transform.position);
-        }
-    }
+    //     if (CanSeePlayer)
+    //     {
+    //         Gizmos.color = Color.green;
+    //         Gizmos.DrawLine(transform.position, playerRef.transform.position);
+    //     }
+    // }
 
-    private Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)
-    {
-        angleInDegrees += eulerY;
+    // private Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)
+    // {
+    //     angleInDegrees += eulerY;
 
-        return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
-    }
+    //     return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    // }
 
 }

@@ -5,12 +5,10 @@ using UnityEngine.UI;
 
 public class PurchaseShop : MonoBehaviour
 {
-    static public bool itemOnePurchased;
-    static public bool itemTwoPurchased;
-    static public bool itemThreePurchased;
-    static public bool itemFourPurchased;
-    static public bool itemFivePurchased;
-    static public bool itemSixPurchased;
+    static public bool WireClipPurchased;
+    static public bool DecoyPurchased;
+    static public bool ClimbToolPurchased;
+    static public bool LadderPurchased;
 
     static public int balance;
 
@@ -25,94 +23,78 @@ public class PurchaseShop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      itemOnePurchased = false;
-      itemTwoPurchased = false;
-      itemThreePurchased = false;
-      itemFourPurchased = false;
-      itemFivePurchased = false;
-      itemSixPurchased = false;
+        WireClipPurchased = false;
+        DecoyPurchased = false;
+        ClimbToolPurchased = false;
+        LadderPurchased = false;
 
+        ShopUI = transform.parent.gameObject;
 
-
-      ShopUI = transform.parent.gameObject;
-
-      GameObject[] arr = GameObject.FindGameObjectsWithTag("GameController");
-      GameHandler = arr[0];
-      balance = GameHandler.GetComponent<GameHandler>().getCurrentBankBalance();
-      balanceText.text = balance.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        GameObject[] arr = GameObject.FindGameObjectsWithTag("GameController");
+        GameHandler = arr[0];
+        balance = GameHandler.GetComponent<GameHandler>().getCurrentBankBalance();
+        balanceText.text = balance.ToString();
     }
 
     public void purchaseOne(){
-      if (!itemOnePurchased){
-        Debug.Log("Buying Ladder, balance: " + balance);
+      if (!WireClipPurchased){
+        //Debug.Log("Buying wire clippers, balance: " + balance);
         if (balance >= 75){
-          feedbackText.color = Color.green;
-          feedbackText.text = "Successful Purchase!";
+            feedbackText.color = Color.green;
+            feedbackText.text = "Successful Purchase!";
 
-          itemOnePurchased = true;
-          Debug.Log("Bought ladder successfully");
-          balance-= 75;
-          balanceText.text = balance.ToString();
-          GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-          GameHandler.GetComponent<GameHandler>().purchaseLadder();
-
+            WireClipPurchased = true;
+            //Debug.Log("Bought wire clippers successfully");
+            
+            balance-= 75;
+            balanceText.text = balance.ToString();
+            GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
+            GameHandler.GetComponent<GameHandler>().purchaseWireClipper();
         }
         else{
-          Debug.Log("Cannot buy, need more money");
-          feedbackText.color = Color.red;
-          feedbackText.text = "Error, Insufficient funds";
+            //Debug.Log("Cannot buy, need more money");
+            feedbackText.color = Color.red;
+            feedbackText.text = "Error, Insufficient funds";
         }
-
       }
       else{
-        Debug.Log("Already purchases Ladder");
+        //Debug.Log("Already purchased Wire Clippers");
         feedbackText.color = Color.blue;
         feedbackText.text = "Already in Inventory";
       }
     }
 
+// Decoy - not limited
     public void purchaseTwo(){
-      if (!itemTwoPurchased){
-        Debug.Log("Buying Climbing Tool, balance: " + balance);
+        //Debug.Log("Buying Decoy, balance: " + balance);
         if (balance >= 75){
-          feedbackText.color = Color.green;
-          feedbackText.text = "Successful Purchase!";
-          itemTwoPurchased = true;
-          Debug.Log("Bought Climbing tool successfully");
-          balance -= 75;
-          balanceText.text = balance.ToString();
-          GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-          GameHandler.GetComponent<GameHandler>().purchaseClimbingTool();
-
+            feedbackText.color = Color.green;
+            feedbackText.text = "Successful Purchase!";
+            
+            DecoyPurchased = true;
+            //Debug.Log("Bought Decoy successfully");
+            
+            balance -= 75;
+            balanceText.text = balance.ToString();
+            GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
+            GameHandler.GetComponent<GameHandler>().purchaseDecoy();
+            // add one to decoy counter 
         }
         else{
-          Debug.Log("Cannot buy, need more money");
-          feedbackText.color = Color.red;
-          feedbackText.text = "Error, Insufficient funds";
+            //Debug.Log("Cannot buy, need more money");
+            feedbackText.color = Color.red;
+            feedbackText.text = "Error, Insufficient funds";
         }
-
-      }
-      else{
-        Debug.Log("Already purchased Climbing tool");
-        feedbackText.color = Color.blue;
-        feedbackText.text = "Already in Inventory";
-      }
     }
 
     public void purchaseThree(){
-      if (!itemThreePurchased){
+      if (!ClimbToolPurchased){
         Debug.Log("Buying Item 3, balance: " + balance);
         if (balance >= 75){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
-          itemThreePurchased = true;
+          ClimbToolPurchased = true;
           Debug.Log("Bought boat successfully");
           balance-= 75;
           balanceText.text = balance.ToString();
@@ -135,13 +117,13 @@ public class PurchaseShop : MonoBehaviour
     }
 
     public void purchaseFour(){
-      if (!itemFourPurchased){
+      if (!LadderPurchased){
         Debug.Log("Buying Decoy Art, balance: " + balance);
         if (balance >= 75){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
-          itemFourPurchased = true;
+          LadderPurchased = true;
           Debug.Log("Bought Decoy Art successfully");
           balance-= 75;
           balanceText.text = balance.ToString();
@@ -163,63 +145,63 @@ public class PurchaseShop : MonoBehaviour
       }
     }
 
-    public void purchaseFive(){
-      if (!itemFivePurchased){
-        Debug.Log("Buying Wireclipper, balance: " + balance);
-        if (balance >= 75){
-          feedbackText.color = Color.green;
-          feedbackText.text = "Successful Purchase!";
+    // public void purchaseFive(){
+    //   if (!itemFivePurchased){
+    //     Debug.Log("Buying Wireclipper, balance: " + balance);
+    //     if (balance >= 75){
+    //       feedbackText.color = Color.green;
+    //       feedbackText.text = "Successful Purchase!";
 
-          itemFivePurchased = true;
-          Debug.Log("Bought Wireclipper successfully");
-          balance-= 75;
-          balanceText.text = balance.ToString();
-          GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-          GameHandler.GetComponent<GameHandler>().purchaseWireClipper();
+    //       itemFivePurchased = true;
+    //       Debug.Log("Bought Wireclipper successfully");
+    //       balance-= 75;
+    //       balanceText.text = balance.ToString();
+    //       GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
+    //       GameHandler.GetComponent<GameHandler>().purchaseWireClipper();
 
-        }
-        else{
-          Debug.Log("Cannot buy, need more money");
-          feedbackText.color = Color.red;
-          feedbackText.text = "Error, Insufficient funds";
-        }
+    //     }
+    //     else{
+    //       Debug.Log("Cannot buy, need more money");
+    //       feedbackText.color = Color.red;
+    //       feedbackText.text = "Error, Insufficient funds";
+    //     }
 
-      }
-      else{
-        Debug.Log("Already purchased Wireclipper");
-        feedbackText.color = Color.blue;
-        feedbackText.text = "Already in Inventory";
-      }
-    }
+    //   }
+    //   else{
+    //     Debug.Log("Already purchased Wireclipper");
+    //     feedbackText.color = Color.blue;
+    //     feedbackText.text = "Already in Inventory";
+    //   }
+    // }
 
-    public void purchaseSix(){
-      if (!itemSixPurchased){
-        Debug.Log("Buying Bush, balance: " + balance);
-        if (balance >= 75){
-          feedbackText.color = Color.green;
-          feedbackText.text = "Successful Purchase!";
+    // public void purchaseSix(){
+    //   if (!itemSixPurchased){
+    //     Debug.Log("Buying Bush, balance: " + balance);
+    //     if (balance >= 75){
+    //       feedbackText.color = Color.green;
+    //       feedbackText.text = "Successful Purchase!";
 
-          itemSixPurchased = true;
-          Debug.Log("Bought bush successfully");
-          balance-= 75;
-          balanceText.text = balance.ToString();
-          GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-          GameHandler.GetComponent<GameHandler>().purchaseBush();
+    //       itemSixPurchased = true;
+    //       Debug.Log("Bought bush successfully");
+    //       balance-= 75;
+    //       balanceText.text = balance.ToString();
+    //       GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
+    //       GameHandler.GetComponent<GameHandler>().purchaseBush();
 
-        }
-        else{
-          Debug.Log("Cannot buy, need more money");
-          feedbackText.color = Color.red;
-          feedbackText.text = "Error, Insufficient funds";
-        }
+    //     }
+    //     else{
+    //       Debug.Log("Cannot buy, need more money");
+    //       feedbackText.color = Color.red;
+    //       feedbackText.text = "Error, Insufficient funds";
+    //     }
 
-      }
-      else{
-        Debug.Log("Already purchased Bush");
-        feedbackText.color = Color.blue;
-        feedbackText.text = "Already in Inventory";
-      }
-    }
+    //   }
+    //   else{
+    //     Debug.Log("Already purchased Bush");
+    //     feedbackText.color = Color.blue;
+    //     feedbackText.text = "Already in Inventory";
+    //   }
+    // }
 
     public void ExitButton(){
       Debug.Log("Exit Button Clicked");

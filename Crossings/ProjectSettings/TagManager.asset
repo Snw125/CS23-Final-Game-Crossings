@@ -13,6 +13,9 @@ TagManager:
   - inventorySpot
   - balanceText
   - Inventory
+  - Immigrant
+  - Fence
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -25,7 +28,7 @@ TagManager:
   - Obstruction
   - Fence
   - Wall
-  - 
+  - Decoy
   - 
   - 
   - 

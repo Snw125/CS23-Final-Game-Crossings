@@ -58,35 +58,6 @@ public class ImmigrantFollowSpots : MonoBehaviour
     }
 
 
-    public void OnTriggerEnter2D(Collider2D other) 
-    {
-        if (other.gameObject.tag == "Player") 
-        {
-            playerStates.XButtonSig.SetActive(true);
-            playerStates.thingNear = this.gameObject;
-            playerStates.currImm = this;
-            playerStates.nearImm = true;
-
-            playerStates.thingNearArt = playerStates.thingNear.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            playerStates.thingNearArt.color = Color.yellow;
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D other) 
-    {
-        if (other.gameObject.tag == "Player") 
-        {
-            playerStates.thingNearArt = playerStates.thingNear.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            playerStates.thingNearArt.color = Color.white;
-
-            playerStates.XButtonSig.SetActive(false);
-            playerStates.thingNear = null;
-            playerStates.currImm = null;
-            playerStates.nearImm = false;
-        }
-    }
-
-
     public bool getIsFollow() 
     {
         return isFollowing;
