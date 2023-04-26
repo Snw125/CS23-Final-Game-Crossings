@@ -5880,6 +5880,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1618588507
       objectReference: {fileID: 0}
+    - target: {fileID: 7270787645476382927, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8840810858262310635, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
       propertyPath: Decoy
       value: 
@@ -6140,7 +6144,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 91aa83e779001134e824b7bef49485ec, type: 2}
+  - {fileID: 2100000, guid: e33450e2dab7fbf4aa190c40fe6a3160, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

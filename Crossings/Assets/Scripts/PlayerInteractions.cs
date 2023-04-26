@@ -13,8 +13,13 @@ public class PlayerInteractions : MonoBehaviour
     float holdDur;
 
     //private GameHandler gameHandler;
-    public GameObject XButtonSig;
     public GameObject ZButtonSig;
+    public GameObject XButtonSig;
+    public GameObject CButtonSig;
+
+    // object sigs here
+    // TODO
+
     public GameObject hideArt;
     
     public GameObject Timer;
@@ -53,13 +58,18 @@ public class PlayerInteractions : MonoBehaviour
 
         holdDur = 2f;
 
-        XButtonSig = transform.GetChild(2).gameObject;
-        ZButtonSig = transform.GetChild(3).gameObject;
+        ZButtonSig = transform.GetChild(4).transform.GetChild(1).gameObject;
+        XButtonSig = transform.GetChild(4).transform.GetChild(5).gameObject;
+        CButtonSig = transform.GetChild(4).transform.GetChild(9).gameObject;
+
         ShopUI = GameObject.FindWithTag("shop");
         hideArt = transform.GetChild(5).gameObject;
         
-        XButtonSig.SetActive(false);
+
         ZButtonSig.SetActive(false);
+        XButtonSig.SetActive(false);
+        CButtonSig.SetActive(false);
+
         ShopUI.SetActive(false);
         Timer.SetActive(false);
         hideArt.SetActive(false);
