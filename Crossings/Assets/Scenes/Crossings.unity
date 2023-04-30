@@ -12985,6 +12985,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8854552327388198840, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
   m_PrefabInstance: {fileID: 1106364605}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &423803094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423803083}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c17e99e8070749d29188ce194564c49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  movePoint: {fileID: 1100708408}
+  whatStopsMovement:
+    serializedVersion: 2
+    m_Bits: 0
+  anim: {fileID: 0}
+  canMove: 1
+  followers: []
+  interact: {fileID: 0}
 --- !u!1 &657672917
 GameObject:
   m_ObjectHideFlags: 0
@@ -22473,6 +22494,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!4 &1100708408 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1192465877, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
+  m_PrefabInstance: {fileID: 1106364605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1106364605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22483,6 +22509,18 @@ PrefabInstance:
     - target: {fileID: 423803089, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
       propertyPath: distance
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970191123, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731920871521555123, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731920871521555123, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2113671601
       objectReference: {fileID: 0}
     - target: {fileID: 8854552327388198840, guid: 597848056721f0446a0d41fa3c6f6360, type: 3}
       propertyPath: m_Name
