@@ -1293,8 +1293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a535d7be6819d4d93bfa4283d4a4052c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySpots: []
-  inventorySpotTracker: []
   balanceText: {fileID: 0}
 --- !u!4 &1124011460
 Transform:

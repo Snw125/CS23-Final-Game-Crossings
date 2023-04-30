@@ -22,6 +22,9 @@ public class ImmigrantFollowSpots : MonoBehaviour
 
     private bool isFollowing = false;
 
+    private Transform currentFollower;
+    private List<Transform> followers = new List<Transform>();
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -44,7 +47,7 @@ public class ImmigrantFollowSpots : MonoBehaviour
         
         transform.position = Vector3.MoveTowards(transform.position, 
                             targetPosition, moveSpeed * Time.deltaTime);
-        // Vector3.Distance(transform.position, player.transform.position) < stopDistance
+
         if (spots.Count == 1)
         {
             Idle();
@@ -53,8 +56,18 @@ public class ImmigrantFollowSpots : MonoBehaviour
         
         if (spots.Count > 0) 
         {
+            if (spots.Peek() == player.transform.position) {
+                // Move the follower to the player's previous position
+                spots.Dequeue();
+                if (followers.Count > 0) {
+                    Transform follower = followers[0];
+                    followers.RemoveAt(0);
+                    spots.Enqueue(follower.position);
+                    currentFollower = follower;
+                }
+            }
+
             targetPosition = spots.Dequeue();
-            //Debug.Log(targetPosition);
 
             if (transform.position.y < targetPosition.y) { TurnUp(); }
             else if (transform.position.y > targetPosition.y) { TurnDown(); }
@@ -62,50 +75,19 @@ public class ImmigrantFollowSpots : MonoBehaviour
             else if (transform.position.x > targetPosition.x) { TurnLeft(); }
         }
 
-        
-
-        // else if (Vector3.Distance(transform.position, targetPosition) <= .05f) 
-        // {
-        //     if (moving) {
-        //         moving = false;
-        //     }
-        // }
-
-        // else {
-        //     moving = true;
-        // }
-
-        // if (Vector3.Distance(transform.position, player.transform.position) < followDistance)
-        // {
-        //     targetPosition = player.transform.position;
-        // }
-        // else if (Vector3.Distance(transform.position, targetPosition) < followDistance)
-        // {
-            
-        //     // if (currentSpotIndex >= spots.Count)
-        //     // {
-        //     //     currentSpotIndex = 0;
-        //     // }
-
-        //     targetPosition = spots[currentSpotIndex];
-        //     currentSpotIndex++;
-
-        //     
-        // }
-
-        // Vector3 direction = (targetPosition - transform.position).normalized;
-        // transform.position += direction * moveSpeed * Time.deltaTime;
-
-        //transform.position = targetPosition;
-
-        
-
-        // if (direction.y > 0) { TurnUp(); }
-        // else if (direction.y < 0) { TurnDown(); }
-        // else if (direction.x > 0) { TurnRight(); }
-        // else if (direction.x < 0) { TurnLeft(); }
+        if (followers.Count > 0) {
+            Transform lastFollower = followers[followers.Count - 1];
+            Vector3 lastFollowerPos = spots.Peek();
+            Vector3 direction = (lastFollowerPos - lastFollower.position).normalized;
+            float distance = Vector3.Distance(lastFollowerPos, lastFollower.position);
+            if (distance > followDistance) {
+                Transform newFollower = followers[0];
+                followers.RemoveAt(0);
+                followers.Add(newFollower);
+                spots.Enqueue(lastFollower.position - (direction * followDistance));
+            }
+        }
     }
-
 
     public bool getIsFollow() 
     {
@@ -115,14 +97,19 @@ public class ImmigrantFollowSpots : MonoBehaviour
     public void FollowPlayer() 
     {
         isFollowing = true;
+        followers.Add(transform);
     }
 
     public void StopFollow() 
     {
         isFollowing = false;
         Idle();
+        followers.Remove(transform);
+        if (currentFollower != null) {
+            spots.Enqueue(currentFollower.position);
+            currentFollower = null;
+        }
     }
-
 
     private void TurnUp(){
         anim.SetBool("Up", true);
@@ -139,8 +126,7 @@ public class ImmigrantFollowSpots : MonoBehaviour
         anim.SetBool("Left", false);
         anim.SetBool("Moving", true);
     }
-
-    private void TurnRight(){
+        private void TurnRight(){
         anim.SetBool("Up", false);
         anim.SetBool("Down", false);
         anim.SetBool("Right", true);
@@ -149,8 +135,6 @@ public class ImmigrantFollowSpots : MonoBehaviour
     }
 
     private void TurnLeft(){
-        //Debug.Log("LEFT!");
-
         anim.SetBool("Up", false);
         anim.SetBool("Down", false);
         anim.SetBool("Right", false);
@@ -159,7 +143,33 @@ public class ImmigrantFollowSpots : MonoBehaviour
     }
 
     private void Idle(){
-        //Debug.Log("STOP!");
         anim.SetBool("Moving", false);
     }
+
+    public void AddFollower(Transform follower) {
+        followers.Add(follower);
+        if (currentFollower == null) {
+            currentFollower = follower;
+            spots.Enqueue(currentFollower.position);
+        } else {
+            Vector3 lastFollowerPos = spots.Peek();
+            Vector3 direction = (lastFollowerPos - currentFollower.position).normalized;
+            spots.Enqueue(currentFollower.position - (direction * followDistance));
+        }
+    }
+
+    public void RemoveFollower(Transform follower) {
+        followers.Remove(follower);
+        if (currentFollower == follower) {
+            currentFollower = null;
+            if (followers.Count > 0) {
+                Transform newFollower = followers[0];
+                followers.RemoveAt(0);
+                currentFollower = newFollower;
+                spots.Enqueue(currentFollower.position);
+            }
+        }
+    }
 }
+
+
