@@ -4,21 +4,41 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerInteractions : MonoBehaviour
-{
-    //gameHandler = GameObject.FindWithTag("GameHandler").GetComponent<GameHandler>();
-    
+{   
     public PlayerGridMove movement;
 
     float timer;
     float holdDur;
 
     //private GameHandler gameHandler;
-    public GameObject ZButtonSig;
-    public GameObject XButtonSig;
-    public GameObject CButtonSig;
 
-    // object sigs here
-    // TODO
+    // signifier stuff
+    private GameObject ZButtonSig;
+    private GameObject XButtonSig;
+    private GameObject CButtonSig;
+
+    // Z
+    private GameObject BushSig;
+    private GameObject ShopSig;
+    private GameObject FenceSig;
+    private GameObject ClimbSig;
+
+    // X 
+    private GameObject ImmSig;
+    private GameObject ClipSig;
+    private GameObject LadderSig;
+
+    // C
+    private GameObject DecoySig;
+
+    // Text 
+    private GameObject ZSig;
+    private GameObject XSig;
+    private GameObject CSig;
+    private Text ZSigtxt;
+    private Text XSigtxt;
+    private Text CSigtxt;
+
 
     public GameObject hideArt;
     
@@ -27,18 +47,19 @@ public class PlayerInteractions : MonoBehaviour
 
     public GameObject ShopUI;
 
-    public bool nearShop;
-    public bool nearBush;
+    private bool nearShop;
+    private bool nearBush;
     public bool nearImm;
-    public bool nearFence;
-    public bool nearWall;
+    private bool nearFence;
+    private bool nearWall;
 
     public bool hasDecoy;
     public bool hasClip;
     public bool hasClimb;
     public bool hasLadder;
 
-    public float numDecoy;
+    public int numDecoy;
+    private bool displayDecoy;
     public GameObject Decoy;
 
     public GameObject thingNear;
@@ -53,17 +74,43 @@ public class PlayerInteractions : MonoBehaviour
     {
         //gameHandler = GameObject.FindWithTag("GameHandler").GetComponent<GameHandler>();
         movement = gameObject.GetComponent<PlayerGridMove>();
-        Timer = transform.GetChild(4).transform.GetChild(0).gameObject;
+        
+        Timer = transform.GetChild(2).transform.GetChild(0).gameObject;
         TimeBar = Timer.transform.GetChild(0).GetComponent<Image>();
 
         holdDur = 2f;
 
-        ZButtonSig = transform.GetChild(4).transform.GetChild(1).gameObject;
-        XButtonSig = transform.GetChild(4).transform.GetChild(5).gameObject;
-        CButtonSig = transform.GetChild(4).transform.GetChild(9).gameObject;
+        GameObject allSigs = transform.GetChild(2).transform.GetChild(1).gameObject;
+
+        ZButtonSig = allSigs.transform.GetChild(0).gameObject;
+        XButtonSig = allSigs.transform.GetChild(5).gameObject;
+        CButtonSig = allSigs.transform.GetChild(9).gameObject;
+
+        // Z
+        BushSig = allSigs.transform.GetChild(1).gameObject;
+        ShopSig = allSigs.transform.GetChild(2).gameObject;
+        FenceSig = allSigs.transform.GetChild(3).gameObject;
+        ClimbSig = allSigs.transform.GetChild(4).gameObject;
+
+        // X 
+        ImmSig = allSigs.transform.GetChild(6).gameObject;
+        ClipSig = allSigs.transform.GetChild(7).gameObject;
+        LadderSig = allSigs.transform.GetChild(8).gameObject;
+
+        // C
+        DecoySig = allSigs.transform.GetChild(10).gameObject;
+
+        // Text 
+        ZSig = allSigs.transform.GetChild(11).gameObject;
+        ZSigtxt = allSigs.transform.GetChild(11).gameObject.GetComponent<Text>();
+        XSig = allSigs.transform.GetChild(12).gameObject;
+        XSigtxt = allSigs.transform.GetChild(12).gameObject.GetComponent<Text>();
+        CSig = allSigs.transform.GetChild(13).gameObject;
+        CSigtxt = allSigs.transform.GetChild(13).gameObject.GetComponent<Text>();
+
 
         ShopUI = GameObject.FindWithTag("shop");
-        hideArt = transform.GetChild(5).gameObject;
+        hideArt = transform.GetChild(3).gameObject;
         
 
         ZButtonSig.SetActive(false);
@@ -87,6 +134,7 @@ public class PlayerInteractions : MonoBehaviour
         hasLadder = false;
 
         numDecoy = 0;
+        displayDecoy = false;
 
         hidden = false;
     }
@@ -102,6 +150,9 @@ public class PlayerInteractions : MonoBehaviour
 
                 thingNearArt = other.transform.GetChild(0).GetComponent<SpriteRenderer>();
                 thingNearArt.color = Color.yellow;
+                BushSig.SetActive(true);
+                ZSig.SetActive(true);
+                ZSigtxt.text = "Hide";
             }
             if (other.gameObject.tag == "Immigrant") 
             {
@@ -112,27 +163,46 @@ public class PlayerInteractions : MonoBehaviour
 
                 thingNearArt = other.transform.GetChild(0).GetComponent<SpriteRenderer>();
                 thingNearArt.color = Color.yellow;
+                ImmSig.SetActive(true);
+                XSig.SetActive(true);
+                XSigtxt.text = "Follow";
             }
             if (other.gameObject.tag == "Fence") {
-                ZButtonSig.SetActive(true);
-                // also X if have clip
                 Timer.SetActive(true);
                 thingNear = other.gameObject;
                 nearFence = true;
 
                 //thingNearArt = other.transform.GetChild.GetComponent<TilemapRenderer>();
                 //thingNearArt.color = Color.yellow;
+                ZButtonSig.SetActive(true);
+                FenceSig.SetActive(true);
+                ZSig.SetActive(true);
+                ZSigtxt.text = "Jump";
+                if (hasClip) { 
+                    XButtonSig.SetActive(true);
+                    ClipSig.SetActive(true);
+                    XSig.SetActive(true);
+                    XSigtxt.text = "Break";
+                }
             }
             if (other.gameObject.tag == "Wall") {
                 if (hasClimb) {
-                    ZButtonSig.SetActive(true);
-                    // also X if have ladder
                     Timer.SetActive(true);
                     thingNear = other.gameObject;
                     nearWall = true;
 
                     //thingNearArt = other.transform.GetChild(0).GetComponent<SpriteRenderer>();
                     // thingNearArt.color = Color.yellow;
+                    ZButtonSig.SetActive(true);
+                    ClimbSig.SetActive(true);
+                    ZSig.SetActive(true);
+                    ZSigtxt.text = "Climb";
+                    if (hasLadder) { 
+                        XButtonSig.SetActive(true);
+                        LadderSig.SetActive(true);
+                        XSig.SetActive(true);
+                        XSigtxt.text = "With Imms";
+                    }
                 }
             }
             if (other.gameObject.tag == "ShopOverworld") {
@@ -141,6 +211,9 @@ public class PlayerInteractions : MonoBehaviour
 
                 thingNearArt = other.transform.GetChild(0).GetComponent<SpriteRenderer>();
                 thingNearArt.color = Color.yellow;
+                ShopSig.SetActive(true);
+                ZSig.SetActive(true);
+                ZSigtxt.text = "Shop";
             }
     }
 
@@ -362,6 +435,13 @@ public class PlayerInteractions : MonoBehaviour
             }
 
             if (hasDecoy) {
+                    if (!displayDecoy) {
+                        CButtonSig.SetActive(true);
+                        DecoySig.SetActive(true);
+                        CSig.SetActive(true);
+
+                        displayDecoy = true;
+                    }
                     if (Input.GetKeyDown(KeyCode.C)) {
                         Vector2 decoypos = new Vector2 (transform.position.x, transform.position.y + 1f);
                         Instantiate(Decoy, decoypos, Quaternion.identity);
@@ -377,6 +457,9 @@ public class PlayerInteractions : MonoBehaviour
                 thingNearArt.color = Color.white;
 
                 ZButtonSig.SetActive(false);
+                BushSig.SetActive(false);
+                ZSig.SetActive(false);
+                
                 Timer.SetActive(false);
                 thingNear = null;
                 thingCol = null;
@@ -389,6 +472,9 @@ public class PlayerInteractions : MonoBehaviour
             thingNearArt.color = Color.white;
 
             XButtonSig.SetActive(false);
+            ImmSig.SetActive(false);
+            XSig.SetActive(false);
+            
             thingNear = null;
             currImm = null;
             nearImm = false;
@@ -398,6 +484,14 @@ public class PlayerInteractions : MonoBehaviour
             //thingNearArt.color = Color.white;
 
             ZButtonSig.SetActive(false);
+            FenceSig.SetActive(false);
+            ZSig.SetActive(false);
+            if (hasClip) {
+                XButtonSig.SetActive(false);
+                ClipSig.SetActive(false);
+                XSig.SetActive(false);
+            }
+
             Timer.SetActive(false);
             thingNear = null;
             nearFence = false;
@@ -408,7 +502,14 @@ public class PlayerInteractions : MonoBehaviour
                 //thingNearArt.color = Color.white;
                 
                 ZButtonSig.SetActive(false);
-                // also X if have ladder
+                ClimbSig.SetActive(false);
+                ZSig.SetActive(false);
+                if (hasLadder) {
+                    XButtonSig.SetActive(false);
+                    LadderSig.SetActive(false);
+                    XSig.SetActive(false);
+                }
+
                 Timer.SetActive(false);
                 thingNear = null;
                 nearWall = false;
@@ -419,6 +520,8 @@ public class PlayerInteractions : MonoBehaviour
             thingNearArt.color = Color.white;
             
             ZButtonSig.SetActive(false);
+            ShopSig.SetActive(false);
+            ZSig.SetActive(false);
             nearShop = false;
         }
 

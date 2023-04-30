@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7135882154443865444}
   - component: {fileID: 7135882154443865445}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: Explosion 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ Animator:
   m_GameObject: {fileID: 7135882154443865442}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e0342b980fc3a47b2b78ad6b8d714dfc, type: 2}
+  m_Controller: {fileID: 9100000, guid: d157ea1344d3d2d419d8e2b529b386f8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
