@@ -20,6 +20,7 @@ public class PlayerGridMove : MonoBehaviour
     public Queue<Vector3> spots = new Queue<Vector3>(); // list of positions to follow
     public List<Transform> immigrants = new List<Transform>(); // list of immigrant objects to follow
 
+    public Queue<Vector3> Spots { get { return spots; } }   
     public PlayerInteractions interact;
 
     // Start is called before the first frame update

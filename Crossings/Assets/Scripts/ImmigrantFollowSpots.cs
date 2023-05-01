@@ -8,9 +8,9 @@ public class ImmigrantFollowSpots : MonoBehaviour
     public PlayerInteractions playerStates;
 
     public float moveSpeed = 5.0f;
-    public float followDistance = 3f;
+    public float followDistance = 0.1f;
     public float stopDistance = 0.5f;
-    public float interpolationSpeed = 5.0f;
+    public float interpolationSpeed = 2.5f;
 
     //private bool moving;
 

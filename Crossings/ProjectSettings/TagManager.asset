@@ -16,6 +16,8 @@ TagManager:
   - Immigrant
   - Fence
   - Wall
+  - temp_boarder
+  - TempBoarder
   layers:
   - Default
   - TransparentFX
