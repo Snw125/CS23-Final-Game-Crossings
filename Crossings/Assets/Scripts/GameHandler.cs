@@ -37,7 +37,7 @@ public class GameHandler : MonoBehaviour
     private GameObject LadderImg;
 
     private GameObject AmtDecoy;
-    private Text AmtDecoytxt;
+    public Text AmtDecoytxt;
 
     // Balance Stuff
     const int STARTING_BALANCE = 1000;

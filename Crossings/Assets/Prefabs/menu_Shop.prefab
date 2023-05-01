@@ -1113,7 +1113,7 @@ GameObject:
   - component: {fileID: 6987985788665417791}
   - component: {fileID: 5386907211356329157}
   m_Layer: 5
-  m_Name: ButtonOne
+  m_Name: ButtonTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1226,7 +1226,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5386907211356329157}
         m_TargetAssemblyTypeName: PurchaseShop, Assembly-CSharp
-        m_MethodName: purchaseOne
+        m_MethodName: purchaseFour
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1383,7 +1383,7 @@ GameObject:
   - component: {fileID: 6748535179035685169}
   - component: {fileID: 3477627537501668030}
   m_Layer: 5
-  m_Name: ButtonOne
+  m_Name: ButtonFour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1496,7 +1496,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3477627537501668030}
         m_TargetAssemblyTypeName: PurchaseShop, Assembly-CSharp
-        m_MethodName: purchaseOne
+        m_MethodName: purchaseThree
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2213,7 +2213,7 @@ GameObject:
   - component: {fileID: 2334685678197918523}
   - component: {fileID: 5341673925712596877}
   m_Layer: 5
-  m_Name: ButtonOne
+  m_Name: ButtonThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2326,7 +2326,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5341673925712596877}
         m_TargetAssemblyTypeName: PurchaseShop, Assembly-CSharp
-        m_MethodName: purchaseOne
+        m_MethodName: purchaseTwo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

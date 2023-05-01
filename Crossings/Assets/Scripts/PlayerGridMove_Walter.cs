@@ -104,7 +104,7 @@ public class PlayerGridMove_Walter : MonoBehaviour
         } else { // hidden/cant move
             UpCollide.enabled = false;
             DownCollide.enabled = false;
-                        RightCollide.enabled = false;
+            RightCollide.enabled = false;
             LeftCollide.enabled = false;
             
             anim.SetBool("Up", false);

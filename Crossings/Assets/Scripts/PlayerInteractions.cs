@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerInteractions : MonoBehaviour
 {   
-    public PlayerGridMove movement;
+    public PlayerGridMove_Walter movement;
 
     float timer;
     float holdDur;
 
-    //private GameHandler gameHandler;
+    private GameHandler gameHandler;
 
     // signifier stuff
     private GameObject ZButtonSig;
@@ -72,8 +72,8 @@ public class PlayerInteractions : MonoBehaviour
     
     void Start()
     {
-        //gameHandler = GameObject.FindWithTag("GameHandler").GetComponent<GameHandler>();
-        movement = gameObject.GetComponent<PlayerGridMove>();
+        gameHandler = GameObject.FindWithTag("GameController").GetComponent<GameHandler>();
+        movement = gameObject.GetComponent<PlayerGridMove_Walter>();
         
         Timer = transform.GetChild(2).transform.GetChild(0).gameObject;
         TimeBar = Timer.transform.GetChild(0).GetComponent<Image>();
@@ -263,6 +263,7 @@ public class PlayerInteractions : MonoBehaviour
                 TimeBar.fillAmount = 1 - (Time.time - timer)/holdDur;
             }
 
+            // !!! CHANGE TO FIT NEW WALTER CODE 
             if (nearImm) {
                 if (Input.GetKeyDown(KeyCode.X)) {
                     if (currImm.getIsFollow())
@@ -304,7 +305,8 @@ public class PlayerInteractions : MonoBehaviour
                         else if (transform.position.x > thingNear.transform.position.x) {
                             // tp the player to the left 2 tiles
                             Vector2 newpos = new Vector2 (thingNear.transform.position.x - 1f, thingNear.transform.position.y); 
-                            movement.movePoint.position = newpos;
+                            Debug.Log(movement.movePoint.position);
+                            //movement.movePoint.position = newpos;
                             transform.position = newpos;
                         }
                         else if (transform.position.y < thingNear.transform.position.y) {
@@ -442,9 +444,14 @@ public class PlayerInteractions : MonoBehaviour
 
                         displayDecoy = true;
                     }
-                    if (Input.GetKeyDown(KeyCode.C)) {
+                    if (Input.GetKeyDown(KeyCode.C) & numDecoy != 0) {
+                        // if facing certain way 
                         Vector2 decoypos = new Vector2 (transform.position.x, transform.position.y + 1f);
+                        
                         Instantiate(Decoy, decoypos, Quaternion.identity);
+
+                        numDecoy--;
+                        gameHandler.AmtDecoytxt.text = numDecoy.ToString();
                     }
             }
     }
