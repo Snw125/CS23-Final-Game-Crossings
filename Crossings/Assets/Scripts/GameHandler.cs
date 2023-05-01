@@ -114,6 +114,12 @@ public class GameHandler : MonoBehaviour
 
     }
 
+    public void IncreaseBankBalance(int amount)
+    {
+        bankBalance += amount;
+        balanceText.text = bankBalance.ToString();
+    }
+
 
     public void purchaseWireClipper(){
         if(!wireClipperPurchased){

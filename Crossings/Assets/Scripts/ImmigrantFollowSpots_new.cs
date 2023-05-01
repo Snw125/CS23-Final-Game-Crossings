@@ -7,10 +7,21 @@ public class ImmigrantFollowSpots_new : MonoBehaviour
     public float followDistance = 1.0f;
     public float followSpeed = 3.0f;
     public int followIndex;
-    public float stopDistance = 1f; 
+
+    private static int nextFollowIndex = 0;
+    public float stopDistance = 1f;
+    public GameObject gameHandlerObject; 
 
     private bool isFollowing = false;
     private Vector3 currentTarget;
+     
+    public GameHandler gameHandler;
+    public GameObject temp_boarder;
+
+    private void Start()
+    {
+        gameHandler = gameHandlerObject.GetComponent<GameHandler>(); 
+    }
 
     private void Update()
     {
@@ -19,11 +30,13 @@ public class ImmigrantFollowSpots_new : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X) && !isFollowing && distanceToPlayer <= 1.0f)
         {
             isFollowing = true;
+            followIndex = nextFollowIndex++; // Assign and increment the nextFollowIndex
         }
 
         if (Input.GetKeyDown(KeyCode.P) && isFollowing && distanceToPlayer <= 1.0f)
         {
             isFollowing = false;
+            nextFollowIndex--; // Decrement the nextFollowIndex
         }
 
         if (isFollowing)
@@ -51,9 +64,20 @@ public class ImmigrantFollowSpots_new : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("TempBoarder"))
+        {
+            gameHandler.IncreaseBankBalance(100);
+            Destroy(gameObject);
+        }
+    }
+
     public bool IsFollowing
     {
         get { return isFollowing; }
         set { isFollowing = value; }
     }
+
+    
 }
