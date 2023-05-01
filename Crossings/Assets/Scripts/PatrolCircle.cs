@@ -12,6 +12,9 @@ public class PatrolCircle : MonoBehaviour {
        public int startSpot = 0;
        public bool endPath = false;
 
+       public FieldOfView FOV;
+       private bool seeing;
+
        // Turning
        private int nextSpot;
        private int previousSpot;
@@ -26,13 +29,28 @@ public class PatrolCircle : MonoBehaviour {
               waitTime = startWaitTime;
               nextSpot = startSpot;
               anim = gameObject.GetComponentInChildren<Animator>();
+              FOV = gameObject.GetComponentInChildren<FieldOfView>();
        }
 
        void Update(){
-              transform.position = Vector2.MoveTowards(transform.position, moveSpots[nextSpot].position, speed * Time.deltaTime);
+            if (!FOV.CanSeePlayer && !FOV.CanSeeDecoy) {
+                transform.position = Vector2.MoveTowards(transform.position, moveSpots[nextSpot].position, speed * Time.deltaTime);
 
-              if (Vector2.Distance(transform.position, moveSpots[nextSpot].position) < 0.2f){
-                     if (waitTime <= 0){
+                if(seeing) {
+                    seeing = false;
+                    // resume ANIM
+                    // check if up 
+                    if ((moveSpots[previousSpot]).position.y < (moveSpots[nextSpot]).position.y) { TurnUp(); }
+                    // check if down 
+                    else if ((moveSpots[previousSpot]).position.y > (moveSpots[nextSpot]).position.y) { TurnDown(); }
+                    // check if turn right 
+                    else if ((moveSpots[previousSpot]).position.x < (moveSpots[nextSpot]).position.x) { TurnRight(); }
+                    // check if left 
+                    else if ((moveSpots[previousSpot]).position.x > (moveSpots[nextSpot]).position.x) { TurnLeft(); }
+                }
+
+                if (Vector2.Distance(transform.position, moveSpots[nextSpot].position) < 0.2f){
+                        if (waitTime <= 0){
                             if (endPath == false){ previousSpot = nextSpot; nextSpot += 1; }
                             else if (endPath == true){ previousSpot = nextSpot; nextSpot = 0; }
                             waitTime = startWaitTime;
@@ -45,20 +63,25 @@ public class PatrolCircle : MonoBehaviour {
                             else if ((moveSpots[previousSpot]).position.x < (moveSpots[nextSpot]).position.x) { TurnRight(); }
                             // check if left 
                             else if ((moveSpots[previousSpot]).position.x > (moveSpots[nextSpot]).position.x) { TurnLeft(); }
-                     } else {
+                        } else {
                             Idle();
                             //Debug.Log("waiting!");
                             waitTime -= Time.deltaTime;
-                     }
-              }
+                        }
+                }
 
-              // cause the cycle
-              if (nextSpot == 0) {endPath = false; }
-              else if (nextSpot == (moveSpots.Length -1)) { endPath = true; }
+                // cause the cycle
+                if (nextSpot == 0) {endPath = false; }
+                else if (nextSpot == (moveSpots.Length -1)) { endPath = true; }
 
-              // cycle thru spots
-              if (previousSpot < 0){ previousSpot = moveSpots.Length - 1; }
-              else if (previousSpot > moveSpots.Length -1){ previousSpot = 0; }
+                // cycle thru spots
+                if (previousSpot < 0){ previousSpot = moveSpots.Length - 1; }
+                else if (previousSpot > moveSpots.Length -1){ previousSpot = 0; }
+            }
+            else {
+                Idle();
+                seeing = true;
+            }
 
        }
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerInteractions : MonoBehaviour
 {   
-    public PlayerGridMove_Walter movement;
+    public PlayerGridMove movement;
 
     float timer;
     float holdDur;
@@ -73,7 +73,7 @@ public class PlayerInteractions : MonoBehaviour
     void Start()
     {
         gameHandler = GameObject.FindWithTag("GameController").GetComponent<GameHandler>();
-        movement = gameObject.GetComponent<PlayerGridMove_Walter>();
+        movement = gameObject.GetComponent<PlayerGridMove>();
         
         Timer = transform.GetChild(2).transform.GetChild(0).gameObject;
         TimeBar = Timer.transform.GetChild(0).GetComponent<Image>();

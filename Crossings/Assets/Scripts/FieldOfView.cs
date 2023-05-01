@@ -18,6 +18,9 @@ public class FieldOfView : MonoBehaviour
     public NPC_PatrolSequencePoints pathverswitch;
 
     public bool CanSeePlayer;
+    public bool CanSeeDecoy;
+
+    public Transform target;
 
     // !!! make this easy to change on upper level
     public int turnadj = 360;
@@ -31,6 +34,7 @@ public class FieldOfView : MonoBehaviour
     public float endNoticeTime = 2f;
 
     public bool PlayerChase = false;
+    public bool DecoyChase = false;
     public float chaseSpeed = 2f;
 
     public bool facingUp;
@@ -55,14 +59,44 @@ public class FieldOfView : MonoBehaviour
 
         Timer = transform.GetChild(2).transform.GetChild(0).gameObject;
 
+        CanSeeDecoy = false;
+        CanSeePlayer = false;
+
         StartCoroutine(FOVCheck());
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if player is hidden SKIP THESE STEPS 
-        if (!playerStates.hidden) {
+        if (CanSeeDecoy) {
+            if (savedTime + currtime < endNoticeTime) {
+                currtime = Time.time - noticeTime;
+            }
+            if (savedTime + currtime >= endNoticeTime) {
+
+                // chase!
+                Debug.Log("Chase!");
+                if (target != null) {
+                    DecoyChase = true;
+                }
+            }
+
+            Timer.transform.localScale = new Vector3(1, (savedTime + currtime)/endNoticeTime, 1);
+        }
+        else {
+            if ((savedTime - currtime)/endNoticeTime > 0) {
+                currtime = Time.time - loseNoticeTime;
+            }
+            else {
+                DecoyChase = false;
+            }
+            
+            Timer.transform.localScale = new Vector3(1, (savedTime - currtime)/endNoticeTime, 1);
+            
+        }
+
+        //if player is hidden SKIP THESE STEPS 
+        if (!playerStates.hidden && !CanSeeDecoy) {
             if (CanSeePlayer) {
                 if (savedTime + currtime < endNoticeTime) {
                     currtime = Time.time - noticeTime;
@@ -108,6 +142,17 @@ public class FieldOfView : MonoBehaviour
             // TO DO: make this more complicated
             transform.position = Vector2.MoveTowards(transform.position, playerRef.transform.position, chaseSpeed * Time.deltaTime);
         }
+
+        if (DecoyChase) {
+            // TO DO: make this more complicated
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, chaseSpeed * Time.deltaTime);
+            if (transform.position == target.position) {
+                Destroy(target.gameObject);
+                DecoyChase = false;
+            }
+        }
+
+        
         
     }
 
@@ -124,12 +169,74 @@ public class FieldOfView : MonoBehaviour
 
     private void FOV()
     {
-        //Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, radius, decoyLayer);
+        Collider2D[] rangeCheckDecoy = Physics2D.OverlapCircleAll(transform.position, radius, decoyLayer);
         Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
+
+        if (rangeCheckDecoy.Length > 0) 
+        {
+            target = rangeCheckDecoy[0].transform;
+            Debug.Log(target);
+            Vector2 directionToTarget = (target.position - transform.position).normalized;
+            
+            if (facingUp) {
+                findAngle = Vector2.Angle(transform.up, directionToTarget);
+            }
+            if (facingDown) {
+                findAngle = Vector2.Angle(-transform.up, directionToTarget);
+            }
+            if (facingRight) {
+                findAngle = Vector2.Angle(transform.right, directionToTarget);
+            }
+            if (facingLeft) {
+                findAngle = Vector2.Angle(-transform.right, directionToTarget);
+            }
+
+
+            if (findAngle < angle / 2)
+            {
+                float distanceToTarget = Vector2.Distance(transform.position, target.position);
+
+                if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+                {
+                    if (!CanSeeDecoy) {
+                        noticeTime = Time.time;
+                        savedTime = savedTime - currtime;
+                        currtime = 0;
+                    }
+                    CanSeeDecoy = true;
+                    Debug.Log("Decoy Seen!");
+                }       
+                else 
+                {
+                    if (CanSeeDecoy) {
+                        loseNoticeTime = Time.time;
+                        savedTime = savedTime + currtime;
+                        currtime = 0;
+                    }
+                    CanSeeDecoy = false;
+                }  
+            }
+            else 
+            {
+                if (CanSeeDecoy) {
+                    loseNoticeTime = Time.time;
+                    savedTime = savedTime + currtime;
+                    currtime = 0;
+                }
+                CanSeeDecoy = false;
+            }
+        }
+        else if (CanSeeDecoy)
+        {
+            loseNoticeTime = Time.time;
+            savedTime = savedTime + currtime;
+            currtime = 0;
+            CanSeeDecoy = false;
+        }
 
         if (rangeCheck.Length > 0) 
         {
-            Transform target = rangeCheck[0].transform;
+            target = rangeCheck[0].transform;
             Debug.Log(target);
             Vector2 directionToTarget = (target.position - transform.position).normalized;
             
