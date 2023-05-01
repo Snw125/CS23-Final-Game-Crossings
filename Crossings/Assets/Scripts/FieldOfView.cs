@@ -100,7 +100,7 @@ public class FieldOfView : MonoBehaviour
         }
 
         //if player is hidden SKIP THESE STEPS 
-        if (!playerStates.hidden && !CanSeeDecoy && DecoyTimeEnd) {
+        if (!CanSeeDecoy && DecoyTimeEnd) {
             if (CanSeePlayer) {
                 if (savedTime + currtime < endNoticeTime) {
                     currtime = Time.time - noticeTime;

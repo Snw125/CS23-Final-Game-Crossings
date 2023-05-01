@@ -2460,11 +2460,7 @@ MonoBehaviour:
   Timer: {fileID: 0}
   TimeBar: {fileID: 0}
   ShopUI: {fileID: 0}
-  nearShop: 0
-  nearBush: 0
   nearImm: 0
-  nearFence: 0
-  nearWall: 0
   hasDecoy: 1
   hasClip: 0
   hasClimb: 0
@@ -2475,6 +2471,8 @@ MonoBehaviour:
   thingNearArt: {fileID: 0}
   thingCol: {fileID: 0}
   currImm: {fileID: 0}
+  Fencetiles: {fileID: 0}
+  boom: {fileID: 7135882154443865442, guid: 84d7bc91ddb6a4935a121e32773393f9, type: 3}
   hidden: 0
 --- !u!114 &423803089
 MonoBehaviour:

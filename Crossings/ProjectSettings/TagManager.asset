@@ -18,6 +18,7 @@ TagManager:
   - Wall
   - temp_boarder
   - TempBoarder
+  - Decoy
   layers:
   - Default
   - TransparentFX

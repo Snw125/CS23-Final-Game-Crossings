@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Tilemaps;
 
 public class PlayerInteractions : MonoBehaviour
 {   
@@ -68,6 +69,9 @@ public class PlayerInteractions : MonoBehaviour
     public Collider2D thingCol;
 
     public ImmigrantFollowSpots currImm;
+
+    public Tilemap Fencetiles;
+    public GameObject boom;
 
     public bool hidden;
     
@@ -137,6 +141,8 @@ public class PlayerInteractions : MonoBehaviour
 
         numDecoy = 0;
         displayDecoy = false;
+
+        Fencetiles = GameObject.FindGameObjectWithTag("Fence").GetComponent<Tilemap>();
 
         hidden = false;
     }
@@ -295,45 +301,46 @@ public class PlayerInteractions : MonoBehaviour
                         //perform your action
                         // tp the player to other side 
 
-                        Debug.Log(thingNear);
-
-                        // you cant do this. Use player orientation !!!
-                        if (transform.position.x < thingNear.transform.position.x) {
-                            // tp the player to the right 2 tiles
-                            Vector2 newpos = new Vector2 (thingNear.transform.position.x + 1f, thingNear.transform.position.y); 
-                            movement.movePoint.position = newpos;
-                            transform.position = newpos;
-                        }
-                        else if (transform.position.x > thingNear.transform.position.x) {
-                            // tp the player to the left 2 tiles
-                            Vector2 newpos = new Vector2 (thingNear.transform.position.x - 1f, thingNear.transform.position.y); 
-                            Debug.Log(movement.movePoint.position);
-                            //movement.movePoint.position = newpos;
-                            transform.position = newpos;
-                        }
-                        else if (transform.position.y < thingNear.transform.position.y) {
+                        // Use player orientation to determine where to jump
+                        if (anim.GetBool("Up")) {
                             // tp the player up 2 tiles
-                            Vector2 newpos = new Vector2 (thingNear.transform.position.x, thingNear.transform.position.y + 1f); 
+                            Vector2 newpos = new Vector2 (transform.position.x, transform.position.y + 2f); 
                             movement.movePoint.position = newpos;
                             transform.position = newpos;
                         }
-                        else if (transform.position.y > thingNear.transform.position.y) {
+                        else if (anim.GetBool("Down")) {
                             // tp the player down 2 tiles
-                            Vector2 newpos = new Vector2 (thingNear.transform.position.x, thingNear.transform.position.y - 1f); 
+                            Vector2 newpos = new Vector2 (transform.position.x, transform.position.y - 2f); 
                             movement.movePoint.position = newpos;
                             transform.position = newpos;
                         }
+                        else if (anim.GetBool("Right")) {
+                            // tp the player to the right 2 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x + 2f, transform.position.y); 
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+                        else if (anim.GetBool("Left")) {
+                            // tp the player to the left 2 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x - 2f, transform.position.y); 
+                            //Debug.Log(movement.movePoint.position);
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+
+
                     }
                 }
                 
                 
                 
                 // BREAK 
-                else if (Input.GetKeyDown(KeyCode.X)) {
+                // make sure to check they have the clippers!!
+                else if (hasClip && Input.GetKeyDown(KeyCode.X)) {
                     // Player will break
                     timer = Time.time;
                 }
-                else if(Input.GetKey(KeyCode.Z))
+                else if(hasClip && Input.GetKey(KeyCode.X))
                 {
                     if(Time.time - timer > holdDur)
                     {   
@@ -342,11 +349,37 @@ public class PlayerInteractions : MonoBehaviour
                         timer = float.PositiveInfinity;
                     
                         //perform your action
-                        // destroy the tile
-                        // bruh idk ???
+                        // Use player orientation to determine where to BREAK
+                        Vector2 breakpos;
+                        if (anim.GetBool("Up")) {
+                            // break the tile 1 above player
+                            breakpos = new Vector2 (transform.position.x, transform.position.y + 1f); 
+                            
+                        }
+                        else if (anim.GetBool("Down")) {
+                            // break the tile 1 below player
+                            breakpos = new Vector2 (transform.position.x, transform.position.y - 1f); 
+                            
+                        }
+                        else if (anim.GetBool("Right")) {
+                            // break the tile to the right of the player
+                            breakpos = new Vector2 (transform.position.x + 1f, transform.position.y); 
+                            
+                        }
+                        else if (anim.GetBool("Left")) {
+                            // break the tile to the left of the player 
+                            breakpos = new Vector2 (transform.position.x - 1f, transform.position.y); 
+                            
+                        }
+                        else {
+                            breakpos = new Vector2 (transform.position.x - 1f, transform.position.y);
+                        }
 
-                        // Destroy(thingNear);
+                        Fencetiles.SetTile(Fencetiles.WorldToCell(breakpos), null);
+                        // destructableTilemap.SetTile(destructableTilemap.WorldToCell(hitPosition), null);
+                        
                         // instantiate boom  
+                        Instantiate(boom, breakpos, Quaternion.identity);
                     }
                 }
                 else
