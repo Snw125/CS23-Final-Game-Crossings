@@ -41,6 +41,7 @@ public class PlayerInteractions : MonoBehaviour
 
 
     public GameObject hideArt;
+    private Animator anim; 
     
     public GameObject Timer;
     public Image TimeBar;
@@ -111,6 +112,7 @@ public class PlayerInteractions : MonoBehaviour
 
         ShopUI = GameObject.FindWithTag("shop");
         hideArt = transform.GetChild(3).gameObject;
+        anim = gameObject.GetComponentInChildren<Animator>();
         
 
         ZButtonSig.SetActive(false);
@@ -446,7 +448,22 @@ public class PlayerInteractions : MonoBehaviour
                     }
                     if (Input.GetKeyDown(KeyCode.C) & numDecoy != 0) {
                         // if facing certain way 
-                        Vector2 decoypos = new Vector2 (transform.position.x, transform.position.y + 1f);
+                        Vector2 decoypos;
+                        if (anim.GetBool("Up")) {
+                            decoypos = new Vector2 (transform.position.x, transform.position.y + 1f);
+                        }
+                        else if (anim.GetBool("Down")) {
+                            decoypos = new Vector2 (transform.position.x, transform.position.y - 1f);
+                        }
+                        else if (anim.GetBool("Right")) {
+                            decoypos = new Vector2 (transform.position.x + 1f, transform.position.y);
+                        }
+                        else if (anim.GetBool("Left")) {
+                            decoypos = new Vector2 (transform.position.x - 1f, transform.position.y);
+                        }
+                        else {
+                            decoypos = new Vector2 (transform.position.x, transform.position.y + 1f);
+                        }
                         
                         Instantiate(Decoy, decoypos, Quaternion.identity);
 

@@ -19,8 +19,10 @@ public class FieldOfView : MonoBehaviour
 
     public bool CanSeePlayer;
     public bool CanSeeDecoy;
+    public bool DecoyTimeEnd;
 
     public Transform target;
+    public Transform playertarget;
 
     // !!! make this easy to change on upper level
     public int turnadj = 360;
@@ -61,6 +63,7 @@ public class FieldOfView : MonoBehaviour
 
         CanSeeDecoy = false;
         CanSeePlayer = false;
+        DecoyTimeEnd = true;
 
         StartCoroutine(FOVCheck());
     }
@@ -89,6 +92,7 @@ public class FieldOfView : MonoBehaviour
             }
             else {
                 DecoyChase = false;
+                DecoyTimeEnd = true;
             }
             
             Timer.transform.localScale = new Vector3(1, (savedTime - currtime)/endNoticeTime, 1);
@@ -96,7 +100,7 @@ public class FieldOfView : MonoBehaviour
         }
 
         //if player is hidden SKIP THESE STEPS 
-        if (!playerStates.hidden && !CanSeeDecoy) {
+        if (!playerStates.hidden && !CanSeeDecoy && DecoyTimeEnd) {
             if (CanSeePlayer) {
                 if (savedTime + currtime < endNoticeTime) {
                     currtime = Time.time - noticeTime;
@@ -151,8 +155,6 @@ public class FieldOfView : MonoBehaviour
                 DecoyChase = false;
             }
         }
-
-        
         
     }
 
@@ -204,6 +206,7 @@ public class FieldOfView : MonoBehaviour
                         currtime = 0;
                     }
                     CanSeeDecoy = true;
+                    DecoyTimeEnd = false;
                     Debug.Log("Decoy Seen!");
                 }       
                 else 
@@ -234,39 +237,50 @@ public class FieldOfView : MonoBehaviour
             CanSeeDecoy = false;
         }
 
-        if (rangeCheck.Length > 0) 
-        {
-            target = rangeCheck[0].transform;
-            Debug.Log(target);
-            Vector2 directionToTarget = (target.position - transform.position).normalized;
-            
-            if (facingUp) {
-                findAngle = Vector2.Angle(transform.up, directionToTarget);
-            }
-            if (facingDown) {
-                findAngle = Vector2.Angle(-transform.up, directionToTarget);
-            }
-            if (facingRight) {
-                findAngle = Vector2.Angle(transform.right, directionToTarget);
-            }
-            if (facingLeft) {
-                findAngle = Vector2.Angle(-transform.right, directionToTarget);
-            }
-
-
-            if (findAngle < angle / 2)
+        if (DecoyTimeEnd) {
+            if (rangeCheck.Length > 0) 
             {
-                float distanceToTarget = Vector2.Distance(transform.position, target.position);
+                playertarget = rangeCheck[0].transform;
+                Debug.Log(playertarget);
+                Vector2 directionToTarget = (playertarget.position - transform.position).normalized;
+                
+                if (facingUp) {
+                    findAngle = Vector2.Angle(transform.up, directionToTarget);
+                }
+                if (facingDown) {
+                    findAngle = Vector2.Angle(-transform.up, directionToTarget);
+                }
+                if (facingRight) {
+                    findAngle = Vector2.Angle(transform.right, directionToTarget);
+                }
+                if (facingLeft) {
+                    findAngle = Vector2.Angle(-transform.right, directionToTarget);
+                }
 
-                if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+
+                if (findAngle < angle / 2)
                 {
-                    if (!CanSeePlayer) {
-                        noticeTime = Time.time;
-                        savedTime = savedTime - currtime;
-                        currtime = 0;
-                    }
-                    CanSeePlayer = true;
-                }       
+                    float distanceToTarget = Vector2.Distance(transform.position, playertarget.position);
+
+                    if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+                    {
+                        if (!CanSeePlayer) {
+                            noticeTime = Time.time;
+                            savedTime = savedTime - currtime;
+                            currtime = 0;
+                        }
+                        CanSeePlayer = true;
+                    }       
+                    else 
+                    {
+                        if (CanSeePlayer) {
+                            loseNoticeTime = Time.time;
+                            savedTime = savedTime + currtime;
+                            currtime = 0;
+                        }
+                        CanSeePlayer = false;
+                    }  
+                }
                 else 
                 {
                     if (CanSeePlayer) {
@@ -275,25 +289,17 @@ public class FieldOfView : MonoBehaviour
                         currtime = 0;
                     }
                     CanSeePlayer = false;
-                }  
-            }
-            else 
-            {
-                if (CanSeePlayer) {
-                    loseNoticeTime = Time.time;
-                    savedTime = savedTime + currtime;
-                    currtime = 0;
                 }
+            }
+            else if (CanSeePlayer)
+            {
+                loseNoticeTime = Time.time;
+                savedTime = savedTime + currtime;
+                currtime = 0;
                 CanSeePlayer = false;
             }
         }
-        else if (CanSeePlayer)
-        {
-            loseNoticeTime = Time.time;
-            savedTime = savedTime + currtime;
-            currtime = 0;
-            CanSeePlayer = false;
-        }
+        
     }
 
     void OnCollisionEnter2D(Collision2D col)
