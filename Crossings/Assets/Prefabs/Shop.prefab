@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4563541783038923734}
   - component: {fileID: 4563541783038923729}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Shop
   m_TagString: ShopOverworld
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4563541783098652435}
   - component: {fileID: 4563541783098652432}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: houseShopArt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
