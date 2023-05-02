@@ -296,8 +296,8 @@ TextureImporter:
       name: Large UI Buttons_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 64
+        y: 48
         width: 64
         height: 16
       alignment: 0
@@ -309,6 +309,27 @@ TextureImporter:
       bones: []
       spriteID: d2b77ac0e921645ef9093959c61e7632
       internalID: -1471302008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Large UI Buttons_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 64
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5817cf4ce1a70403da662b6ddbb93d1d
+      internalID: -1866245029
       vertices: []
       indices: 
       edges: []
@@ -329,6 +350,7 @@ TextureImporter:
       Large UI Buttons_1: -13604447
       Large UI Buttons_7: -241404890
       Large UI Buttons_3: 1071564407
+      Large UI Buttons_10: -1866245029
       Large UI Buttons_8: -283393549
       Large UI Buttons_9: -1471302008
       Large UI Buttons_4: 157058425
