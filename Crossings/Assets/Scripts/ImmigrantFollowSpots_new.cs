@@ -8,7 +8,7 @@ public class ImmigrantFollowSpots_new : MonoBehaviour
     public float followSpeed = 3.0f;
     public int followIndex;
 
-    private static int nextFollowIndex = 0;
+    private static int nextFollowIndex;
     public float stopDistance = 1f;
     public GameObject gameHandlerObject; 
 
@@ -18,26 +18,34 @@ public class ImmigrantFollowSpots_new : MonoBehaviour
     public GameHandler gameHandler;
     public GameObject temp_boarder;
 
+    public ImmigrantManager immManager;
+
     private void Start()
     {
-        gameHandler = gameHandlerObject.GetComponent<GameHandler>(); 
+        gameHandlerObject = GameObject.FindWithTag("GameController"); 
+        gameHandler = GameObject.FindWithTag("GameController").GetComponent<GameHandler>();
+        playerGridMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGridMove>();
+        immManager = GameObject.FindGameObjectWithTag("ImmManager").GetComponent<ImmigrantManager>();
     }
 
     private void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, playerGridMove.transform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, playerGridMove.movePoint.position);
 
-        if (Input.GetKeyDown(KeyCode.X) && !isFollowing && distanceToPlayer <= 1.0f)
-        {
-            isFollowing = true;
-            followIndex = nextFollowIndex++; // Assign and increment the nextFollowIndex
-        }
+        // if (Input.GetKeyDown(KeyCode.X) && !isFollowing && distanceToPlayer <= 1.0f)
+        // {
+        //     Debug.Log("Following!");
+        //     immManager.immsFollowing.Add(this.gameObject);
+        //     isFollowing = true;
+        //     followIndex = nextFollowIndex++; // Assign and increment the nextFollowIndex
+        // }
 
-        if (Input.GetKeyDown(KeyCode.P) && isFollowing && distanceToPlayer <= 1.0f)
-        {
-            isFollowing = false;
-            nextFollowIndex--; // Decrement the nextFollowIndex
-        }
+        // if (Input.GetKeyDown(KeyCode.P) && isFollowing && distanceToPlayer <= 1.0f)
+        // {
+        //     immManager.immsFollowing.Remove(this.gameObject);
+        //     isFollowing = false;
+        //     nextFollowIndex--; // Decrement the nextFollowIndex
+        // }
 
         if (isFollowing)
         {
@@ -53,7 +61,8 @@ public class ImmigrantFollowSpots_new : MonoBehaviour
         }
         else
         {
-            currentTarget = playerGridMove.transform.position;
+            currentTarget = playerGridMove.movePoint.position; 
+            //currentTarget = playerGridMove.transform.position;
         }
 
         float distanceToTarget = Vector3.Distance(transform.position, currentTarget);

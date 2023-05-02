@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
-  balanceText: {fileID: 0}
+  balanceText: {fileID: 5543415906311187466}
   ShopUI: {fileID: 0}
   GameHandler: {fileID: 0}
 --- !u!1 &1423006698786142666
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
-  balanceText: {fileID: 0}
+  balanceText: {fileID: 1712202764688231892}
   ShopUI: {fileID: 0}
   GameHandler: {fileID: 0}
 --- !u!1 &1423006700261699934
@@ -1254,7 +1254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
-  balanceText: {fileID: 0}
+  balanceText: {fileID: 5543415906311187466}
   ShopUI: {fileID: 0}
   GameHandler: {fileID: 0}
 --- !u!1 &2090002166034037631
@@ -1444,7 +1444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
-  balanceText: {fileID: 0}
+  balanceText: {fileID: 5543415906311187466}
   ShopUI: {fileID: 0}
   GameHandler: {fileID: 0}
 --- !u!1 &3753983304496413086
@@ -3119,6 +3119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 1423006699084762639}
-  balanceText: {fileID: 0}
+  balanceText: {fileID: 5543415906311187466}
   ShopUI: {fileID: 0}
   GameHandler: {fileID: 0}

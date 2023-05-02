@@ -19,6 +19,7 @@ TagManager:
   - temp_boarder
   - TempBoarder
   - Decoy
+  - ImmManager
   layers:
   - Default
   - TransparentFX

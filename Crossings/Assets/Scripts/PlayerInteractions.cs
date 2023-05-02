@@ -36,9 +36,9 @@ public class PlayerInteractions : MonoBehaviour
     private GameObject ZSig;
     private GameObject XSig;
     private GameObject CSig;
-    private Text ZSigtxt;
-    private Text XSigtxt;
-    private Text CSigtxt;
+    private TMPro.TextMeshProUGUI ZSigtxt;
+    private TMPro.TextMeshProUGUI XSigtxt;
+    private TMPro.TextMeshProUGUI CSigtxt;
 
 
     public GameObject hideArt;
@@ -68,9 +68,10 @@ public class PlayerInteractions : MonoBehaviour
     public SpriteRenderer thingNearArt;
     public Collider2D thingCol;
 
-    public ImmigrantFollowSpots currImm;
+    public ImmigrantManager imms;
 
     public Tilemap Fencetiles;
+    public TilemapCollider2D WallCol; 
     public GameObject boom;
 
     public bool hidden;
@@ -107,11 +108,11 @@ public class PlayerInteractions : MonoBehaviour
 
         // Text 
         ZSig = allSigs.transform.GetChild(11).gameObject;
-        ZSigtxt = allSigs.transform.GetChild(11).gameObject.GetComponent<Text>();
+        ZSigtxt = allSigs.transform.GetChild(11).gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         XSig = allSigs.transform.GetChild(12).gameObject;
-        XSigtxt = allSigs.transform.GetChild(12).gameObject.GetComponent<Text>();
+        XSigtxt = allSigs.transform.GetChild(12).gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         CSig = allSigs.transform.GetChild(13).gameObject;
-        CSigtxt = allSigs.transform.GetChild(13).gameObject.GetComponent<Text>();
+        CSigtxt = allSigs.transform.GetChild(13).gameObject.GetComponent<TMPro.TextMeshProUGUI>();
 
 
         ShopUI = GameObject.FindWithTag("shop");
@@ -143,8 +144,11 @@ public class PlayerInteractions : MonoBehaviour
         displayDecoy = false;
 
         Fencetiles = GameObject.FindGameObjectWithTag("Fence").GetComponent<Tilemap>();
+        WallCol = GameObject.FindGameObjectWithTag("Wall").GetComponent<TilemapCollider2D>();
 
         hidden = false;
+
+        imms = GameObject.FindGameObjectWithTag("ImmManager").GetComponent<ImmigrantManager>();
     }
 
 
@@ -166,7 +170,6 @@ public class PlayerInteractions : MonoBehaviour
             {
                 XButtonSig.SetActive(true);
                 thingNear = other.gameObject;
-                currImm = other.gameObject.GetComponent<ImmigrantFollowSpots>();
                 nearImm = true;
 
                 thingNearArt = other.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -272,17 +275,17 @@ public class PlayerInteractions : MonoBehaviour
             }
 
             // !!! CHANGE TO FIT NEW WALTER CODE 
-            if (nearImm) {
-                if (Input.GetKeyDown(KeyCode.X)) {
-                    if (currImm.getIsFollow())
-                    {
-                        currImm.StopFollow();
-                    }
-                    else {
-                        currImm.FollowPlayer();
-                    }
-                }
-            }
+            // if (nearImm) {
+            //     if (Input.GetKeyDown(KeyCode.X)) {
+            //         if (currImm.getIsFollow())
+            //         {
+            //             currImm.StopFollow();
+            //         }
+            //         else {
+            //             currImm.FollowPlayer();
+            //         }
+            //     }
+            // }
 
             if (nearFence) {
                 // JUMP 
@@ -328,6 +331,14 @@ public class PlayerInteractions : MonoBehaviour
                             transform.position = newpos;
                         }
 
+                        // leave immigrants behind 
+                        foreach (var immigrant in imms.immsFollowing)
+                        {
+                            ImmigrantFollowSpots_new followcode = immigrant.GetComponent<ImmigrantFollowSpots_new>();
+                            followcode.followIndex = 0;
+                            followcode.IsFollowing = false;
+                        }
+                        imms.immsFollowing.Clear();
 
                     }
                 }
@@ -395,11 +406,11 @@ public class PlayerInteractions : MonoBehaviour
 
             if (nearWall) {
                 // both tp. Ladder tp's with imms.
-                if (Input.GetKeyDown(KeyCode.Z)) {
+                if (hasClimb && Input.GetKeyDown(KeyCode.Z)) {
                     // Player will climb
                     timer = Time.time;
                 }
-                else if(Input.GetKey(KeyCode.Z))
+                else if(hasClimb && Input.GetKey(KeyCode.Z))
                 {
                     if(Time.time - timer > holdDur)
                     {   
@@ -409,22 +420,67 @@ public class PlayerInteractions : MonoBehaviour
                     
                         //perform your action
                         // tp the player to the wall 
-                        thingCol = thingNear.GetComponent<Collider2D>();
-                        thingCol.enabled = !thingCol.enabled;
-                        Vector2 newpos = new Vector2 (thingNear.transform.position.x, thingNear.transform.position.y); 
-                        movement.movePoint.position = newpos;
+
+                        WallCol.enabled = !WallCol.enabled;
+                        // change player's layer to appear above 
+
+                        // public const string LAYER_NAME = "TopLayer";
+                        // public int sortingOrder = 0;
+                        // sprite.sortingLayerName = LAYER_NAME;
+                        // sprite.sortingOrder = sortingOrder;
+
+                        // find way to replace colliders using player's hitbox 
+                        // if player move onto ground tile, replace 
+                        // make ground a trigger tile!!
+
+                        // if (anim.GetBool("Up")) {
+                        //     // tp the player up 2 tiles
+                        //     Vector2 newpos = new Vector2 (transform.position.x, transform.position.y + 2f); 
+                        //     movement.movePoint.position = newpos;
+                        //     transform.position = newpos;
+                        // }
+                        // else if (anim.GetBool("Down")) {
+                        //     // tp the player down 2 tiles
+                        //     Vector2 newpos = new Vector2 (transform.position.x, transform.position.y - 2f); 
+                        //     movement.movePoint.position = newpos;
+                        //     transform.position = newpos;
+                        // }
+                        // else if (anim.GetBool("Right")) {
+                        //     // tp the player to the right 2 tiles
+                        //     Vector2 newpos = new Vector2 (transform.position.x + 2f, transform.position.y); 
+                        //     movement.movePoint.position = newpos;
+                        //     transform.position = newpos;
+                        // }
+                        // else if (anim.GetBool("Left")) {
+                        //     // tp the player to the left 2 tiles
+                        //     Vector2 newpos = new Vector2 (transform.position.x - 2f, transform.position.y); 
+                        //     //Debug.Log(movement.movePoint.position);
+                        //     movement.movePoint.position = newpos;
+                        //     transform.position = newpos;
+                        // }
+                        // thingCol = thingNear.GetComponent<Collider2D>();
+                        // thingCol.enabled = !thingCol.enabled;
+                        // Vector2 newpos = new Vector2 (thingNear.transform.position.x, thingNear.transform.position.y); 
+                        // movement.movePoint.position = newpos;
                         //transform.position = newpos;
 
                         // leave immigrants behind!!!
+                        // foreach (var immigrant in imms.immsFollowing)
+                        // {
+                        //     ImmigrantFollowSpots_new followcode = immigrant.GetComponent<ImmigrantFollowSpots_new>();
+                        //     followcode.followIndex = 0;
+                        //     followcode.IsFollowing = false;
+                        // }
+                        // imms.immsFollowing.Clear();
                     }
                 }
 
 
-                else if (Input.GetKeyDown(KeyCode.X)) {
+                else if (hasLadder && Input.GetKeyDown(KeyCode.X)) {
                     // Player will use ladder
                     timer = Time.time;
                 }
-                else if(Input.GetKey(KeyCode.X))
+                else if(hasLadder && Input.GetKey(KeyCode.X))
                 {
                     if(Time.time - timer > holdDur)
                     {   
@@ -479,7 +535,7 @@ public class PlayerInteractions : MonoBehaviour
 
                         displayDecoy = true;
                     }
-                    if (Input.GetKeyDown(KeyCode.C) & numDecoy != 0) {
+                    if (Input.GetKeyDown(KeyCode.C) && numDecoy != 0) {
                         // if facing certain way 
                         Vector2 decoypos;
                         if (anim.GetBool("Up")) {
@@ -533,7 +589,6 @@ public class PlayerInteractions : MonoBehaviour
             XSig.SetActive(false);
             
             thingNear = null;
-            currImm = null;
             nearImm = false;
         }
         if (other.gameObject.tag == "Fence") {

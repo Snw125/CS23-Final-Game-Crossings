@@ -13,7 +13,7 @@ public class PurchaseShop : MonoBehaviour
     static public int balance;
 
     public Text feedbackText;
-    public Text balanceText;
+    public TMPro.TextMeshProUGUI balanceText;
 
 
     public GameObject ShopUI;

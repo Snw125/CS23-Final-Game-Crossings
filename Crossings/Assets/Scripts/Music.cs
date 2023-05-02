@@ -20,7 +20,7 @@ public class Music : MonoBehaviour
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Tilemap")
+        if (SceneManager.GetActiveScene().name == "TutorialLevel")
             Music.instance.GetComponent<AudioSource>().Pause();
             //BGmusic.instance.GetComponent<AudioSource>().Play();
     }

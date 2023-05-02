@@ -37,13 +37,13 @@ public class GameHandler : MonoBehaviour
     private GameObject LadderImg;
 
     private GameObject AmtDecoy;
-    public Text AmtDecoytxt;
+    public TMPro.TextMeshProUGUI AmtDecoytxt;
 
     // Balance Stuff
     const int STARTING_BALANCE = 1000;
     private int bankBalance = STARTING_BALANCE;
     public GameObject balance; 
-    public Text balanceText;
+    public TMPro.TextMeshProUGUI balanceText;
 
 
     // Start is called before the first frame update
@@ -84,13 +84,13 @@ public class GameHandler : MonoBehaviour
         LadderImg.SetActive(false);
 
         AmtDecoy = theInventory.transform.GetChild(4).gameObject;
-        AmtDecoytxt = AmtDecoy.GetComponent<Text>();
+        AmtDecoytxt = AmtDecoy.GetComponent<TMPro.TextMeshProUGUI>();
 
         AmtDecoy.SetActive(false);
 
         // Get BalanceText and Set Balance
         balance = theInventory.transform.GetChild(6).gameObject; 
-        balanceText = balance.GetComponent<Text>();
+        balanceText = balance.GetComponent<TMPro.TextMeshProUGUI>();
         setBankBalance(bankBalance); 
 
         //   GameObject[] arr = GameObject.FindGameObjectsWithTag("balanceText");

@@ -4,6 +4,14 @@ using UnityEngine;
 public class ImmigrantManager : MonoBehaviour
 {
     public List<ImmigrantFollowSpots_new> immigrants;
+    public List<GameObject> immsFollowing;
+
+    private PlayerGridMove playerGridMove;
+
+    private void Start() 
+    {
+        playerGridMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGridMove>();
+    }
 
     private void Update()
     {
@@ -11,10 +19,12 @@ public class ImmigrantManager : MonoBehaviour
         {
             foreach (var immigrant in immigrants)
             {
-                float distanceToPlayer = Vector3.Distance(immigrant.transform.position, immigrant.playerGridMove.transform.position);
+                //Debug.Log(immigrant.playerGridMove);
+                float distanceToPlayer = Vector3.Distance(immigrant.transform.position, playerGridMove.movePoint.position);
 
-                if (!immigrant.IsFollowing && distanceToPlayer <= 1.0f)
+                if (!immigrant.IsFollowing && distanceToPlayer <= 2.0f)
                 {
+                    immsFollowing.Add(immigrant.gameObject);
                     immigrant.followIndex = GetNextFollowIndex();
                     immigrant.IsFollowing = true;
                 }
@@ -25,10 +35,11 @@ public class ImmigrantManager : MonoBehaviour
         {
             foreach (var immigrant in immigrants)
             {
-                float distanceToPlayer = Vector3.Distance(immigrant.transform.position, immigrant.playerGridMove.transform.position);
+                float distanceToPlayer = Vector3.Distance(immigrant.transform.position, playerGridMove.movePoint.position);
 
-                if (immigrant.IsFollowing && distanceToPlayer <= 1.0f)
+                if (immigrant.IsFollowing && distanceToPlayer <= 2.0f)
                 {
+                    immsFollowing.Remove(immigrant.gameObject);
                     immigrant.IsFollowing = false;
                 }
             }
