@@ -124,6 +124,10 @@ public class PlayerInteractions : MonoBehaviour
         XButtonSig.SetActive(false);
         CButtonSig.SetActive(false);
 
+        ZSig.SetActive(false);
+        XSig.SetActive(false);
+        CSig.SetActive(false);
+
         ShopUI.SetActive(false);
         Timer.SetActive(false);
         hideArt.SetActive(false);

@@ -292,3 +292,4 @@ MonoBehaviour:
   gameHandlerObject: {fileID: 0}
   gameHandler: {fileID: 0}
   temp_boarder: {fileID: 0}
+  immManager: {fileID: 0}

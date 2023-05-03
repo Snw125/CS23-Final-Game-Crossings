@@ -742,7 +742,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3788155971656204599}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -997,7 +997,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3788155971656204599}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1976,8 +1976,8 @@ RectTransform:
   - {fileID: 2865927906957534659}
   - {fileID: 3641021752215516572}
   - {fileID: 1179335390226608265}
-  - {fileID: 372557392181689189}
   - {fileID: 3077196176129455628}
+  - {fileID: 372557392181689189}
   - {fileID: 8205101402723065087}
   - {fileID: 7524752553870057276}
   - {fileID: 9064613686790505872}
@@ -2534,7 +2534,6 @@ GameObject:
   - component: {fileID: 1519426468967143791}
   - component: {fileID: 8854552327388198846}
   - component: {fileID: 8840810858262310635}
-  - component: {fileID: 423803089}
   - component: {fileID: 1970191123}
   m_Layer: 7
   m_Name: Player
@@ -2742,30 +2741,11 @@ MonoBehaviour:
   thingNear: {fileID: 0}
   thingNearArt: {fileID: 0}
   thingCol: {fileID: 0}
-  currImm: {fileID: 0}
+  imms: {fileID: 0}
   Fencetiles: {fileID: 0}
   WallCol: {fileID: 0}
   boom: {fileID: 7135882154443865442, guid: 84d7bc91ddb6a4935a121e32773393f9, type: 3}
   hidden: 0
---- !u!114 &423803089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8854552327388198840}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d4e1a8f3051c469dbd9a1655800307d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  movement: {x: 0, y: 0}
-  distance: 1
-  spots: []
-  immigrants: []
-  anim: {fileID: 8854552328450867927}
-  interact: {fileID: 0}
 --- !u!114 &1970191123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2782,7 +2762,7 @@ MonoBehaviour:
   movePoint: {fileID: 1192465877}
   whatStopsMovement:
     serializedVersion: 2
-    m_Bits: 3840
+    m_Bits: 1792
   anim: {fileID: 0}
   canMove: 0
   immigrants: []
