@@ -31,7 +31,7 @@ public class ImmigrantManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             foreach (var immigrant in immigrants)
             {
