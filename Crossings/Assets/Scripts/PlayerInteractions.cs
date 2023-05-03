@@ -60,6 +60,9 @@ public class PlayerInteractions : MonoBehaviour
     public bool hasClimb;
     public bool hasLadder;
 
+    public bool climbing;
+    public bool climbingwithimms;
+
     public int numDecoy;
     private bool displayDecoy;
     public GameObject Decoy;
@@ -72,9 +75,13 @@ public class PlayerInteractions : MonoBehaviour
 
     public Tilemap Fencetiles;
     public TilemapCollider2D WallCol; 
+    public Tilemap Walltiles;
     public GameObject boom;
 
     public bool hidden;
+
+    private SpriteRenderer playerSprite;
+    private SpriteRenderer shadowSprite;
     
     void Start()
     {
@@ -144,15 +151,22 @@ public class PlayerInteractions : MonoBehaviour
         hasClimb = false;
         hasLadder = false;
 
+        climbing = false;
+        climbingwithimms = false;
+
         numDecoy = 0;
         displayDecoy = false;
 
         Fencetiles = GameObject.FindGameObjectWithTag("Fence").GetComponent<Tilemap>();
         WallCol = GameObject.FindGameObjectWithTag("Wall").GetComponent<TilemapCollider2D>();
+        Walltiles = GameObject.FindGameObjectWithTag("Wall").GetComponent<Tilemap>();
 
         hidden = false;
 
         imms = GameObject.FindGameObjectWithTag("ImmManager").GetComponent<ImmigrantManager>();
+
+        playerSprite = gameObject.GetComponentInChildren<SpriteRenderer>();
+        shadowSprite = gameObject.transform.GetChild(4).GetComponent<SpriteRenderer>();
     }
 
 
@@ -428,40 +442,39 @@ public class PlayerInteractions : MonoBehaviour
                         WallCol.enabled = !WallCol.enabled;
                         // change player's layer to appear above 
 
-                        // public const string LAYER_NAME = "TopLayer";
-                        // public int sortingOrder = 0;
-                        // sprite.sortingLayerName = LAYER_NAME;
-                        // sprite.sortingOrder = sortingOrder;
+                        playerSprite.sortingLayerName = "Overlays";
+                        playerSprite.sortingOrder = 100;
+                        shadowSprite.sortingLayerName = "Overlays";
+                        shadowSprite.sortingOrder = 95;
 
-                        // find way to replace colliders using player's hitbox 
-                        // if player move onto ground tile, replace 
-                        // make ground a trigger tile!!
+                        climbing = true;
 
-                        // if (anim.GetBool("Up")) {
-                        //     // tp the player up 2 tiles
-                        //     Vector2 newpos = new Vector2 (transform.position.x, transform.position.y + 2f); 
-                        //     movement.movePoint.position = newpos;
-                        //     transform.position = newpos;
-                        // }
-                        // else if (anim.GetBool("Down")) {
-                        //     // tp the player down 2 tiles
-                        //     Vector2 newpos = new Vector2 (transform.position.x, transform.position.y - 2f); 
-                        //     movement.movePoint.position = newpos;
-                        //     transform.position = newpos;
-                        // }
-                        // else if (anim.GetBool("Right")) {
-                        //     // tp the player to the right 2 tiles
-                        //     Vector2 newpos = new Vector2 (transform.position.x + 2f, transform.position.y); 
-                        //     movement.movePoint.position = newpos;
-                        //     transform.position = newpos;
-                        // }
-                        // else if (anim.GetBool("Left")) {
-                        //     // tp the player to the left 2 tiles
-                        //     Vector2 newpos = new Vector2 (transform.position.x - 2f, transform.position.y); 
-                        //     //Debug.Log(movement.movePoint.position);
-                        //     movement.movePoint.position = newpos;
-                        //     transform.position = newpos;
-                        // }
+                        if (anim.GetBool("Up")) {
+                            // tp the player up 1 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x, transform.position.y + 1f); 
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+                        else if (anim.GetBool("Down")) {
+                            // tp the player down 1 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x, transform.position.y - 1f); 
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+                        else if (anim.GetBool("Right")) {
+                            // tp the player to the right 1 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x + 1f, transform.position.y); 
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+                        else if (anim.GetBool("Left")) {
+                            // tp the player to the left 1 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x - 1f, transform.position.y); 
+                            //Debug.Log(movement.movePoint.position);
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+
                         // thingCol = thingNear.GetComponent<Collider2D>();
                         // thingCol.enabled = !thingCol.enabled;
                         // Vector2 newpos = new Vector2 (thingNear.transform.position.x, thingNear.transform.position.y); 
@@ -469,13 +482,13 @@ public class PlayerInteractions : MonoBehaviour
                         //transform.position = newpos;
 
                         // leave immigrants behind!!!
-                        // foreach (var immigrant in imms.immsFollowing)
-                        // {
-                        //     ImmigrantFollowSpots_new followcode = immigrant.GetComponent<ImmigrantFollowSpots_new>();
-                        //     followcode.followIndex = 0;
-                        //     followcode.IsFollowing = false;
-                        // }
-                        // imms.immsFollowing.Clear();
+                        foreach (var immigrant in imms.immsFollowing)
+                        {
+                            ImmigrantFollowSpots_new followcode = immigrant.GetComponent<ImmigrantFollowSpots_new>();
+                            followcode.followIndex = 0;
+                            followcode.IsFollowing = false;
+                        }
+                        imms.immsFollowing.Clear();
                     }
                 }
 
@@ -494,13 +507,53 @@ public class PlayerInteractions : MonoBehaviour
                     
                         //perform your action
                         // tp the player to the wall 
-                        thingCol = thingNear.GetComponent<Collider2D>();
-                        thingCol.enabled = !thingCol.enabled;
-                        Vector2 newpos = new Vector2 (thingNear.transform.position.x, thingNear.transform.position.y); 
-                        movement.movePoint.position = newpos;
-                        //transform.position = newpos;
+                        WallCol.enabled = !WallCol.enabled;
+                        // change player's layer to appear above 
 
-                        // tp immigrants as well ??????
+                        playerSprite.sortingLayerName = "Overlays";
+                        playerSprite.sortingOrder = 100;
+                        shadowSprite.sortingLayerName = "Overlays";
+                        shadowSprite.sortingOrder = 95;
+
+                        climbingwithimms = true;
+
+                        if (anim.GetBool("Up")) {
+                            // tp the player up 1 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x, transform.position.y + 1f); 
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+                        else if (anim.GetBool("Down")) {
+                            // tp the player down 1 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x, transform.position.y - 1f); 
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+                        else if (anim.GetBool("Right")) {
+                            // tp the player to the right 1 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x + 1f, transform.position.y); 
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+                        else if (anim.GetBool("Left")) {
+                            // tp the player to the left 1 tiles
+                            Vector2 newpos = new Vector2 (transform.position.x - 1f, transform.position.y); 
+                            //Debug.Log(movement.movePoint.position);
+                            movement.movePoint.position = newpos;
+                            transform.position = newpos;
+                        }
+
+                        // immigrants stay with 
+                        foreach (var immigrant in imms.immsFollowing)
+                        {
+                            SpriteRenderer currImmSprite = immigrant.GetComponentInChildren<SpriteRenderer>();
+                            currImmSprite.sortingLayerName = "Overlays";
+                            currImmSprite.sortingOrder = 100;
+                            
+                            SpriteRenderer immShadowSprite = immigrant.transform.GetChild(1).GetComponent<SpriteRenderer>();
+                            immShadowSprite.sortingLayerName = "Overlays";
+                            immShadowSprite.sortingOrder = 95;
+                        }
                     }
                 }
                 else
@@ -564,6 +617,45 @@ public class PlayerInteractions : MonoBehaviour
                         gameHandler.AmtDecoytxt.text = numDecoy.ToString();
                     }
             }
+    }
+
+    void FixedUpdate()
+    {
+        // player is no longer on a wall 
+        if (climbing && !Walltiles.HasTile(Walltiles.WorldToCell(gameObject.transform.position))) {
+            WallCol.enabled = !WallCol.enabled;
+
+            // change player's layer to appear at ground again
+            playerSprite.sortingLayerName = "Ground";
+            playerSprite.sortingOrder = 50;
+            shadowSprite.sortingLayerName = "Ground";
+            shadowSprite.sortingOrder = 45;
+
+            climbing = false;
+        }
+        if (climbingwithimms && !Walltiles.HasTile(Walltiles.WorldToCell(gameObject.transform.position))) {
+            WallCol.enabled = !WallCol.enabled;
+
+            // change player's layer to appear at ground again
+            playerSprite.sortingLayerName = "Ground";
+            playerSprite.sortingOrder = 50;
+            shadowSprite.sortingLayerName = "Ground";
+            shadowSprite.sortingOrder = 45;
+            
+            // change imm layers
+            foreach (var immigrant in imms.immsFollowing)
+            {
+                SpriteRenderer currImmSprite = immigrant.GetComponentInChildren<SpriteRenderer>();
+                currImmSprite.sortingLayerName = "Ground";
+                currImmSprite.sortingOrder = 50;
+                
+                SpriteRenderer immShadowSprite = immigrant.transform.GetChild(1).GetComponent<SpriteRenderer>();
+                immShadowSprite.sortingLayerName = "Ground";
+                immShadowSprite.sortingOrder = 45;
+            }
+
+            climbingwithimms = false;
+        }
     }
 
     public void OnTriggerExit2D(Collider2D other){
