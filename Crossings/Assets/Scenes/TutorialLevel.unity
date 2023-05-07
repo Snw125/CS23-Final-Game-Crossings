@@ -13670,8 +13670,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &592136845
 MonoBehaviour:
@@ -13720,8 +13720,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13732,7 +13732,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -13805,8 +13805,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &629547616
 MonoBehaviour:
@@ -13828,8 +13828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Oh no! It seems like you'll need wire clippers from the shop to get the
-    Immigrant through!
+  m_text: Oh no! You'll need wire clippers from the shop to get the immigrant through!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca6d468e061a74760bfd13cba818f205, type: 2}
   m_sharedMaterial: {fileID: -392373335338296351, guid: ca6d468e061a74760bfd13cba818f205, type: 2}
@@ -13856,8 +13855,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13868,7 +13867,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -13941,8 +13940,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &795695852
 MonoBehaviour:
@@ -13964,7 +13963,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Deliver Immigrants to the border! There's one right ahead!
+  m_text: Deliver immigrants to the border! There's one right ahead!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca6d468e061a74760bfd13cba818f205, type: 2}
   m_sharedMaterial: {fileID: -392373335338296351, guid: ca6d468e061a74760bfd13cba818f205, type: 2}
@@ -13991,8 +13990,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -14003,7 +14002,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -14149,8 +14148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &936057600
 MonoBehaviour:
@@ -14199,8 +14198,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56
-  m_fontSizeBase: 56
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -14211,7 +14210,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -14284,8 +14283,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &991434969
 MonoBehaviour:
@@ -14334,8 +14333,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -14346,7 +14345,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -14419,8 +14418,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031685224
 MonoBehaviour:
@@ -14442,8 +14441,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Oh no! It seems like you'll need wire clippers from the shop to get the
-    Immigrant through!
+  m_text: Oh no! You'll need wire clippers from the shop to get the immigrant through!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca6d468e061a74760bfd13cba818f205, type: 2}
   m_sharedMaterial: {fileID: -392373335338296351, guid: ca6d468e061a74760bfd13cba818f205, type: 2}
@@ -14470,8 +14468,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -14482,7 +14480,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -14907,8 +14905,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1331982467
 MonoBehaviour:
@@ -14932,8 +14930,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Nice job! You got money from that!
 
-    Now head forward and rescue more
-    immigrants!'
+    Go ahead and rescue more immigrants!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca6d468e061a74760bfd13cba818f205, type: 2}
   m_sharedMaterial: {fileID: -392373335338296351, guid: ca6d468e061a74760bfd13cba818f205, type: 2}
@@ -14960,8 +14957,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -14972,7 +14969,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -15129,8 +15126,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1424746914
 MonoBehaviour:
@@ -15179,8 +15176,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15191,7 +15188,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -26632,8 +26629,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1817802738
 MonoBehaviour:
@@ -26682,8 +26679,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -26694,7 +26691,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -27072,8 +27069,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 500, y: 192}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 540, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1924441162
 MonoBehaviour:
@@ -27122,8 +27119,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -27134,7 +27131,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -27207,8 +27204,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 128, y: 64}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 144, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1971897055
 MonoBehaviour:
