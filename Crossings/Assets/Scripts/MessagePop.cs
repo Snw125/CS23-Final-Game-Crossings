@@ -7,6 +7,7 @@ public class MessagePop : MonoBehaviour
 {
 
     public GameObject Message;
+    public GameObject DialogBoxBackground;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,6 +15,7 @@ public class MessagePop : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             Message.SetActive(true);
+            DialogBoxBackground.SetActive(true);
         }
     }
 
@@ -22,6 +24,7 @@ public class MessagePop : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Message.SetActive(false);
+            DialogBoxBackground.SetActive(false);
         }
     }
 
