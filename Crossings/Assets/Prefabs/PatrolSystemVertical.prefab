@@ -375,15 +375,24 @@ MonoBehaviour:
   pathvercircle: {fileID: 0}
   pathverswitch: {fileID: 0}
   CanSeePlayer: 0
+  CanSeeDecoy: 0
+  DecoyTimeEnd: 0
+  target: {fileID: 0}
+  playertarget: {fileID: 0}
+  whereplayerseen: {x: 0, y: 0}
+  wheretargetseen: {x: 0, y: 0}
   turnadj: 360
   Timer: {fileID: 0}
   endNoticeTime: 2
   PlayerChase: 0
+  DecoyChase: 0
   chaseSpeed: 2
   facingUp: 0
   facingDown: 0
   facingRight: 0
   facingLeft: 0
+  immmanage: {fileID: 0}
+  statechange: 0
 --- !u!114 &3896777906896432708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +413,7 @@ MonoBehaviour:
   - {fileID: 1356989163910869107}
   startSpot: 0
   moveForward: 1
+  FOV: {fileID: 0}
   faceUp: 0
   faceDown: 0
   faceRight: 0

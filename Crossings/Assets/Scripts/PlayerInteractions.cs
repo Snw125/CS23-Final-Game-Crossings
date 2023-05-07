@@ -9,7 +9,7 @@ public class PlayerInteractions : MonoBehaviour
     public PlayerGridMove movement;
 
     float timer;
-    float holdDur;
+    public float holdDur = 2f;
 
     private GameHandler gameHandler;
 
@@ -90,8 +90,6 @@ public class PlayerInteractions : MonoBehaviour
         
         Timer = transform.GetChild(2).transform.GetChild(0).gameObject;
         TimeBar = Timer.transform.GetChild(0).GetComponent<Image>();
-
-        holdDur = 2f;
 
         GameObject allSigs = transform.GetChild(2).transform.GetChild(1).gameObject;
 
@@ -281,6 +279,16 @@ public class PlayerInteractions : MonoBehaviour
                         Vector2 newpos = new Vector2 (thingNear.transform.position.x, thingNear.transform.position.y + .2f); 
                         movement.movePoint.position = newpos;
                         //transform.position = newpos;
+
+                        // teleport imms 
+                        foreach (var immigrant in imms.immsFollowing)
+                        {
+                            ImmigrantFollowSpots_new followcode = immigrant.GetComponent<ImmigrantFollowSpots_new>();
+                            Vector2 immnewpos = new Vector2 (newpos.x, newpos.y + (.1f * (followcode.followIndex + 1)));
+                            
+                            followcode.IsFollowing = false;
+                            immigrant.transform.position = immnewpos;
+                        }                     
                         // go to hidden code
                     }
                 }
@@ -581,6 +589,13 @@ public class PlayerInteractions : MonoBehaviour
                             movement.movePoint.position = newpos;
                             transform.position = newpos;
                             thingCol.enabled = !thingCol.enabled;
+
+                            foreach (var immigrant in imms.immsFollowing)
+                            {
+                                ImmigrantFollowSpots_new followcode = immigrant.GetComponent<ImmigrantFollowSpots_new>();
+                                
+                                followcode.IsFollowing = true;
+                            }   
                     }
             }
 

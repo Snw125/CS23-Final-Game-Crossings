@@ -7,15 +7,17 @@ public class ImmigrantManager : MonoBehaviour
     public List<GameObject> immsFollowing;
 
     private PlayerGridMove playerGridMove;
+    private PlayerInteractions playerState;
 
     private void Start() 
     {
         playerGridMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGridMove>();
+        playerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteractions>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && !playerState.hidden)
         {
             foreach (var immigrant in immigrants)
             {

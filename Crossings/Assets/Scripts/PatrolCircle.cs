@@ -33,7 +33,7 @@ public class PatrolCircle : MonoBehaviour {
        }
 
        void Update(){
-            if (!FOV.CanSeePlayer && !FOV.CanSeeDecoy) {
+            if (!FOV.CanSeePlayer && !FOV.CanSeeDecoy && !FOV.PlayerChase && !FOV.DecoyChase) {
                 transform.position = Vector2.MoveTowards(transform.position, moveSpots[nextSpot].position, speed * Time.deltaTime);
 
                 if(seeing) {

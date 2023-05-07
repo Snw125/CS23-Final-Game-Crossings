@@ -20,12 +20,15 @@ public class ImmigrantFollowSpots_new : MonoBehaviour
 
     public ImmigrantManager immManager;
 
+    public Vector3 spawnpos;
+
     private void Start()
     {
         gameHandlerObject = GameObject.FindWithTag("GameController"); 
         gameHandler = GameObject.FindWithTag("GameController").GetComponent<GameHandler>();
         playerGridMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGridMove>();
         immManager = GameObject.FindGameObjectWithTag("ImmManager").GetComponent<ImmigrantManager>();
+        spawnpos = transform.position;
     }
 
     private void Update()
