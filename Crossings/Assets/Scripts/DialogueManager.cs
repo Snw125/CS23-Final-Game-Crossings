@@ -5,28 +5,37 @@ using System;
 
 public class DialogueManager : MonoBehaviour
 {
-    public GameObject thisUIGameObject;// togle on and off
-    public Text dialogueText;
-    public float characterDelay = 0.05f;
-    public float clearDelay = 4f;
+    public GameObject thisUIGameObject; // toggle showDialogueImage on and off
+    public Text dialogueText; // speech
+    public Text dialogueName; // speaker
+    public float characterDelay = 0.05f; // time between each char render
+    public float clearDelay = 4f; // time between each speaker
 
+    // funcition params
     private string[] dialogueParts;
     private int currentPartIndex = 0;
 
+    // index of which one of tuple of allDialogues to use
     private int randomIndex = 0;
     System.Random rnd = new System.Random();
 
+    // speaker avatar and index for changes
     public Image avatarImage;
     public int avatarIndex = 1;
+
+    // art for avatar switches
     string[] artNames = {"Art/People/frontPlayerArt3", "Art/People/frontPatrolArt3"};
 
     private void Start()
     {
 
-      thisUIGameObject.SetActive(true);
-      avatarImage.sprite = Resources.Load<Sprite>(artNames[1]);
-      avatarIndex = 1;
 
+      thisUIGameObject.SetActive(true); // activate object
+      avatarImage.sprite = Resources.Load<Sprite>(artNames[1]); // set patrol guard avatar
+      dialogueName.text = "Patrol Guard"; // set patrol guard text
+      avatarIndex = 1; // index to change avatar
+
+        // all dialgoues n * 3 array beginning, [guard, player_response, guard_response]
         string [,] allDialogues = {
             {"Hey you there! What are you doing out here so late?", "Oh, just taking a walk. It's a nice night, isn't it?", "Damn right, nice night for you to go prison!"},
             {"Stop right there! What's in the backpack?", "Just some clothes and food. We're camping nearby.", "Well tonight you're gonna be camping in prison!"},
@@ -38,6 +47,7 @@ public class DialogueManager : MonoBehaviour
             // {"What are you doing out here so late?", "Just taking a walk. I couldn't sleep.", "I could help with that. I know a peaceful spot in this prison cell!"}
         };
 
+        // get random index position of tuple from all dialogues to use
         randomIndex = rnd.Next(0, 8);
         dialogueParts = new string[allDialogues.GetLength(1)];
 
@@ -75,8 +85,10 @@ public class DialogueManager : MonoBehaviour
             StartCoroutine(DisplayDialoguePart(dialogueParts[currentPartIndex]));
         }
         else{
-          // Finished with all Dialogue
+          // When finished with all Dialogue
           Debug.Log("At else Part");
+
+          // hide the Dialogue GameObject
           thisUIGameObject.SetActive(false);
         }
 
@@ -87,10 +99,12 @@ public class DialogueManager : MonoBehaviour
       if (avatarIndex == 0){
         avatarImage.sprite = Resources.Load<Sprite>(artNames[1]);
         avatarIndex = 1;
+        dialogueName.text = "Patrol Guard";
       }
       else{
         avatarImage.sprite = Resources.Load<Sprite>(artNames[0]);
         avatarIndex = 0;
+        dialogueName.text = "Player";
       }
 
     }
