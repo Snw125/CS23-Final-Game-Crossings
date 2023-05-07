@@ -112,15 +112,30 @@ MonoBehaviour:
   pathvercircle: {fileID: 0}
   pathverswitch: {fileID: 0}
   CanSeePlayer: 0
+  CanSeeDecoy: 0
+  target: {fileID: 0}
+  playertarget: {fileID: 0}
+  whereplayerseen: {x: 0, y: 0}
+  wheretargetseen: {x: 0, y: 0}
   turnadj: 360
   Timer: {fileID: 0}
+  noticeTime: 0
+  loseNoticeTime: 0
+  currtime: 0
+  savedTime: 0
   endNoticeTime: 2
   PlayerChase: 0
+  DecoyChase: 0
+  goThere: 0
   chaseSpeed: 2
+  progress: 0
+  lastcheck: 0
   facingUp: 0
   facingDown: 1
   facingRight: 0
   facingLeft: 0
+  immmanage: {fileID: 0}
+  sprite: {fileID: 0}
 --- !u!1 &102587429454321220
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,7 +429,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1618588507
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0.26100624, b: 0.26100624, a: 1}
   m_FlipX: 0
@@ -499,7 +514,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1618588507
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
   m_FlipX: 0

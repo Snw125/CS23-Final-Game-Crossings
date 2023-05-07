@@ -43,7 +43,7 @@ public class StatisticHandler : MonoBehaviour
     }
 
     public void setSomeStat(){
-      someStatText.text = someStat.ToString();
+      //someStatText.text = someStat.ToString();
     }
 
 

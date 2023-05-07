@@ -79,6 +79,7 @@ public class PlayerInteractions : MonoBehaviour
     public GameObject boom;
 
     public bool hidden;
+    public bool bushhide;
 
     private SpriteRenderer playerSprite;
     private SpriteRenderer shadowSprite;
@@ -160,6 +161,7 @@ public class PlayerInteractions : MonoBehaviour
         Walltiles = GameObject.FindGameObjectWithTag("Wall").GetComponent<Tilemap>();
 
         hidden = false;
+        bushhide = false;
 
         imms = GameObject.FindGameObjectWithTag("ImmManager").GetComponent<ImmigrantManager>();
 
@@ -267,6 +269,7 @@ public class PlayerInteractions : MonoBehaviour
                     
                         //perform your action
                         hidden = true;
+                        bushhide = true;
                         Debug.Log("hidden!");
                         Timer.SetActive(false);
 
@@ -489,6 +492,9 @@ public class PlayerInteractions : MonoBehaviour
                         // movement.movePoint.position = newpos;
                         //transform.position = newpos;
 
+                        // make player not visible to guards on walls
+                        hidden = true;
+
                         // leave immigrants behind!!!
                         foreach (var immigrant in imms.immsFollowing)
                         {
@@ -551,6 +557,9 @@ public class PlayerInteractions : MonoBehaviour
                             transform.position = newpos;
                         }
 
+                        // make player not visible to guards on walls
+                        hidden = true;
+
                         // immigrants stay with 
                         foreach (var immigrant in imms.immsFollowing)
                         {
@@ -578,12 +587,13 @@ public class PlayerInteractions : MonoBehaviour
 
 
 
-            if (hidden) {
+            if (hidden && bushhide) {
                     // signify you can leave bush with Z (another button signifier?)
                     // check if they move if they do get them out of bush
                     if (Input.GetKeyDown(KeyCode.Z)) {
                             // get em out
                             hidden = false;
+                            bushhide = false;
                             hideArt.SetActive(false);
                             Vector2 newpos = new Vector2 (transform.position.x, transform.position.y + 1f); 
                             movement.movePoint.position = newpos;

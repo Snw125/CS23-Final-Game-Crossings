@@ -53,6 +53,8 @@ public class FieldOfView : MonoBehaviour
 
     public SpriteRenderer sprite;
 
+    public bool cooldown;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,10 +75,12 @@ public class FieldOfView : MonoBehaviour
 
         CanSeeDecoy = false;
         CanSeePlayer = false;
+        cooldown = false;
 
         sprite = transform.GetComponentInChildren<SpriteRenderer>();
 
         StartCoroutine(FOVCheck());
+        
     }
 
     // Update is called once per frame
@@ -104,6 +108,7 @@ public class FieldOfView : MonoBehaviour
             if (Vector3.Distance(transform.position, whereplayerseen) <= .2f) {
                 // Debug.Log("Lost them");
                 if (!CanSeePlayer) {
+                    MusicPlayer.PlayLevelMusic();
                     PlayerChase = false;
                 }
             }
@@ -119,7 +124,7 @@ public class FieldOfView : MonoBehaviour
                 if (target.tag == "Immigrant") 
                 {
                     ImmigrantFollowSpots_new followcode = target.GetComponent<ImmigrantFollowSpots_new>();
-                    
+                    Debug.Log(Vector3.Distance(followcode.spawnpos, target.position));
                     if (Vector3.Distance(followcode.spawnpos, target.position) > .2f) {
                         followcode.IsFollowing = false;
                         // remove from following array 
@@ -134,12 +139,13 @@ public class FieldOfView : MonoBehaviour
                         }       
                         target.transform.position = followcode.spawnpos;
                         DecoyChase = false; 
+                        StartCoroutine(Cooldown());
                     }
-                    
                 }
                 else {
                     DecoyChase = false; 
                     Debug.Log("destroyed");
+                    StartCoroutine(Cooldown());
                     Destroy(target.gameObject);
                 }
                 
@@ -263,15 +269,22 @@ public class FieldOfView : MonoBehaviour
         
         if (progress >= 2) {
             if (CanSeeDecoy && target != null) {
+                Debug.Log("DecoyChase");
                 DecoyChase = true;
                 wheretargetseen = target.transform.position;
             }
             else if (CanSeePlayer) {
+                if (!PlayerChase) {
+                    MusicPlayer.PlaySpeedMusic();
+                }
                 PlayerChase = true;
                 whereplayerseen = playerRef.transform.position;
             }  
         }
         else if (progress <= 0) {
+            if (PlayerChase) {
+                MusicPlayer.PlayLevelMusic();
+            }   
             PlayerChase = false;
             DecoyChase = false;
         }
@@ -280,6 +293,18 @@ public class FieldOfView : MonoBehaviour
         }
         
         
+    }
+
+    private IEnumerator Cooldown()
+    {
+        CanSeePlayer = false;
+        CanSeeDecoy = false;
+        cooldown = true;
+
+        WaitForSeconds wait = new WaitForSeconds(2f);
+        yield return wait;
+
+        cooldown = false;
     }
 
     private IEnumerator FOVCheck()
@@ -300,47 +325,75 @@ public class FieldOfView : MonoBehaviour
         Collider2D[] rangeCheckDecoy = Physics2D.OverlapCircleAll(transform.position, radius, decoyLayer);
         Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
 
-        if (rangeCheckDecoy.Length > 0) 
-        {
-            target = rangeCheckDecoy[0].transform;
-            Debug.Log(target);
-            if (playerStates.hidden && target.tag == "Immigrant") {
-                Debug.Log("Imm is hiding with player!");
-            }
-            else {
-                Vector2 directionToTarget = (target.position - transform.position).normalized;
-                
-                if (facingUp) {
-                    findAngle = Vector2.Angle(transform.up, directionToTarget);
+        if (!cooldown) {
+            if (rangeCheckDecoy.Length > 0) 
+            {
+                target = rangeCheckDecoy[0].transform;
+                Debug.Log(target);
+                if (playerStates.hidden && target.tag == "Immigrant") {
+                    Debug.Log("Imm is hiding with player!");
                 }
-                if (facingDown) {
-                    findAngle = Vector2.Angle(-transform.up, directionToTarget);
-                }
-                if (facingRight) {
-                    findAngle = Vector2.Angle(transform.right, directionToTarget);
-                }
-                if (facingLeft) {
-                    findAngle = Vector2.Angle(-transform.right, directionToTarget);
-                }
+                else {
+                    Vector2 directionToTarget = (target.position - transform.position).normalized;
+                    
+                    if (facingUp) {
+                        findAngle = Vector2.Angle(transform.up, directionToTarget);
+                    }
+                    if (facingDown) {
+                        findAngle = Vector2.Angle(-transform.up, directionToTarget);
+                    }
+                    if (facingRight) {
+                        findAngle = Vector2.Angle(transform.right, directionToTarget);
+                    }
+                    if (facingLeft) {
+                        findAngle = Vector2.Angle(-transform.right, directionToTarget);
+                    }
 
-                if (findAngle < angle / 2)
-                {
-                    float distanceToTarget = Vector2.Distance(transform.position, target.position);
-
-                    if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+                    if (findAngle < angle / 2)
                     {
-                        // if (!CanSeeDecoy) {
-                        //     noticeTime = Time.time;
-                        //     savedTime = savedTime - currtime;
-                        //     currtime = 0;
-                        // }
+                        float distanceToTarget = Vector2.Distance(transform.position, target.position);
 
-                        if (!CanSeePlayer) {
-                            // first seen 
-                            lastcheck = Time.time;
-                        }
-                        CanSeeDecoy = true;
-                    }       
+                        if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+                        {
+                            // if (!CanSeeDecoy) {
+                            //     noticeTime = Time.time;
+                            //     savedTime = savedTime - currtime;
+                            //     currtime = 0;
+                            // }
+
+                            if (target.tag == "Immigrant") 
+                            {
+                                ImmigrantFollowSpots_new followcode = target.GetComponent<ImmigrantFollowSpots_new>();
+                                if (Vector3.Distance(followcode.spawnpos, target.position) > .2f) {
+                                    if (!CanSeeDecoy) {
+                                        // first seen 
+                                        lastcheck = Time.time;
+                                    }
+                                    CanSeeDecoy = true;
+                                }
+                                else {
+                                    CanSeeDecoy = false;
+                                }
+                            }
+                            else {
+                                if (!CanSeeDecoy) {
+                                    // first seen 
+                                    lastcheck = Time.time;
+                                }
+                                CanSeeDecoy = true;
+                            }
+
+                        }       
+                        else 
+                        {
+                            // if (CanSeeDecoy) {
+                            //     loseNoticeTime = Time.time;
+                            //     savedTime = savedTime + currtime;
+                            //     currtime = 0;
+                            // }
+                            CanSeeDecoy = false;
+                        }  
+                    }
                     else 
                     {
                         // if (CanSeeDecoy) {
@@ -349,109 +402,101 @@ public class FieldOfView : MonoBehaviour
                         //     currtime = 0;
                         // }
                         CanSeeDecoy = false;
-                    }  
+                    }
                 }
-                else 
-                {
-                    // if (CanSeeDecoy) {
-                    //     loseNoticeTime = Time.time;
-                    //     savedTime = savedTime + currtime;
-                    //     currtime = 0;
-                    // }
-                    CanSeeDecoy = false;
-                }
+
+            }
+            else if (CanSeeDecoy)
+            {
+                // loseNoticeTime = Time.time;
+                // savedTime = savedTime + currtime;
+                // currtime = 0;
+                CanSeeDecoy = false;
             }
 
-        }
-        else if (CanSeeDecoy)
-        {
-            // loseNoticeTime = Time.time;
-            // savedTime = savedTime + currtime;
-            // currtime = 0;
-            CanSeeDecoy = false;
-        }
 
 
-
-        // PLAYER -------------------------------------------------------------
-        if (!playerStates.hidden) {
-            if (rangeCheck.Length > 0) 
-            {
-                playertarget = rangeCheck[0].transform;
-                Debug.Log(playertarget);
-                Vector2 directionToTarget = (playertarget.position - transform.position).normalized;
-                
-                if (facingUp) {
-                    findAngle = Vector2.Angle(transform.up, directionToTarget);
-                }
-                if (facingDown) {
-                    findAngle = Vector2.Angle(-transform.up, directionToTarget);
-                }
-                if (facingRight) {
-                    findAngle = Vector2.Angle(transform.right, directionToTarget);
-                }
-                if (facingLeft) {
-                    findAngle = Vector2.Angle(-transform.right, directionToTarget);
-                }
-
-                if (findAngle < angle / 2)
+            // PLAYER -------------------------------------------------------------
+            if (!playerStates.hidden) {
+                if (rangeCheck.Length > 0) 
                 {
-                    float distanceToTarget = Vector2.Distance(transform.position, playertarget.position);
+                    playertarget = rangeCheck[0].transform;
+                    Debug.Log(playertarget);
+                    Vector2 directionToTarget = (playertarget.position - transform.position).normalized;
+                    
+                    if (facingUp) {
+                        findAngle = Vector2.Angle(transform.up, directionToTarget);
+                    }
+                    if (facingDown) {
+                        findAngle = Vector2.Angle(-transform.up, directionToTarget);
+                    }
+                    if (facingRight) {
+                        findAngle = Vector2.Angle(transform.right, directionToTarget);
+                    }
+                    if (facingLeft) {
+                        findAngle = Vector2.Angle(-transform.right, directionToTarget);
+                    }
 
-                    if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+                    if (findAngle < angle / 2)
                     {
-                        // if (!CanSeePlayer) {
-                        //     Debug.Log("here");
-                        //     noticeTime = Time.time;
-                        //     //loseNoticeTime = Time.time;
-                        //     savedTime = savedTime - currtime;
-                        //     currtime = 0;
-                        // }
-                        if (!CanSeePlayer) {
-                            // first seen 
-                            lastcheck = Time.time;
-                        }
-                        CanSeePlayer = true;
-                    }       
+                        float distanceToTarget = Vector2.Distance(transform.position, playertarget.position);
+
+                        if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+                        {
+                            // if (!CanSeePlayer) {
+                            //     Debug.Log("here");
+                            //     noticeTime = Time.time;
+                            //     //loseNoticeTime = Time.time;
+                            //     savedTime = savedTime - currtime;
+                            //     currtime = 0;
+                            // }
+                            if (!CanSeePlayer) {
+                                // first seen 
+                                lastcheck = Time.time;
+                            }
+                            CanSeePlayer = true;
+                        }       
+                        else 
+                        {
+                            // if (CanSeePlayer) {
+                            //     //noticeTime = Time.time;
+                            //     loseNoticeTime = Time.time;
+                            //     savedTime = savedTime + currtime;
+                            //     currtime = 0;
+                            // }
+                            CanSeePlayer = false;
+                        }  
+                    }
                     else 
                     {
                         // if (CanSeePlayer) {
-                        //     //noticeTime = Time.time;
+                        //     //noticeTime = Time.time;  
                         //     loseNoticeTime = Time.time;
                         //     savedTime = savedTime + currtime;
                         //     currtime = 0;
                         // }
                         CanSeePlayer = false;
-                    }  
+                    }
                 }
-                else 
+                else if (CanSeePlayer)
                 {
-                    // if (CanSeePlayer) {
-                    //     //noticeTime = Time.time;  
-                    //     loseNoticeTime = Time.time;
-                    //     savedTime = savedTime + currtime;
-                    //     currtime = 0;
-                    // }
+                    // //noticeTime = Time.time; 
+                    // loseNoticeTime = Time.time;
+                    // savedTime = savedTime + currtime;
+                    // currtime = 0;
                     CanSeePlayer = false;
                 }
             }
-            else if (CanSeePlayer)
-            {
-                // //noticeTime = Time.time; 
+
+            if (playerStates.hidden && CanSeePlayer) {
+                // //noticeTime = Time.time;
                 // loseNoticeTime = Time.time;
                 // savedTime = savedTime + currtime;
                 // currtime = 0;
                 CanSeePlayer = false;
             }
         }
-
-        if (playerStates.hidden && CanSeePlayer) {
-            // //noticeTime = Time.time;
-            // loseNoticeTime = Time.time;
-            // savedTime = savedTime + currtime;
-            // currtime = 0;
-            CanSeePlayer = false;
-        }
+        
 
         // if(PlayerChase && CanSeePlayer) {
         //     sprite.color = Color.red;
@@ -489,7 +534,7 @@ public class FieldOfView : MonoBehaviour
         {
             if (CanSeePlayer == true) 
             {
-                SceneManager.LoadScene("EndScene");    
+                SceneLoader.LoadScene("EndScene");    
             }
         }
     }
