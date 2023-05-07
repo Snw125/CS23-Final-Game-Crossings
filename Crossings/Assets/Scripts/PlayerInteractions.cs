@@ -9,7 +9,11 @@ public class PlayerInteractions : MonoBehaviour
     public PlayerGridMove movement;
 
     float timer;
-    public float holdDur = 2f;
+    public float bushholdDur = 2f;
+    public float jumpholdDur = 2f; 
+    public float breakholdDur = 2f;
+    public float climbholdDur = 2f;
+    public float ladholdDur = 2f;
 
     private GameHandler gameHandler;
 
@@ -83,6 +87,9 @@ public class PlayerInteractions : MonoBehaviour
 
     private SpriteRenderer playerSprite;
     private SpriteRenderer shadowSprite;
+
+    public bool jumpnotbreak;
+    public bool climbnotlad;
     
     void Start()
     {
@@ -162,6 +169,9 @@ public class PlayerInteractions : MonoBehaviour
 
         hidden = false;
         bushhide = false;
+
+        jumpnotbreak = true;
+        climbnotlad = true;
 
         imms = GameObject.FindGameObjectWithTag("ImmManager").GetComponent<ImmigrantManager>();
 
@@ -261,7 +271,7 @@ public class PlayerInteractions : MonoBehaviour
                 }
                 else if(Input.GetKey(KeyCode.Z))
                 {
-                    if(Time.time - timer > holdDur)
+                    if(Time.time - timer > bushholdDur)
                     {   
                         //by making it positive inf, we won't subsequently run this code by accident,
                         //since X - +inf = -inf, which is always less than holdDur
@@ -300,7 +310,7 @@ public class PlayerInteractions : MonoBehaviour
                     timer = float.PositiveInfinity;
                 }
                 // update timer visually 
-                TimeBar.fillAmount = 1 - (Time.time - timer)/holdDur;
+                TimeBar.fillAmount = 1 - (Time.time - timer)/bushholdDur;
             }
 
             // !!! CHANGE TO FIT NEW WALTER CODE 
@@ -321,10 +331,11 @@ public class PlayerInteractions : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Z)) {
                     // Player will jump 
                     timer = Time.time;
+                    jumpnotbreak = true;
                 }
                 else if(Input.GetKey(KeyCode.Z))
                 {
-                    if(Time.time - timer > holdDur)
+                    if(Time.time - timer > jumpholdDur)
                     {   
                         //by making it positive inf, we won't subsequently run this code by accident,
                         //since X - +inf = -inf, which is always less than holdDur
@@ -379,10 +390,11 @@ public class PlayerInteractions : MonoBehaviour
                 else if (hasClip && Input.GetKeyDown(KeyCode.X)) {
                     // Player will break
                     timer = Time.time;
+                    jumpnotbreak = false;
                 }
                 else if(hasClip && Input.GetKey(KeyCode.X))
                 {
-                    if(Time.time - timer > holdDur)
+                    if(Time.time - timer > breakholdDur)
                     {   
                         //by making it positive inf, we won't subsequently run this code by accident,
                         //since X - +inf = -inf, which is always less than holdDur
@@ -429,7 +441,13 @@ public class PlayerInteractions : MonoBehaviour
 
 
                 // update timer visually 
-                TimeBar.fillAmount = 1 - (Time.time - timer)/holdDur;
+                if (jumpnotbreak) {
+                    TimeBar.fillAmount = 1 - (Time.time - timer)/jumpholdDur;
+                }
+                else {
+                    TimeBar.fillAmount = 1 - (Time.time - timer)/breakholdDur;
+                }
+                
                 // CLARIFY WHICH IS BEING PRESSED !!!
             }
 
@@ -438,10 +456,11 @@ public class PlayerInteractions : MonoBehaviour
                 if (hasClimb && Input.GetKeyDown(KeyCode.Z)) {
                     // Player will climb
                     timer = Time.time;
+                    climbnotlad = true;
                 }
                 else if(hasClimb && Input.GetKey(KeyCode.Z))
                 {
-                    if(Time.time - timer > holdDur)
+                    if(Time.time - timer > climbholdDur)
                     {   
                         //by making it positive inf, we won't subsequently run this code by accident,
                         //since X - +inf = -inf, which is always less than holdDur
@@ -510,10 +529,11 @@ public class PlayerInteractions : MonoBehaviour
                 else if (hasLadder && Input.GetKeyDown(KeyCode.X)) {
                     // Player will use ladder
                     timer = Time.time;
+                    climbnotlad = false;
                 }
                 else if(hasLadder && Input.GetKey(KeyCode.X))
                 {
-                    if(Time.time - timer > holdDur)
+                    if(Time.time - timer > ladholdDur)
                     {   
                         //by making it positive inf, we won't subsequently run this code by accident,
                         //since X - +inf = -inf, which is always less than holdDur
@@ -580,7 +600,12 @@ public class PlayerInteractions : MonoBehaviour
 
 
                 // update timer visually 
-                TimeBar.fillAmount = 1 - (Time.time - timer)/holdDur;
+                if (climbnotlad) {
+                    TimeBar.fillAmount = 1 - (Time.time - timer)/climbholdDur;
+                }
+                else {
+                    TimeBar.fillAmount = 1 - (Time.time - timer)/ladholdDur;
+                }
                 // CLARIFY WHICH IS BEING PRESSED !!!
             }
             
