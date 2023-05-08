@@ -2727,7 +2727,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 0}
-  holdDur: 1.7
+  bushholdDur: 1.5
+  jumpholdDur: 0.5
+  breakholdDur: 2
+  climbholdDur: 2
+  ladholdDur: 3
   hideArt: {fileID: 0}
   Timer: {fileID: 0}
   TimeBar: {fileID: 0}
@@ -2750,6 +2754,9 @@ MonoBehaviour:
   Walltiles: {fileID: 0}
   boom: {fileID: 7135882154443865442, guid: 84d7bc91ddb6a4935a121e32773393f9, type: 3}
   hidden: 0
+  bushhide: 0
+  jumpnotbreak: 0
+  climbnotlad: 0
 --- !u!114 &1970191123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2762,7 +2769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54a562992e631045a685baf0ca5b3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 7
   movePoint: {fileID: 1192465877}
   whatStopsMovement:
     serializedVersion: 2
@@ -2831,7 +2838,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.5
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

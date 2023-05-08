@@ -39,7 +39,7 @@ public class PurchaseShop : MonoBehaviour
     public void purchaseOne(){
       if (!WireClipPurchased){
         //Debug.Log("Buying wire clippers, balance: " + balance);
-        if (balance >= 75){
+        if (balance >= 300){
             feedbackText.color = Color.green;
             feedbackText.text = "Successful Purchase!";
 
@@ -67,7 +67,7 @@ public class PurchaseShop : MonoBehaviour
 // Decoy - not limited
     public void purchaseTwo(){
         //Debug.Log("Buying Decoy, balance: " + balance);
-        if (balance >= 75){
+        if (balance >= 100){
             feedbackText.color = Color.green;
             feedbackText.text = "Successful Purchase!";
             
@@ -90,7 +90,7 @@ public class PurchaseShop : MonoBehaviour
     public void purchaseThree(){
       if (!ClimbToolPurchased){
         //Debug.Log("Buying Climbing Tools, balance: " + balance);
-        if (balance >= 75){
+        if (balance >= 700){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
@@ -119,7 +119,7 @@ public class PurchaseShop : MonoBehaviour
     public void purchaseFour(){
       if (!LadderPurchased){
         //Debug.Log("Buying Ladder, balance: " + balance);
-        if (balance >= 75){
+        if (balance >= 1000){
           feedbackText.color = Color.green;
           feedbackText.text = "Successful Purchase!";
 
