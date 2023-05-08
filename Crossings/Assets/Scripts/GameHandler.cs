@@ -41,10 +41,21 @@ public class GameHandler : MonoBehaviour
 
     // Balance Stuff
     const int STARTING_BALANCE = 0;
-    private int bankBalance = STARTING_BALANCE;
+    static public int bankBalance = STARTING_BALANCE;
+    static public int immsMigrated = 0;
     public GameObject balance; 
     public TMPro.TextMeshProUGUI balanceText;
 
+    public static GameHandler control;
+
+    private void Awake() {
+        if (control = null) {
+            control = this;
+            DontDestroyOnLoad(gameObject);
+        } else if (control != this) {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

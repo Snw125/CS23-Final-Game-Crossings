@@ -19,9 +19,12 @@ public class StatisticHandler : MonoBehaviour
     void Start()
     {
       //bankBalance = GameHandler.getCurrentBankBalance();
-      bankBalance = 10;
-      immigrantsMigrated = 10;
-      someStat = 10;
+      //bankBalance = 10;
+      //immigrantsMigrated = 10;
+      //someStat = 10;
+
+      bankBalance = GameHandler.bankBalance;
+      immigrantsMigrated = GameHandler.immsMigrated;
 
       setBalance();
       setImmigrant();

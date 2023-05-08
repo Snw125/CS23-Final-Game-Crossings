@@ -80,7 +80,10 @@ public class ImmigrantFollowSpots_new : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("TempBoarder"))
         {
-            gameHandler.IncreaseBankBalance(50);
+            GameHandler.bankBalance += 50;
+            GameHandler.immsMigrated++;
+            //gameHandler.IncreaseImms();
+            
             Destroy(gameObject);
         }
     }

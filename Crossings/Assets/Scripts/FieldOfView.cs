@@ -329,7 +329,7 @@ public class FieldOfView : MonoBehaviour
             if (rangeCheckDecoy.Length > 0) 
             {
                 target = rangeCheckDecoy[0].transform;
-                Debug.Log(target);
+                //Debug.Log(target);
                 if (playerStates.hidden && target.tag == "Immigrant") {
                     Debug.Log("Imm is hiding with player!");
                 }
