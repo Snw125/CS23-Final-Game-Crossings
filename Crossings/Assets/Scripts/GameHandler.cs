@@ -40,7 +40,7 @@ public class GameHandler : MonoBehaviour
     public TMPro.TextMeshProUGUI AmtDecoytxt;
 
     // Balance Stuff
-    const int STARTING_BALANCE = 1000;
+    const int STARTING_BALANCE = 0;
     private int bankBalance = STARTING_BALANCE;
     public GameObject balance; 
     public TMPro.TextMeshProUGUI balanceText;
