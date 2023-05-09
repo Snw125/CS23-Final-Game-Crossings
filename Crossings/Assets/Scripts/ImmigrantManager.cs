@@ -17,7 +17,7 @@ public class ImmigrantManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X) && !playerState.hidden)
+        if (Input.GetKeyDown(KeyCode.X) && !playerState.bushhide)
         {
             foreach (var immigrant in immigrants)
             {

@@ -59,7 +59,7 @@ public class PlayerGridMove : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, 
                              movePoint.position, moveSpeed * Time.deltaTime);
 
-        if (interact.hidden) 
+        if (interact.bushhide) 
         {
             canMove = false;
         }

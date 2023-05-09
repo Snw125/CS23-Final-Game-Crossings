@@ -616,12 +616,12 @@ public class PlayerInteractions : MonoBehaviour
 
 
 
-            if (hidden && bushhide) {
+            if (bushhide) {
                     // signify you can leave bush with Z (another button signifier?)
                     // check if they move if they do get them out of bush
                     if (Input.GetKeyDown(KeyCode.Z)) {
                             // get em out
-                            hidden = false;
+                            hidden = false; 
                             bushhide = false;
                             hideArt.SetActive(false);
                             Vector2 newpos = new Vector2 (transform.position.x, transform.position.y + 1f); 
@@ -686,6 +686,7 @@ public class PlayerInteractions : MonoBehaviour
             shadowSprite.sortingOrder = 45;
 
             climbing = false;
+            hidden = false;
         }
         if (climbingwithimms && !Walltiles.HasTile(Walltiles.WorldToCell(gameObject.transform.position))) {
             WallCol.enabled = !WallCol.enabled;
@@ -709,13 +710,14 @@ public class PlayerInteractions : MonoBehaviour
             }
 
             climbingwithimms = false;
+            hidden = false;
         }
     }
 
     public void OnTriggerExit2D(Collider2D other){
         if (other.gameObject.tag == "Bush") 
         {
-            if (!hidden) {
+            if (!bushhide) {
                 thingNearArt = other.transform.GetChild(0).GetComponent<SpriteRenderer>();
                 thingNearArt.color = Color.white;
 

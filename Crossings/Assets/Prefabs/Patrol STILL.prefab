@@ -124,11 +124,11 @@ MonoBehaviour:
   loseNoticeTime: 0
   currtime: 0
   savedTime: 0
-  endNoticeTime: 2
+  endNoticeTime: 1.7
   PlayerChase: 0
   DecoyChase: 0
   goThere: 0
-  chaseSpeed: 2
+  chaseSpeed: 4
   progress: 0
   lastcheck: 0
   facingUp: 0

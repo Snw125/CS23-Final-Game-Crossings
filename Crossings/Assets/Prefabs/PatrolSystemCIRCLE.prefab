@@ -156,11 +156,11 @@ MonoBehaviour:
   loseNoticeTime: 0
   currtime: 0
   savedTime: 0
-  endNoticeTime: 2
+  endNoticeTime: 1.7
   PlayerChase: 0
   DecoyChase: 0
   goThere: 0
-  chaseSpeed: 2
+  chaseSpeed: 4
   progress: 0
   lastcheck: 0
   facingUp: 0
@@ -183,8 +183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  speed: 2
-  startWaitTime: 2
+  speed: 4
+  startWaitTime: 1
   moveSpots:
   - {fileID: 3297187557674788997}
   - {fileID: 4379395677162870958}

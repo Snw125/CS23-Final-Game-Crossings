@@ -7,11 +7,12 @@ public class SceneLoader : MonoBehaviour
 {
     public string sceneName; 
     static public bool tutorialComplete = false;
+    public GameHandler gameHandler;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
     }
 
     // Update is called once per frame
@@ -48,7 +49,7 @@ public class SceneLoader : MonoBehaviour
         if (sceneName == "MainMenu" || sceneName == "EndScene") {
             MusicPlayer.PlayMenuMusic();
         }
-
+        
         SceneManager.LoadScene(sceneName);
     }
 }
