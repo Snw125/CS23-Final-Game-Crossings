@@ -13,6 +13,9 @@ public class GameHandler : MonoBehaviour
     private bool decoyPurchased;
     private bool wireClipperPurchased;
 
+
+    static public int playercustom; 
+
     
     private int inventoryIndex;
 

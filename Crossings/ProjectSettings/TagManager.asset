@@ -20,6 +20,7 @@ TagManager:
   - TempBoarder
   - Decoy
   - ImmManager
+  - Patrol
   layers:
   - Default
   - TransparentFX
