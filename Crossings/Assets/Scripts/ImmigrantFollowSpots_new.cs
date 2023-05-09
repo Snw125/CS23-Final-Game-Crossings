@@ -80,10 +80,19 @@ public class ImmigrantFollowSpots_new : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("TempBoarder"))
         {
-            GameHandler.bankBalance += 50;
+            gameHandler.IncreaseBankBalance(50);
             GameHandler.immsMigrated++;
             //gameHandler.IncreaseImms();
-            
+            immManager.immsFollowing.Remove(this.gameObject);
+            int index = 0;
+            // reassigns indices 
+            foreach (var immigrant in immManager.immsFollowing)
+            {
+                ImmigrantFollowSpots_new followcode2 = immigrant.GetComponent<ImmigrantFollowSpots_new>();
+                followcode2.followIndex = index; 
+                index++; 
+            }
+
             Destroy(gameObject);
         }
     }

@@ -363,13 +363,18 @@ public class FieldOfView : MonoBehaviour
 
                             if (target.tag == "Immigrant") 
                             {
-                                ImmigrantFollowSpots_new followcode = target.GetComponent<ImmigrantFollowSpots_new>();
-                                if (Vector3.Distance(followcode.spawnpos, target.position) > .2f) {
-                                    if (!CanSeeDecoy) {
-                                        // first seen 
-                                        lastcheck = Time.time;
+                                if (!playerStates.hidden) {
+                                    ImmigrantFollowSpots_new followcode = target.GetComponent<ImmigrantFollowSpots_new>();
+                                    if (Vector3.Distance(followcode.spawnpos, target.position) > .2f) {
+                                        if (!CanSeeDecoy) {
+                                            // first seen 
+                                            lastcheck = Time.time;
+                                        }
+                                        CanSeeDecoy = true;
                                     }
-                                    CanSeeDecoy = true;
+                                    else {
+                                        CanSeeDecoy = false;
+                                    }
                                 }
                                 else {
                                     CanSeeDecoy = false;

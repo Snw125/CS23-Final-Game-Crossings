@@ -2707,7 +2707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 0}
-  bushholdDur: 1.5
+  bushholdDur: 1
   jumpholdDur: 0.5
   breakholdDur: 2
   climbholdDur: 2

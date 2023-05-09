@@ -90,6 +90,8 @@ public class PlayerInteractions : MonoBehaviour
 
     public bool jumpnotbreak;
     public bool climbnotlad;
+
+    public PurchaseShop shopcode;
     
     void Start()
     {
@@ -131,8 +133,9 @@ public class PlayerInteractions : MonoBehaviour
         ShopUI = GameObject.FindWithTag("shop");
         hideArt = transform.GetChild(3).gameObject;
         anim = gameObject.GetComponentInChildren<Animator>();
-        
 
+        shopcode = ShopUI.GetComponentInChildren<PurchaseShop>();
+        
         ZButtonSig.SetActive(false);
         XButtonSig.SetActive(false);
         CButtonSig.SetActive(false);
@@ -197,7 +200,7 @@ public class PlayerInteractions : MonoBehaviour
             if (other.gameObject.tag == "Immigrant") 
             {
                 XButtonSig.SetActive(true);
-                thingNear = other.gameObject;
+                //thingNear = other.gameObject;
                 nearImm = true;
 
                 thingNearArt = other.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -261,6 +264,7 @@ public class PlayerInteractions : MonoBehaviour
             if (nearShop) {
                     if (Input.GetKeyDown(KeyCode.Z)) {
                             Time.timeScale = 0f;
+                            shopcode.UpdateShop();
                             ShopUI.SetActive(true);
                     }
             }

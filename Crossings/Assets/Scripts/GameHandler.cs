@@ -44,19 +44,25 @@ public class GameHandler : MonoBehaviour
 
     // Balance Stuff
     const int STARTING_BALANCE = 0;
+    [SerializeField]
     static public int bankBalance = STARTING_BALANCE;
     static public int immsMigrated = 0;
     public GameObject balance; 
     public TMPro.TextMeshProUGUI balanceText;
 
-    public static GameHandler control;
+    static private GameHandler control;
 
-    private void Awake() {
-        if (control = null) {
+    public bool init;
+
+    protected virtual void Awake() {
+        if (control == null) {
             control = this;
-            DontDestroyOnLoad(gameObject);
-        } else if (control != this) {
-            Destroy(gameObject);
+            DontDestroyOnLoad(this);
+            //Debug.Log("lol");
+        } else {
+            Destroy(this);
+            //Debug.Log("no");
+            return;
         }
     }
 
@@ -70,42 +76,9 @@ public class GameHandler : MonoBehaviour
 
         inventoryIndex = 0;
 
+        init = false; 
+
         
-
-        player = GameObject.FindGameObjectWithTag("Player");      
-        interact = player.GetComponent<PlayerInteractions>();
-
-        // Get Inventory Game Objects and Toggle Display Inventory On/Off
-        theInventory = player.transform.GetChild(2).transform.GetChild(2).gameObject;
-
-        // Find inventorySpots and deactivate all of them on init
-        
-        // inventorySpots = GameObject.FindGameObjectsWithTag("inventorySpot");
-        // inventorySpotTracker = new string[inventorySpots.Length];
-        // for(int i = 0; i < inventorySpots.Length; i++){
-        //     inventorySpots[i].SetActive(false);
-        //     inventorySpotTracker[i] = "empty";
-        // }        
-        
-        ClipImg = theInventory.transform.GetChild(0).gameObject;
-        DecoyImg = theInventory.transform.GetChild(1).gameObject;
-        ClimbImg = theInventory.transform.GetChild(2).gameObject;
-        LadderImg = theInventory.transform.GetChild(3).gameObject;
-
-        ClipImg.SetActive(false);
-        DecoyImg.SetActive(false);
-        ClimbImg.SetActive(false);
-        LadderImg.SetActive(false);
-
-        AmtDecoy = theInventory.transform.GetChild(4).gameObject;
-        AmtDecoytxt = AmtDecoy.GetComponent<TMPro.TextMeshProUGUI>();
-
-        AmtDecoy.SetActive(false);
-
-        // Get BalanceText and Set Balance
-        balance = theInventory.transform.GetChild(6).gameObject; 
-        balanceText = balance.GetComponent<TMPro.TextMeshProUGUI>();
-        setBankBalance(bankBalance); 
 
         //   GameObject[] arr = GameObject.FindGameObjectsWithTag("balanceText");
         //   balanceText = arr[0].GetComponent<Text>();
@@ -126,6 +99,52 @@ public class GameHandler : MonoBehaviour
         // purchaseDecoyArt();
         // purchaseBoat();
 
+    }
+
+    public void Update() {
+        
+        if (!init) {
+            Scene currentScene = SceneManager.GetActiveScene();
+            
+            if (currentScene.name == "TutorialLevel" || currentScene.name == "Levels") {
+                 
+                player = GameObject.FindGameObjectWithTag("Player");
+                interact = player.GetComponent<PlayerInteractions>();
+
+                // Get Inventory Game Objects and Toggle Display Inventory On/Off
+                theInventory = player.transform.GetChild(2).transform.GetChild(2).gameObject;
+
+                // Find inventorySpots and deactivate all of them on init
+                
+                // inventorySpots = GameObject.FindGameObjectsWithTag("inventorySpot");
+                // inventorySpotTracker = new string[inventorySpots.Length];
+                // for(int i = 0; i < inventorySpots.Length; i++){
+                //     inventorySpots[i].SetActive(false);
+                //     inventorySpotTracker[i] = "empty";
+                // }        
+                
+                ClipImg = theInventory.transform.GetChild(0).gameObject;
+                DecoyImg = theInventory.transform.GetChild(1).gameObject;
+                ClimbImg = theInventory.transform.GetChild(2).gameObject;
+                LadderImg = theInventory.transform.GetChild(3).gameObject;
+
+                ClipImg.SetActive(false);
+                DecoyImg.SetActive(false);
+                ClimbImg.SetActive(false);
+                LadderImg.SetActive(false);
+
+                AmtDecoy = theInventory.transform.GetChild(4).gameObject;
+                AmtDecoytxt = AmtDecoy.GetComponent<TMPro.TextMeshProUGUI>();
+
+                AmtDecoy.SetActive(false);
+
+                // Get BalanceText and Set Balance
+                balance = theInventory.transform.GetChild(6).gameObject; 
+                balanceText = balance.GetComponent<TMPro.TextMeshProUGUI>();
+                setBankBalance(bankBalance); 
+            }
+        }
+        
     }
 
     public void IncreaseBankBalance(int amount)
@@ -286,6 +305,11 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+
+    public void ResetBalance() {
+        bankBalance = 0;
+        immsMigrated = 0;
+    }
 
     public void setBankBalance(int newBalance){
       if(newBalance >= 0){

@@ -18,7 +18,7 @@ public class PurchaseShop : MonoBehaviour
 
     public GameObject ShopUI;
 
-    public GameObject GameHandler;
+    public GameHandler gameHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -30,9 +30,22 @@ public class PurchaseShop : MonoBehaviour
 
         ShopUI = transform.parent.gameObject;
 
-        GameObject[] arr = GameObject.FindGameObjectsWithTag("GameController");
-        GameHandler = arr[0];
-        balance = GameHandler.GetComponent<GameHandler>().getCurrentBankBalance();
+        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
+        balance = gameHandler.getCurrentBankBalance();
+        balanceText.text = balance.ToString();
+    }
+
+    void Awake() {
+        //Debug.Log(GameHandler.bankBalance);
+
+        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
+
+        balance = gameHandler.getCurrentBankBalance();
+        balanceText.text = balance.ToString();
+    }
+
+    public void UpdateShop() {
+        balance = gameHandler.getCurrentBankBalance();
         balanceText.text = balance.ToString();
     }
 
@@ -46,10 +59,10 @@ public class PurchaseShop : MonoBehaviour
             WireClipPurchased = true;
             //Debug.Log("Bought wire clippers successfully");
             
-            balance-= 75;
+            balance-= 300;
             balanceText.text = balance.ToString();
-            GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-            GameHandler.GetComponent<GameHandler>().purchaseWireClipper();
+            gameHandler.setBankBalance(balance);
+            gameHandler.purchaseWireClipper();
         }
         else{
             //Debug.Log("Cannot buy, need more money");
@@ -74,10 +87,10 @@ public class PurchaseShop : MonoBehaviour
             DecoyPurchased = true;
             //Debug.Log("Bought Decoy successfully");
             
-            balance -= 75;
+            balance -= 100;
             balanceText.text = balance.ToString();
-            GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-            GameHandler.GetComponent<GameHandler>().purchaseDecoy();
+            gameHandler.setBankBalance(balance);
+            gameHandler.purchaseDecoy();
             // add one to decoy counter 
         }
         else{
@@ -97,10 +110,10 @@ public class PurchaseShop : MonoBehaviour
           ClimbToolPurchased = true;
           //Debug.Log("Bought boat successfully");
           
-          balance-= 75;
+          balance-= 700;
           balanceText.text = balance.ToString();
-          GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-          GameHandler.GetComponent<GameHandler>().purchaseClimbingTool();
+          gameHandler.setBankBalance(balance);
+          gameHandler.purchaseClimbingTool();
         }
         else{
           //Debug.Log("Cannot buy, need more money");
@@ -126,10 +139,10 @@ public class PurchaseShop : MonoBehaviour
           LadderPurchased = true;
           //Debug.Log("Bought Decoy Art successfully");
           
-          balance-= 75;
+          balance-= 1000;
           balanceText.text = balance.ToString();
-          GameHandler.GetComponent<GameHandler>().setBankBalance(balance);
-          GameHandler.GetComponent<GameHandler>().purchaseLadder();
+          gameHandler.setBankBalance(balance);
+          gameHandler.purchaseLadder();
         }
         else{
           //Debug.Log("Cannot buy, need more money");

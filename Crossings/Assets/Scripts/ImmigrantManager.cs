@@ -22,6 +22,10 @@ public class ImmigrantManager : MonoBehaviour
             foreach (var immigrant in immigrants)
             {
                 //Debug.Log(immigrant);
+                if (immigrant == null) {
+                    continue;
+                }
+
                 float distanceToPlayer = Vector3.Distance(immigrant.transform.position, playerGridMove.movePoint.position);
 
                 if (!immigrant.IsFollowing && distanceToPlayer <= 2.0f)
